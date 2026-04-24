@@ -46,6 +46,18 @@ local function AddGodTraitProperty( args )
 	end
 end
 
+function mod.LoadAspectPackage()
+	local packageName = _PLUGIN.guid .. ""
+	print("AuthorName-ModName - Loading package: " .. packageName)
+	LoadPackages({ Name = packageName })
+end
+
+modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
+		if game.CurrentHubRoom.Name == "Hub_PreRun" then
+			mod.LoadAspectPackage()
+		end
+		return base(source, args)
+	end)
 -- Changes to special
 modutil.once_loaded.game(function()
 
@@ -322,7 +334,7 @@ modutil.once_loaded.game(function()
 				Multiplier = 4.5,
 			},
 		},
-		Icon = "iconaxe",
+		Icon = "JarlUlsfark-AspectYoungMel\\AxeAspectYoungMelIcon",
 		RequiredWeapon = "WeaponAxe",
 		WeaponKitGrannyModel = "Melinoe_Axe_Mesh1",
 		ReplacementGrannyModels = 
@@ -408,12 +420,6 @@ modutil.once_loaded.game(function()
 				WeaponName = "WeaponAxeSpecial",
 				WeaponProperty = "Cooldown",
 				ChangeValue = 0.4,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "ChargeTime",
-				ChangeValue = 0.1,
 				ChangeType = "Absolute",
 			},
 			{
@@ -553,5 +559,4 @@ modutil.once_loaded.game(function()
 		FlavorText = "AxeRecoveryAspect_FlavorText",
 	}
 	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AspectofYoungMelinoe)
-	OverwriteTableKeys( TraitData.Aspects.AxeRecoveryAspect, AspectofYoungMelinoe )
 end)
