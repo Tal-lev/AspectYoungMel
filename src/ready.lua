@@ -46,6 +46,29 @@ local function AddGodTraitProperty( args )
 	end
 end
 
+local function RemoveWeaponPropertyFromGodTraits(weaponName, weaponProperty)
+    for traitName, trait in pairs(TraitData) do
+        
+        -- 1. Identify if the trait is a God Boon
+        -- Boons typically have a 'LootName' or 'God' key tied to them.
+        local isGodBoon = (trait.LootName ~= nil) or (trait.God ~= nil)
+        
+        -- 2. Explicitly safeguard against modifying Aspects
+        -- Aspects usually use this flag, or have "Aspect" in their internal name.
+        local isAspect = trait.IsWeaponEnchantment or string.find(traitName, "Aspect") ~= nil
+        
+        -- 3. Proceed only if it's a boon and definitely not an aspect
+        if isGodBoon and not isAspect and trait.PropertyChanges then
+            for i = #trait.PropertyChanges, 1, -1 do
+                local change = trait.PropertyChanges[i]
+                if change.WeaponName == weaponName and change.WeaponProperty == weaponProperty then
+                    table.remove(trait.PropertyChanges, i)
+                end
+            end
+        end
+    end
+end
+
 function mod.LoadAspectPackage()
 	local packageName = _PLUGIN.guid .. ""
 	print("AuthorName-ModName - Loading package: " .. packageName)
@@ -58,168 +81,189 @@ modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
 		end
 		return base(source, args)
 	end)
+
 -- Changes to special
+
+
+-- Failed Attempt to change the Aspect trait to give damage buff after Block.
+TraitData.AxeBlockDamageBuff = {
+    Name = "AxeBlockDamageBuff",
+    InheritFrom = { "DefaultTrait" },
+    IsHidden = true,
+    -- This must be a list of tables
+    AddOutgoingDamageModifiers = {
+        {
+            ValidWeaponMultiplier = 1.30, 
+        }
+    }
+}
+
+function ApplyAxeAspectBlockBuff()
+		-- If the buff is already active, just refresh the duration (optional)
+		if HeroHasTrait("AxeBlockDamageBuff") then
+			return 
+		end
+		-- Apply the +30% damage buff
+		AddTraitToHero({ TraitName = "AxeBlockDamageBuff" })
+
+		-- Add the Frenzy Icon above the player
+		-- "FrenzyStatusIcon" is the standard internal name for the UI effect
+		local frenzyIconId = CreateAnimationToAttached({ 
+			Name = "FrenzyStatusIcon", 
+			DestinationId = CurrentRun.Hero.ObjectId, 
+			OffsetY = -150 
+		})
+		
+		-- Wait 3 seconds
+		wait(3.0, RoomThreadName)
+		
+		-- Remove the buff
+		RemoveTrait(CurrentRun.Hero, "AxeBlockDamageBuff")
+    
+		-- Remove the icon
+		StopAnimation({ Name = "FrenzyStatusIcon", DestinationId = CurrentRun.Hero.ObjectId })
+		Destroy({ Id = frenzyIconId })
+	end
+
+ModUtil.Path.Wrap("CheckWeaponBlock", function(baseFunc, victim, attacker, triggerArgs)
+    -- Execute the original block logic first
+    local successfullyBlocked = baseFunc(victim, attacker, triggerArgs)
+    
+    -- If the block was successful by the player using your Aspect, trigger the buff
+    if successfullyBlocked and victim == CurrentRun.Hero and HeroHasTrait("AxeRecoveryAspect") then
+        thread(ApplyAxeAspectBlockBuff)
+    end
+    
+    -- Return the original block result back to the game engine
+    return successfullyBlocked
+end)
+
 modutil.once_loaded.game(function()
 
 	local file = rom.path.combine(rom.paths.Content, 'Game/Weapons/PlayerWeapons.sjson')
 	sjson.hook(file, function(data)
 	for key, weapon in pairs(data.Weapons) do
 		if weapon.Name == 'WeaponAxeSpecial' then
-			data.Weapons[key] =
-	{
-		Name = "WeaponAxeSpecial",
-		InheritFrom = "1_BaseDamagingWeapon",
-		Control = "Attack3",
-		Type = "GUN",
-		Projectile = "ProjectileAxeSpecial",
-		ClipSize = 1,
-		ChargeSoundFadeTime = 0.25,
-		FullyAutomatic = false,
-		ChargeCancelMovement = true,
-		CancelMovement = true,
-		BlockMoveInput = true,
-		AutoLock = false,
-		ChargeStartFx = "null",
-		ProjectileOffsetStart = "LEFT",
-		FireGraphic = "Melinoe_Axe_Special1_Fire",
-		FireFx = "AxeSpinDouble",
-		FireOnRelease = false,
-		ChargeTime = 0.08,
-		ChargeStartAnimation = "Melinoe_Axe_Special1_Start",
-		LockTrigger = true,
-		ForceReleaseOnSwap = true,
-		ChargeCancelGraphic = "Melinoe_Axe_Special1_End",
-		CancelChargeOnRelease = true,
-		BarrelLength = 60,
-		AcceptTriggerLockRequests = true,
-		AllowExternalForceRelease = false,
-		AllowExternalForceReleaseIfAnyCharged = true,
-		CanCancelDisables = true,
-		CanCancelOwnDisables = false,
-		Cooldown = 0.75,
-		SetCompleteAngleOnCharge = true,
-		AddOnFire = "WeaponAxeSpecialSwing",
-
-		Effects =
-		{
+			weapon.Effects =
 			{
-				Name = "AxeSpecialBlockSelfTriggerLock",
-				Duration = 0.30,
-				Active = true,
-			},
-			{
-				Name = "AxeSpecialDisable",
-				Duration = 0.31,
-				DisableAttack = true,
-				DisableMove = true,
-				DisableRotate = true,
-				RequestTriggerLock = true,
-				Cancelable = false,
-				Active = true,
-			},
-			{
-				Name = "AxeSpecialDisableCancelable",
-				Duration = 0.37,
-				DisableAttack = true,
-				DisableMove = true,
-				DisableRotate = true,
-				RequestTriggerLock = true,
-				Cancelable = true,
-				Active = true,
-			},
-			{
-				Name = "AxeSpecialDisableMovementCancelable",
-				Duration = 0.38,
-				DisableAttack = false,
-				DisableMove = true,
-				DisableRotate = true,
-				RequestTriggerLock = true,
-				Cancelable = true,
-				Active = true,
-			},
-			{
-				Trigger = "Charging",
-				Name = "AspectSlowCharge",
-				Type = "SPEED",
-				DurationFrames = 30,
-				Modifier = 0.5,
-				Cancelable = true,
-				Active = false,
-				CanAffectInvulnerable = true,
-			},
-			{
-				Trigger = "Charging",
-				Name = "AspectSlowFire",
-				Type = "SPEED",
-				DurationFrames = 60,
-				Modifier = 0.5,
-				Cancelable = true,
-				Active = false,
-				CanAffectInvulnerable = true,
-			},
-			{
-				Trigger = "Charging",
-				Name = "ShieldSelfSpeed",
-				Type = "SPEED",
-				HaltOnStart = true,
-				Duration = 0.02,
-				Modifier = 0.2,
-				Active = false,
-				CanAffectInvulnerable = true,
-				
-			},
-			{
-				Trigger = "Charging",
-				Name = "ShieldSelfInvulnerableRush",
-				Type = "INVULNERABLE",
-				Duration = 0.1,
-				Modifier = 1.0,
-				Active = false,
-				CanAffectInvulnerable = true,
-				ClearOnAttack = true,
-			},
-			{
-				Trigger = "Fire",
-				Name = "ShieldSelfInvulnerableRush2",
-				Type = "INVULNERABLE",
-				DurationFrames = 34,
-				Modifier = 1.0,
-				Active = false,
-				AngleCoverage = 220,
-				CanAffectInvulnerable = true,
-				Cancelable = true,
-			},
-			{
-				Name = "ShieldFireDisableAttack",
-				DurationFrames = 13,
-				DisableAttack = true,
-				RequestTriggerLock = true,
-				Cancelable = false,
-				Active = false,
-			},
-			{
-				Trigger = "Charging",
-				Name = "ShieldChargeDisableMove",
-				DurationFrames = 19,
-				DisableMove = true,
-				DisableRotate = true,
-				Cancelable = true,
-				TimeModifierFraction = 0,
-				ClearOnAttack = true,
-				Active = false,
-			},
-			{
-				Trigger = "Fire",
-				Name = "ShieldFireDisableMove2",
-				DurationFrames = 34,
-				DisableMove = true,
-				DisableRotate = true,
-				Cancelable = true,
-				TimeModifierFraction = 0,
-				Active = false,
-			},
-		},
-	}
+				{
+					Name = "AxeSpecialBlockSelfTriggerLock",
+					Duration = 0.30,
+					Active = true,
+				},
+				{
+					Name = "AxeSpecialDisable",
+					Duration = 0.31,
+					DisableAttack = true,
+					DisableMove = true,
+					DisableRotate = true,
+					RequestTriggerLock = true,
+					Cancelable = false,
+					Active = true,
+				},
+				{
+					Name = "AxeSpecialDisableCancelable",
+					Duration = 0.37,
+					DisableAttack = true,
+					DisableMove = true,
+					DisableRotate = true,
+					RequestTriggerLock = true,
+					Cancelable = true,
+					Active = true,
+				},
+				{
+					Name = "AxeSpecialDisableMovementCancelable",
+					Duration = 0.38,
+					DisableAttack = false,
+					DisableMove = true,
+					DisableRotate = true,
+					RequestTriggerLock = true,
+					Cancelable = true,
+					Active = true,
+				},
+				{
+					Trigger = "Charging",
+					Name = "AspectSlowCharge",
+					Type = "SPEED",
+					DurationFrames = 30,
+					Modifier = 0.5,
+					Cancelable = true,
+					Active = false,
+					CanAffectInvulnerable = true,
+				},
+				{
+					Trigger = "Charging",
+					Name = "AspectSlowFire",
+					Type = "SPEED",
+					DurationFrames = 60,
+					Modifier = 0.5,
+					Cancelable = true,
+					Active = false,
+					CanAffectInvulnerable = true,
+				},
+				{
+					Trigger = "Charging",
+					Name = "ShieldSelfSpeed",
+					Type = "SPEED",
+					HaltOnStart = true,
+					Duration = 0.02,
+					Modifier = 0.2,
+					Active = false,
+					CanAffectInvulnerable = true,
+					
+				},
+				{
+					Trigger = "Charging",
+					Name = "ShieldSelfInvulnerableRush",
+					Type = "INVULNERABLE",
+					Duration = 0.1,
+					Modifier = 1.0,
+					Active = false,
+					CanAffectInvulnerable = true,
+					ClearOnAttack = true,
+				},
+				{
+					Trigger = "Fire",
+					Name = "ShieldSelfInvulnerableRush2",
+					Type = "INVULNERABLE",
+					DurationFrames = 34,
+					Modifier = 1.0,
+					Active = false,
+					AngleCoverage = 220,
+					CanAffectInvulnerable = true,
+					Cancelable = true,
+				},
+				{
+					Name = "ShieldFireDisableAttack",
+					DurationFrames = 13,
+					DisableAttack = true,
+					RequestTriggerLock = true,
+					Cancelable = false,
+					Active = false,
+				},
+				{
+					Trigger = "Charging",
+					Name = "ShieldChargeDisableMove",
+					DurationFrames = 19,
+					DisableMove = true,
+					DisableRotate = true,
+					Cancelable = true,
+					TimeModifierFraction = 0,
+					ClearOnAttack = true,
+					Active = false,
+				},
+				{
+					Trigger = "Fire",
+					Name = "ShieldFireDisableMove2",
+					DurationFrames = 34,
+					DisableMove = true,
+					DisableRotate = true,
+					Cancelable = true,
+					TimeModifierFraction = 0,
+					Active = false,
+				},
+			}
+	
 
 		end
 	end
@@ -305,6 +349,8 @@ modutil.once_loaded.game(function()
 	return data
 	end)
 
+
+	-- Adding Axe Aspect of Young Mel
 	AspectofYoungMelinoe = {
 		InheritFrom = { "WeaponEnchantmentTrait" },
 		RarityLevels =
@@ -351,6 +397,34 @@ modutil.once_loaded.game(function()
 			ValidWeapons = WeaponSets.HeroSecondaryWeapons,
 			ReportValues = { ReportedWeaponMultiplier = "ExMultiplier"},
 		},
+		WeaponDataOverride =
+		{
+			WeaponAxeSpecial =
+			{
+				Sounds =
+				{
+					FireSounds =
+					{
+						{ Name = "/SFX/Player Sounds/ZagreusFistWhoosh" },
+					},
+					ImpactSounds =
+					{
+						Invulnerable = "/SFX/Player Sounds/ZagreusShieldRicochet",
+						Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+						Bone = "/SFX/Player Sounds/ShieldObstacleHit",
+						Brick = "/SFX/Player Sounds/ShieldObstacleHit",
+						Stone = "/SFX/Player Sounds/ShieldObstacleHit",
+						Organic = "/SFX/Player Sounds/ShieldObstacleHit",
+						StoneObstacle = "/SFX/SwordWallHitClankSmall",
+						BrickObstacle = "/SFX/SwordWallHitClankSmall",
+						MetalObstacle = "/SFX/SwordWallHitClankSmall",
+						BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
+						Shell = "/SFX/ShellImpact",
+					},
+				},
+			},
+		},
+		-- Changing special to Block
 		PropertyChanges =
 		{
 			{
@@ -522,28 +596,6 @@ modutil.once_loaded.game(function()
     			ExcludeLinked = true,
 			},
 		},
-			-- At TraitData_God.lua
-		AddGodTraitProperty = {
-			TraitSuffix = "SpecialBoon",
-			PropertyChanges =
-			{
-				{
-					WeaponName = "WeaponAxeSpecial",
-					WeaponProperty = "FireFx",
-					ChangeValue = "null",
-					ChangeType = "Absolute",
-					ExcludeLinked = true
-				},
-				{
-					WeaponName = "WeaponAxeSpecial",
-					ProjectileName = "ProjectileAxeBlockSpin",
-					ProectileProperty = "DetonateFx",
-					ValuePrefix = "AxeDeflect_",
-					ChangeType = "Absolute",
-					ExcludeLinked = true,
-				}
-			},
-		},
 		StatLines =
 		{
 			"AxeDamageHealthStatDisplay",
@@ -558,5 +610,66 @@ modutil.once_loaded.game(function()
 		},
 		FlavorText = "AxeRecoveryAspect_FlavorText",
 	}
+
+	--RemoveWeaponPropertyFromTraits("WeaponAxeSpecial", "FireFx")
+	-- At TraitData_God.lua
+	AddGodTraitProperty({
+		TraitSuffix = "SpecialBoon",
+		PropertyChanges = {
+
+			-- Default spin (no aspect overrides)
+			{
+				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect", "AxeRecoveryAspect" },
+				WeaponName = "WeaponAxeSpecial",
+				WeaponProperty = "FireFx",
+				ValuePrefix = "AxeSpinDouble_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+
+			-- Rally aspect
+			{
+				TraitName =  "AxeRallyAspect",
+				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRecoveryAspect" },
+				WeaponName = "WeaponAxeSpecial",
+				WeaponProperty = "FireFx",
+				ValuePrefix = "AxeSwipeUpper_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+
+			-- Block aspect (no FX)
+			{
+				TraitName = "AxeBlockEmpowerTrait",
+				FalseTraitNames = { "AxeRecoveryAspect", "AxeRallyAspect" },
+				WeaponName = "WeaponAxeSpecial",
+				WeaponProperty = "FireFx",
+				ValuePrefix = "null",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+
+			-- Recovery aspect (no FX)
+			{
+				TraitName = "AxeRecoveryAspect" ,
+				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect" },
+				WeaponName = "WeaponAxeSpecial",
+				WeaponProperty = "FireFx",
+				ValuePrefix = "null",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponAxeSpecial",
+				ProjectileName = "ProjectileAxeBlockSpin",
+				ProjectileProperty = "DetonateFx",
+				ValuePrefix = "AxeDeflect_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+		}
+	})
+	
+
 	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AspectofYoungMelinoe)
 end)
