@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-04-25
+
 ### Added
 
 - First version of the mod!
+
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/Tal-lev/AspectYoungMel/compare/2a59f3eba279511760a4077aaa7e72010d51936c...0.1.0
