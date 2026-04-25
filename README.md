@@ -24,4 +24,4 @@ While the mod has been tested decently well it is recommended to backup your sav
 
 ## Issues
 
-Report any issues on [Discord](https://discord.gg/bKvJTAJj)
+Report any issues on Hades Modding discord
