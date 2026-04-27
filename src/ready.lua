@@ -106,63 +106,63 @@ modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
 	-- 7.Modifying Hammers
 	-- 8.Overwrite an existing aspect with the new one.
 
--- AxeAspectYoungMel - 1,2,3,4(a,c,e),5,6,7
--- StaffAspectYoungMel - 
+-- AxeAspectYoungMel - 1,2,3,4(a,c,e),5,6,7,8
+-- StaffAspectYoungMel - 1,3,4(a,d,e),5,6,8
 
 -- Changes to special
 
--- Failed Attempt to change the Aspect trait to give damage buff after Block.
-TraitData.AxeBlockDamageBuff = {
-    Name = "AxeBlockDamageBuff",
-    InheritFrom = { "DefaultTrait" },
-    IsHidden = true,
-    -- This must be a list of tables
-    AddOutgoingDamageModifiers = {
-        {
-            ValidWeaponMultiplier = 1.30, 
-        }
-    }
-}
-
-function mod.ApplyAxeAspectBlockBuff()
-		-- If the buff is already active, just refresh the duration (optional)
-		if HeroHasTrait("AxeBlockDamageBuff") then
-			return 
-		end
-		-- Apply the +30% damage buff
-		AddTraitToHero({ TraitName = "AxeBlockDamageBuff" })
-
-		-- Add the Frenzy Icon above the player
-		-- "FrenzyStatusIcon" is the standard internal name for the UI effect
-		local frenzyIconId = CreateAnimationToAttached({ 
-			Name = "FrenzyStatusIcon", 
-			DestinationId = CurrentRun.Hero.ObjectId, 
-			OffsetY = -150 
-		})
-		
-		-- Wait 3 seconds
-		wait(3.0, RoomThreadName)
-		
-		-- Remove the buff
-		RemoveTrait(CurrentRun.Hero, "AxeBlockDamageBuff")
+-- -- Failed Attempt to change the Aspect trait to give damage buff after Block.
+--TraitData.AxeBlockDamageBuff = {
+--    Name = "AxeBlockDamageBuff",
+--    InheritFrom = { "DefaultTrait" },
+--    IsHidden = true,
+--    -- This must be a list of tables
+--    AddOutgoingDamageModifiers = {
+--        {
+--            ValidWeaponMultiplier = 1.30, 
+--        }
+--    }
+--}
+--
+--function mod.ApplyAxeAspectBlockBuff()
+--		-- If the buff is already active, just refresh the duration (optional)
+--		if HeroHasTrait("AxeBlockDamageBuff") then
+--			return 
+--		end
+--		-- Apply the +30% damage buff
+--		AddTraitToHero({ TraitName = "AxeBlockDamageBuff" })
+--
+--		-- Add the Frenzy Icon above the player
+--		-- "FrenzyStatusIcon" is the standard internal name for the UI effect
+--		local frenzyIconId = CreateAnimationToAttached({ 
+--			Name = "FrenzyStatusIcon", 
+--			DestinationId = CurrentRun.Hero.ObjectId, 
+--			OffsetY = -150 
+--		})
+--		
+--		-- Wait 3 seconds
+--		wait(3.0, RoomThreadName)
+--		
+--		-- Remove the buff
+--		RemoveTrait(CurrentRun.Hero, "AxeBlockDamageBuff")
+--  
+--		-- Remove the icon
+--		StopAnimation({ Name = "FrenzyStatusIcon", DestinationId = CurrentRun.Hero.ObjectId })
+--		Destroy({ Id = frenzyIconId })
+--	end
+--
+--ModUtil.Path.Wrap("CheckWeaponBlock", function(baseFunc, victim, attacker, triggerArgs)
+--    -- Execute the original block logic first
+--    local successfullyBlocked = baseFunc(victim, attacker, triggerArgs)
+--    
+--    -- If the block was successful by the player using your Aspect, trigger the buff
+--    if successfullyBlocked and victim == CurrentRun.Hero and HeroHasTrait("AxeRecoveryAspect") then
+--        thread(_PLUGIN.guid .. "." .. "ApplyAxeAspectBlockBuff")
+--    end
     
-		-- Remove the icon
-		StopAnimation({ Name = "FrenzyStatusIcon", DestinationId = CurrentRun.Hero.ObjectId })
-		Destroy({ Id = frenzyIconId })
-	end
-
-ModUtil.Path.Wrap("CheckWeaponBlock", function(baseFunc, victim, attacker, triggerArgs)
-    -- Execute the original block logic first
-    local successfullyBlocked = baseFunc(victim, attacker, triggerArgs)
-    
-    -- If the block was successful by the player using your Aspect, trigger the buff
-    if successfullyBlocked and victim == CurrentRun.Hero and HeroHasTrait("AxeRecoveryAspect") then
-        thread(_PLUGIN.guid .. "." .. "ApplyAxeAspectBlockBuff")
-    end
-    
-    -- Return the original block result back to the game engine
-    return successfullyBlocked
-end)
+--    -- Return the original block result back to the game engine
+--    return successfullyBlocked
+--end)
 
 modutil.once_loaded.game(function()
 
@@ -351,7 +351,7 @@ modutil.once_loaded.game(function()
 				},
 			}
 	
-		--elseif weapon.Name == 'WeaponStaffBolt' then 
+		--elseif weapon.Name == 'WeaponStaffBall' then 
 		--	weapon.Effects =
 		end
 	end
@@ -805,6 +805,12 @@ modutil.once_loaded.game(function()
 				WeaponName = "WeaponStaffBall",
 				WeaponProperty = "InitialCooldown",
 				ChangeValue = 0,
+				ChangeType = "Absolute",
+			},
+			{
+				WeaponName = "WeaponStaffBall",
+				WeaponProperty = "Cooldown",
+				ChangeValue = 0.4,
 				ChangeType = "Absolute",
 			},
 		},
