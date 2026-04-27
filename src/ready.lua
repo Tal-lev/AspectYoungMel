@@ -166,15 +166,29 @@ end)
 
 modutil.once_loaded.game(function()
 
+	local TextOrder = {
+    "Id",
+    "InheritFrom",
+    "DisplayName",
+    "Description",
+	}
+	
 	local file = rom.path.combine(rom.paths.Content, 'Game/Text/en/TraitText.en.sjson')
 	sjson.hook(file, function(data)
-	table.insert(data.Texts, 
-	{
-		Id = "HealthThresholdStatDisplay",
-		DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
-		Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
 
-	})
+	
+	
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "HealthThresholdStatDisplay",
+			InheritFrom = "BaseStatLine",
+			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
+			Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
+
+		},
+		TextOrder)
+	)
+
 	for key, text in pairs(data.Texts) do
 		--Axe Aspect Young Mel
 		if text.Id == 'AxeRecoveryAspect' then
@@ -198,10 +212,6 @@ modutil.once_loaded.game(function()
 		if text.Id == 'BaseStaffAspect' then
 			text.DisplayName = "Aspect of young Melinoë."
 			text.Description = "While you have no more than {#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}{#Prev}, absorb your {$Keywords.SpecialEX} blast to restore {#BoldFormatGraft}{$TooltipData.ExtractData.HealAmount}{!Icons.Health}{#Prev}."
-		end
-		if text.Id == 'HealthThresholdStatDisplay' then
-			text.DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:"
-			text.Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
 		end
 		if text.Id == 'BaseStaffAspect_Shop' then
 			text.DisplayName = "Witch's Staff, Aspect of Young Melinoë:"
