@@ -4,14 +4,14 @@ Replaces Melinoe aspects with aspects of Young Melinoe in their stead.
 
 ## Features
 
-Replaces two aspects of melinoe
+Replaces two aspects of Melinoe
 
-### Axe Aspect of Young Melinoe - 
+### Axe Aspect of Young Melinoe 
 
 - Replaces the special with Block similar to the Early Access.
 - Trait increases damage of omega special. 
 
-### Staff Aspect of Young Melinoe - Replaces Staff Aspect of Melinoethe special with a weaker projectile
+### Staff Aspect of Young Melinoe
 
 - Replaces the special with a weaker projectile with shorter cooldown, better homing and no hit-stun
 - Trait enables to absorb the omega special to heal when health is below a threshold.
