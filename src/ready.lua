@@ -166,6 +166,57 @@ end)
 
 modutil.once_loaded.game(function()
 
+	local file = rom.path.combine(rom.paths.Content, 'Game/Text/en/TraitText.en.sjson')
+	sjson.hook(file, function(data)
+	table.insert(data.Texts, 
+	{
+		Id = "HealthThresholdStatDisplay",
+		DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
+		Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
+
+	})
+	for key, text in pairs(data.Texts) do
+		--Axe Aspect Young Mel
+		if text.Id == 'AxeRecoveryAspect' then
+			text.DisplayName = "Aspect of young Melinoë"
+			text.Description = "Replaces your {$Keywords.Special} with a Block."
+		end
+		if text.Id == 'AxeDamageHealthStatDisplay' then
+			text.DisplayName = "{!Icons.Bullet}{#PropertyFormat}Omega Special Damage:"
+			text.Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
+		end
+		if text.Id == 'AxeRecoveryAspect_Shop' then
+			text.DisplayName = "Moonstone Axe, Aspect of Young Melinoë:"
+		end
+		if text.Id == 'AxeRecoveryAspect_Upgrade' then
+			text.DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}"
+		end
+		if text.Id == 'AxeRecoveryAspect_FlavorText' then
+			text.DisplayName = "One day its blade could even split the light of the Moon, once its wielder is tall enough to lift it."
+		end
+		--Staff Aspect Young Mel
+		if text.Id == 'BaseStaffAspect' then
+			text.DisplayName = "Aspect of young Melinoë."
+			text.Description = "While you have no more than {#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}{#Prev}, absorb your {$Keywords.SpecialEX} blast to restore {#BoldFormatGraft}{$TooltipData.ExtractData.HealAmount}{!Icons.Health}{#Prev}."
+		end
+		if text.Id == 'HealthThresholdStatDisplay' then
+			text.DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:"
+			text.Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
+		end
+		if text.Id == 'BaseStaffAspect_Shop' then
+			text.DisplayName = "Witch's Staff, Aspect of Young Melinoë:"
+		end
+		if text.Id == 'BaseStaffAspect_Upgrade' then
+			text.DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}"
+		end
+		if text.Id == 'BaseStaffAspect_FlavorText' then
+			text.DisplayName = "A waxing crescent moon; the promise of power, if one could get it out of her mouth."
+		end
+	end
+
+	return data
+	end)
+
 	local file = rom.path.combine(rom.paths.Content, 'Game/Weapons/PlayerWeapons.sjson')
 	sjson.hook(file, function(data)
 	for key, weapon in pairs(data.Weapons) do
@@ -825,56 +876,4 @@ modutil.once_loaded.game(function()
 	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AxeAspectofYoungMelinoe)
 	OverwriteTableKeys( TraitSetData.Aspects.BaseStaffAspect, StaffAspectofYoungMelinoe)
 
-
-		--Adding the text
-	local file = rom.path.combine(rom.paths.Content, 'Game/Text/en/TraitText.en.sjson')
-	sjson.hook(file, function(data)
-	table.insert(data.Texts, 
-	{
-		Id = "HealthThresholdStatDisplay",
-		DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
-		Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
-
-	})
-	for key, text in pairs(data.Texts) do
-		--Axe Aspect Young Mel
-		if text.Id == 'AxeRecoveryAspect' then
-			text.DisplayName = "Aspect of young Melinoë"
-			text.Description = "Replaces your {$Keywords.Special} with a Block."
-		end
-		if text.Id == 'AxeDamageHealthStatDisplay' then
-			text.DisplayName = "{!Icons.Bullet}{#PropertyFormat}Omega Special Damage:"
-			text.Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
-		end
-		if text.Id == 'AxeRecoveryAspect_Shop' then
-			text.DisplayName = "Moonstone Axe, Aspect of Young Melinoë:"
-		end
-		if text.Id == 'AxeRecoveryAspect_Upgrade' then
-			text.DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}"
-		end
-		if text.Id == 'AxeRecoveryAspect_FlavorText' then
-			text.DisplayName = "One day its blade could even split the light of the Moon, once its wielder is tall enough to lift it."
-		end
-		--Staff Aspect Young Mel
-		if text.Id == 'BaseStaffAspect' then
-			text.DisplayName = "Aspect of young Melinoë."
-			text.Description = "While you have no more than {#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}{#Prev}, absorb your {$Keywords.SpecialEX} blast to restore {#BoldFormatGraft}{$TooltipData.ExtractData.HealAmount}{!Icons.Health}{#Prev}."
-		end
-		if text.Id == 'HealthThresholdStatDisplay' then
-			text.DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:"
-			text.Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
-		end
-		if text.Id == 'BaseStaffAspect_Shop' then
-			text.DisplayName = "Witch's Staff, Aspect of Young Melinoë:"
-		end
-		if text.Id == 'BaseStaffAspect_Upgrade' then
-			text.DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}"
-		end
-		if text.Id == 'BaseStaffAspect_FlavorText' then
-			text.DisplayName = "A waxing crescent moon; the promise of power, if one could get it out of her mouth."
-		end
-	end
-
-	return data
-	end)
 end)
