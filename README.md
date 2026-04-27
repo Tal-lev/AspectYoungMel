@@ -4,13 +4,24 @@ Replaces Melinoe aspects with aspects of Young Melinoe in their stead.
 
 ## Features
 
-Axe Aspect of Young Melinoe - Replaces the special with Block from the Early Access. 
+Replaces two aspects of melinoe
+
+### Axe Aspect of Young Melinoe - 
+
+- Replaces the special with Block similar to the Early Access.
+- Trait increases damage of omega special. 
+
+### Staff Aspect of Young Melinoe - Replaces Staff Aspect of Melinoethe special with a weaker projectile
+
+- Replaces the special with a weaker projectile with shorter cooldown, better homing and no hit-stun
+- Trait enables to absorb the omega special to heal when health is below a threshold.
 
 ## Known Issues
 
 - This mod replaces Aspect of Melinoe instead of only adding a new aspect
-- New Axe texture to match the icon
+- New textures to match the icons
 - Hammer 'Siege Shredder' creates 3 blocks with the AxeSpecial animation
+- Missing ability card when observing boons
 
 ## Installation
 
@@ -24,4 +35,4 @@ While the mod has been tested decently well it is recommended to backup your sav
 
 ## Issues
 
-Report any issues on Hades Modding discord
+Report any issues on the mod github or Hades Modding discord
