@@ -20,7 +20,7 @@ rom.mods['SGG_Modding-ENVY'].auto()
 game = rom.game
 import_as_fallback(game)
 
--- Utility function
+-- Utility functions
 local CoreGods = { "Aphrodite", "Apollo", "Ares", "Demeter", "Hephaestus", "Hera", "Hestia", "Poseidon", "Zeus" }
 
 local function AddGodTraitProperty( args )
@@ -75,6 +75,15 @@ function mod.LoadAspectPackage()
 	LoadPackages({ Name = packageName })
 end
 
+--Function for StaffAspectYoungMel
+function mod.CheckStaffSelfHit( triggerArgs, args )
+	if not IsEmpty( GetInProjectilesBlast({ Id = CurrentRun.Hero.ObjectId, DestinationName = args.ProjectileName })) then
+		if (CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth) <= args.Threshold then
+			Heal( CurrentRun.Hero, {HealAmount = args.HealAmount, SourceName = "Aspect" })
+		end
+	end
+end
+
 modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
 		if game.CurrentHubRoom.Name == "Hub_PreRun" then
 			mod.LoadAspectPackage()
@@ -82,8 +91,25 @@ modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
 		return base(source, args)
 	end)
 
--- Changes to special
+-- Steps to create new Aspects
+	-- 1.Adding projectile data
+	-- 2.Adding Effects to default attack with active=false
+	-- 3.Loading Packge with new icon/texture/model
+	-- 4.Adding new aspect
+		--a.Icon
+		--b.Mesh / Texture
+		--c.Sounds
+		--d.Trait
+		--e.Modify attacks
+	-- 5.Adding text of new Aspect
+	-- 6.Adding god effects to FireFX / ProjectileFX
+	-- 7.Modifying Hammers
+	-- 8.Overwrite an existing aspect with the new one.
 
+-- AxeAspectYoungMel - 1,2,3,4(a,c,e),5,6,7
+-- StaffAspectYoungMel - 
+
+-- Changes to special
 
 -- Failed Attempt to change the Aspect trait to give damage buff after Block.
 TraitData.AxeBlockDamageBuff = {
@@ -98,7 +124,7 @@ TraitData.AxeBlockDamageBuff = {
     }
 }
 
-function ApplyAxeAspectBlockBuff()
+function mod.ApplyAxeAspectBlockBuff()
 		-- If the buff is already active, just refresh the duration (optional)
 		if HeroHasTrait("AxeBlockDamageBuff") then
 			return 
@@ -131,7 +157,7 @@ ModUtil.Path.Wrap("CheckWeaponBlock", function(baseFunc, victim, attacker, trigg
     
     -- If the block was successful by the player using your Aspect, trigger the buff
     if successfullyBlocked and victim == CurrentRun.Hero and HeroHasTrait("AxeRecoveryAspect") then
-        thread(ApplyAxeAspectBlockBuff)
+        thread(_PLUGIN.guid .. "." .. "ApplyAxeAspectBlockBuff")
     end
     
     -- Return the original block result back to the game engine
@@ -264,7 +290,8 @@ modutil.once_loaded.game(function()
 				},
 			}
 	
-
+		--elseif weapon.Name == 'WeaponStaffBolt' then 
+		--	weapon.Effects =
 		end
 	end
 	return data
@@ -322,36 +349,58 @@ modutil.once_loaded.game(function()
 			},
 		},
 	})
+	table.insert(data.Projectiles,
+	{
+		Name = "ProjectileStaffBoltEA",
+		InheritFrom = "1_BaseDamagingProjectile",
+		Type = "HOMING",
+		HomingAllegiance = "ENEMIES",
+		AdjustRateAcceleration = 3000,
+		MaxAdjustRate = 100,
+		SpinRate = 0,
+		Speed = 0,
+		Acceleration = 2000,
+		Range = 880.0,
+		Damage = 20,
+		DetonateFx = "QuickFlashEnemy",
+		CheckObstacleImpact = true,
+		CheckUnitImpact = true,
+		UnlimitedUnitPenetration = false,
+		DetonateAtVictimLocation = true,
+		Thing =
+		{
+			Graphic = "StaffBallProjectile",
+			AttachedAnim = "StaffProjectileShadow",
+			OffsetZ = 112,
+			Grip = 999999,
+			RotateGeometry = true,
+			Tallness = 20,
+			Points =
+			{
+				{
+					X = 76,
+					Y = 20,
+				},
+				{
+					X = 76,
+					Y = -20,
+				},
+				{
+					X = -32,
+					Y = -20,
+				},
+				{
+					X = -32,
+					Y = 20,
+				},
+			},
+		},
+	})
 	return data
 	end)
-
-	local file = rom.path.combine(rom.paths.Content, 'Game/Text/en/TraitText.en.sjson')
-	sjson.hook(file, function(data)
-	for key, text in pairs(data.Texts) do
-		if text.Id == 'AxeRecoveryAspect' then
-			text.DisplayName = "Aspect of young Melinoë"
-			text.Description = "Replaces your {$Keywords.Special} with a Block."
-		end
-		if text.Id == 'AxeDamageHealthStatDisplay' then
-			text.DisplayName = "{!Icons.Bullet}{#PropertyFormat}Omega Special Damage:"
-			text.Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
-		end
-		if text.Id == 'AxeRecoveryAspect_Shop' then
-			text.DisplayName = "Moonstone Axe, Aspect of Young Melinoë:"
-		end
-		if text.Id == 'AxeRecoveryAspect_Upgrade' then
-			text.DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}"
-		end
-		if text.Id == 'AxeRecoveryAspect_FlavorText' then
-			text.DisplayName = "One day its blade could even split the light of the Moon, once its wielder is tall enough to lift it."
-		end
-	end
-	return data
-	end)
-
 
 	-- Adding Axe Aspect of Young Mel
-	AspectofYoungMelinoe = {
+	AxeAspectofYoungMelinoe = {
 		InheritFrom = { "WeaponEnchantmentTrait" },
 		RarityLevels =
 		{
@@ -611,6 +660,100 @@ modutil.once_loaded.game(function()
 		FlavorText = "AxeRecoveryAspect_FlavorText",
 	}
 
+	-- Adding Staff Aspect of Young Mel
+	StaffAspectofYoungMelinoe = 
+	{
+		InheritFrom = { "WeaponEnchantmentTrait" },
+		Icon = "JarlUlsfark-AspectYoungMel\\StaffAspectYoungMelIcon",
+		RequiredWeapon = "WeaponStaffSwing",
+		-- 'I have a good idea for a prank for this Asclepius character' ~Momus
+		WeaponKitGrannyModel = "WeaponStaff_Mesh",
+		ReplacementGrannyModels = 
+		{
+			WeaponStaff_Mesh = "WeaponStaff_Mesh"
+		},
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 1,
+			},
+			Rare =
+			{
+				Multiplier = 1.333,
+			},
+			Epic =
+			{
+				Multiplier = 1.666,
+			},
+			Heroic =
+			{
+				Multiplier = 2,
+			},
+			Legendary =
+			{
+				Multiplier = 2.333,
+			},
+			Perfect =
+			{
+				Multiplier = 2.666,
+			},
+		},
+		OnProjectileDeathFunction = 
+		{
+			Name = _PLUGIN.guid .. "." .. "CheckStaffSelfHit",
+			ValidProjectiles = {"ProjectileStaffBallCharged"},
+			Args = 
+			{
+				ProjectileName = "ProjectileStaffBallCharged",
+				Threshold = { BaseValue = 0.3 },
+				HealAmount = 5,
+				ReportValues = 
+				{ 
+					ReportedThreshold = "Threshold" ,
+					ReportedHeal = "HealAmount" 
+				},
+			}
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedThreshold",
+				ExtractAs = "HealthThreshold",
+				Format = "Percent",
+				SkipAutoExtract = true
+			},
+			{
+				Key = "ReportedHeal",
+				ExtractAs = "HealAmount",
+				SkipAutoExtract = true
+			},
+		},
+		StatLines =
+		{
+			"HealthThresholdStatDisplay"
+		},
+		PropertyChanges =
+		{
+			{
+				WeaponName = "WeaponStaffBall",
+				WeaponProperty = "Projectile",
+				ChangeValue = "ProjectileStaffBoltEA",
+			},
+			{
+				WeaponName = "WeaponStaffBall",
+				WeaponProperty = "InitialCooldown",
+				ChangeValue = 0,
+				ChangeType = "Absolute",
+			},
+		},
+		AddOutgoingDamageModifiers =
+		{
+
+		},
+		FlavorText = "BaseStaffAspect_FlavorText",
+	}
+
 	--RemoveWeaponPropertyFromTraits("WeaponAxeSpecial", "FireFx")
 	-- At TraitData_God.lua
 	AddGodTraitProperty({
@@ -667,9 +810,71 @@ modutil.once_loaded.game(function()
 				ChangeType = "Absolute",
 				ExcludeLinked = true,
 			},
+			{
+				WeaponName = "WeaponStaffBall",
+				ProjectileName = "ProjectileStaffBoltEA",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "StaffBallProjectileIn_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
 		}
 	})
 	
 
-	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AspectofYoungMelinoe)
+	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AxeAspectofYoungMelinoe)
+	OverwriteTableKeys( TraitSetData.Aspects.BaseStaffAspect, StaffAspectofYoungMelinoe)
+
+
+		--Adding the text
+	local file = rom.path.combine(rom.paths.Content, 'Game/Text/en/TraitText.en.sjson')
+	sjson.hook(file, function(data)
+	table.insert(data.Texts, 
+	{
+		Id = "HealthThresholdStatDisplay",
+		DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
+		Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
+
+	})
+	for key, text in pairs(data.Texts) do
+		--Axe Aspect Young Mel
+		if text.Id == 'AxeRecoveryAspect' then
+			text.DisplayName = "Aspect of young Melinoë"
+			text.Description = "Replaces your {$Keywords.Special} with a Block."
+		end
+		if text.Id == 'AxeDamageHealthStatDisplay' then
+			text.DisplayName = "{!Icons.Bullet}{#PropertyFormat}Omega Special Damage:"
+			text.Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
+		end
+		if text.Id == 'AxeRecoveryAspect_Shop' then
+			text.DisplayName = "Moonstone Axe, Aspect of Young Melinoë:"
+		end
+		if text.Id == 'AxeRecoveryAspect_Upgrade' then
+			text.DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}"
+		end
+		if text.Id == 'AxeRecoveryAspect_FlavorText' then
+			text.DisplayName = "One day its blade could even split the light of the Moon, once its wielder is tall enough to lift it."
+		end
+		--Staff Aspect Young Mel
+		if text.Id == 'BaseStaffAspect' then
+			text.DisplayName = "Aspect of young Melinoë."
+			text.Description = "While you have no more than {#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}{#Prev}, absorb your {$Keywords.SpecialEX} blast to restore {#BoldFormatGraft}{$TooltipData.ExtractData.HealAmount}{!Icons.Health}{#Prev}."
+		end
+		if text.Id == 'HealthThresholdStatDisplay' then
+			text.DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:"
+			text.Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
+		end
+		if text.Id == 'BaseStaffAspect_Shop' then
+			text.DisplayName = "Witch's Staff, Aspect of Young Melinoë:"
+		end
+		if text.Id == 'BaseStaffAspect_Upgrade' then
+			text.DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}"
+		end
+		if text.Id == 'BaseStaffAspect_FlavorText' then
+			text.DisplayName = "A waxing crescent moon; the promise of power, if one could get it out of her mouth."
+		end
+	end
+
+	return data
+	end)
 end)
