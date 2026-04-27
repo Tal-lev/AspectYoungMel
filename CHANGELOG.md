@@ -8,8 +8,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [0.2.1] - 2026-04-27
-
-## [0.2.1] - 2026-04-27
  - fixed rare crash when returning from a brotherly dream. 
 
 ## [0.2.0] - 2026-04-27
