@@ -111,6 +111,15 @@ modutil.mod.Path.Wrap("HubPostDreamLoad", function(base, source, args)
 	return base(source, args)
 end)
 
+modutil.mod.Path.Wrap("StartRoom", function(base, source, args)
+        -- Check for specific Aspect traits
+        if HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("BaseStaffAspect") then  
+            mod.LoadAspectPackage()
+        end
+	return base(source, args)
+end)
+ 
+
 -- Steps to create new Aspects
 	-- 1.Adding projectile data
 	-- 2.Adding Effects to default attack with active=false
@@ -122,13 +131,12 @@ end)
 		--d.Trait
 		--e.Modify attacks
 	-- 5.Adding text of new Aspect
-  -- 6. adding ability card
-	-- 7.Adding god effects to FireFX / ProjectileFX
-	-- 8.Modifying Hammers
-	-- 9.Overwrite an existing aspect with the new one.
+	-- 6.Adding god effects to FireFX / ProjectileFX
+	-- 7.Modifying Hammers
+	-- 8.Overwrite an existing aspect with the new one.
 
--- AxeAspectYoungMel - 1,2,3,4(a,c,e),5,7,8,9
--- StaffAspectYoungMel - 1,3,4(a,d,e),5,7,9
+-- AxeAspectYoungMel - 1,2,3,4(a,c,e),5,6,7,8
+-- StaffAspectYoungMel - 1,3,4(a,d,e),5,6,8
 
 -- Changes to special
 

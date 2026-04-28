@@ -7,17 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fixed Aspect icons disapearing during runs
+
 ## [0.2.1] - 2026-04-27
+
  - fixed rare crash when returning from a brotherly dream. 
 
 ## [0.2.0] - 2026-04-27
+
  - Replaces Staff Aspect of Melinoe with Staff Aspect of Young Melinoe.
  - Staff Aspect of Young Melinoe changes special projectile to be weaker with lower cooldown, better homing and no hit stun.
  - Staff Aspect of Young Melinoe allows to absorb Omega special to recover health when health is below a threshold.
 ﻿
 ## [0.1.0] - 2026-04-25
-
-### Added
 
 - First version of the mod!
 
