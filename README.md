@@ -20,8 +20,6 @@ Replaces two aspects of Melinoe
 
 - This mod replaces Aspect of Melinoe instead of only adding a new aspect
 - New textures to match the icons
-- Hammer 'Siege Shredder' creates 3 blocks with the AxeSpecial animation
-- Missing ability card when observing boons
 
 ## Installation
 

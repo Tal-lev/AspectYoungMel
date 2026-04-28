@@ -195,6 +195,7 @@ end)
 
 modutil.once_loaded.game(function()
 
+	--Inserts text
 	local TextOrder = {
     "Id",
     "InheritFrom",
@@ -213,6 +214,16 @@ modutil.once_loaded.game(function()
 			InheritFrom = "BaseStatLine",
 			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
 			Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
+
+		},
+		TextOrder)
+	)
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "AxeShieldDeflectTrait",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Mirror Shield",
+			Description = "Your {$Keywords.Special} can {$Keywords.Deflect}"
 
 		},
 		TextOrder)
@@ -439,6 +450,62 @@ modutil.once_loaded.game(function()
 			},
 		},
 	})
+
+	table.insert(data.Projectiles,
+	{
+		Name = "ProjectileAxeBlockSpinDeflect",
+		InheritFrom = "1_BaseDamagingProjectile",
+		DetonateFx = "AxeDeflectBase",
+		Type = "STRAIGHT",
+		TotalFuse = 0.4,
+		Fuse = 0.2,
+		FuseStart = 0,
+		ImmunityDuration = 0.3,
+		MultiDetonate = true,
+		AffectsEnemies = true,
+		AffectsFriends = false,
+		Speed = 160,
+		Range = 650.0,
+		DamageRadius = 100,
+		DamageRadiusScaleY = 0.62,
+		RequireHitCenter = false,
+		AttachToOwner = false,
+		NumPenetrations = 9999,
+		AffectsSelf = false,
+		CheckUnitImpact = false,
+		CheckObstacleImpact = true,
+		UnlimitedUnitPenetration = true,
+		Damage = 20,
+		ImpactVelocity = 0,
+		UseArmor = false,
+		UseVulnerability = false,
+		UseDetonationForProjectileDefense = true,
+		UseRadialImpact = true,
+		ProjectileDefenseRadius = 100,
+		DeflectProjectiles = true,
+		SilentImpactOnInvulnerable = true,
+		ImpactFx = "AthenaProjectileImpact",
+		Thing =
+		{
+			Graphic = "AxeDeflectBase",
+			OffsetZ = 70,
+			Grip = 999999,
+		},
+		Effects =
+		{
+			{
+				Name = "OnHitStun",
+				Duration = 0.7,
+				DisableMove = true,
+				DisableRotate = true,
+				DisableAttack = true,
+				Active = true,
+				CanAffectInvulnerable = false,
+				FrontFx = "null",
+			},
+		},
+	})
+
 	table.insert(data.Projectiles,
 	{
 		Name = "ProjectileStaffBoltEA",
@@ -907,6 +974,14 @@ modutil.once_loaded.game(function()
 				ExcludeLinked = true,
 			},
 			{
+				WeaponName = "WeaponAxeSpecial",
+				ProjectileName = "ProjectileAxeBlockSpinDeflect",
+				ProjectileProperty = "DetonateFx",
+				ValuePrefix = "AxeDeflect_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
 				WeaponName = "WeaponStaffBall",
 				ProjectileName = "ProjectileStaffBoltEA",
 				ProjectileProperty = "Graphic",
@@ -917,6 +992,63 @@ modutil.once_loaded.game(function()
 		}
 	})
 	
+
+	--Adding Hammers Traits
+
+	OverwriteTableKeys( TraitData, {
+	AxeShieldDeflectTrait = 
+		{
+			InheritFrom = { "WeaponTrait", "AxeHammerTrait" },
+			Icon = "JarlUlsfark-AspectYoungMel\\ShieldBlockIcon",
+			GameStateRequirements =
+			{
+				{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponAxe", },
+				},
+				{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponAxe", },
+				IsAny = {"AxeRecoveryAspect", }
+				},
+			},
+			PropertyChanges = 
+			{
+				{
+					WeaponName = "WeaponAxeSpecial",
+					WeaponProperty = "Projectile",
+					ChangeValue = "ProjectileAxeBlockSpinDeflect",
+				},
+				{
+					WeaponName = "WeaponAxeSpecial",
+					WeaponProperty = "DoProjectileBlockPresentation",
+					ChangeVlaue = false,
+					ChangeType = "Absolute",
+					ExcludeLinked = true,
+				},
+				{
+					WeaponName = "WeaponAxeSpecial",
+					WeaponProperty = "ExpireProjectilesOnFire",
+					ChangeVlaue = "ProjectileAxeBlockSpinDeflect",
+					ExcludeLinked = true,
+				},
+			}
+		}
+	})
+
+	OverwriteTableKeys(TraitData.AxeBlockEmpowerTrait.GameStateRequirements, {
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponAxe", },
+			},
+			{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponAxe", },
+				IsNone = {"AxeRecoveryAspect", }
+			},
+		}
+	)
+
+	--Adding Hammers to pool
+	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTrait")
 
 	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AxeAspectofYoungMelinoe)
 	OverwriteTableKeys( TraitSetData.Aspects.BaseStaffAspect, StaffAspectofYoungMelinoe)
