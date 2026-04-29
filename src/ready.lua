@@ -84,16 +84,27 @@ function mod.CheckStaffSelfHit( triggerArgs, args )
 	end
 end
 
---Importing Weapon Textures
+--Importing Axe Textures
 local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
 local custom_axe_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponAxe")
 
-local current_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
+local current_axe_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
 
-table.insert(current_overrides, 1, custom_axe_hash)
-table.insert(current_overrides, weapon_axe_hash)
+table.insert(current_axe_overrides, 1, custom_axe_hash)
+table.insert(current_axe_overrides, weapon_axe_hash)
 
-rom.data.load_package_overrides_set(weapon_axe_hash, current_overrides)
+rom.data.load_package_overrides_set(weapon_axe_hash, current_axe_overrides)
+
+--Importing Staff Textures
+local weapon_staff_hash = rom.data.get_hash_guid_from_string("WeaponStaffSwing")
+local custom_staff_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponStaff")
+
+local current_staff_overrides = rom.data.load_package_overrides_get(weapon_staff_hash)
+
+table.insert(current_staff_overrides, 1, custom_staff_hash)
+table.insert(current_staff_overrides, weapon_staff_hash)
+
+rom.data.load_package_overrides_set(weapon_axe_hash, current_staff_overrides)
 
 -- Loading packages
 modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
@@ -147,8 +158,8 @@ end)
 	-- 7.Modifying Hammers
 	-- 8.Overwrite an existing aspect with the new one.
 
--- AxeAspectYoungMel - 1,2,3,4(a,c,e),5,6,7,8
--- StaffAspectYoungMel - 1,3,4(a,d,e),5,6,8
+-- AxeAspectYoungMel - 1,2,3,4(a,b,c,d,e),5,6,7,8
+-- StaffAspectYoungMel - 1,3,4(a,b,d,e),5,6,8
 
 -- Changes to special
 
