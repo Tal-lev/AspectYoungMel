@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added custom texture to Axe Aspect of Young Mel
+
 ## [0.2.2] - 2026-04-29
 
 - Fixed Aspect icons disapearing during runs

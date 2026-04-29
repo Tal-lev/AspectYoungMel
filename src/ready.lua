@@ -84,6 +84,18 @@ function mod.CheckStaffSelfHit( triggerArgs, args )
 	end
 end
 
+--Importing Weapon Textures
+local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
+local custom_axe_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponAxe")
+
+local current_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
+
+table.insert(current_overrides, 1, custom_axe_hash)
+table.insert(current_overrides, weapon_axe_hash)
+
+rom.data.load_package_overrides_set(weapon_axe_hash, current_overrides)
+
+-- Loading packages
 modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
 	if game.CurrentHubRoom ~= '' and game.CurrentHubRoom ~= nil then  
 		if game.CurrentHubRoom.Name == "Hub_PreRun" then
