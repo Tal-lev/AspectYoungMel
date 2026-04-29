@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed Aspect icons disapearing during runs
 - Replaced 'Siege Shredder' with 'Mirror Shield' Hammer for Axe Aspect of Young Mel
 
-
 ## [0.2.1] - 2026-04-27
 
  - fixed rare crash when returning from a brotherly dream. 
