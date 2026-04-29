@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-04-29
+
 - Fixed Aspect icons disapearing during runs
 - Replaced 'Siege Shredder' with 'Mirror Shield' Hammer for Axe Aspect of Young Mel
 
@@ -24,7 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.2.1...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.2.2...HEAD
+[0.2.2]: https://github.com/Tal-lev/AspectYoungMel/compare/0.2.1...0.2.2
 [0.2.1]: https://github.com/Tal-lev/AspectYoungMel/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/Tal-lev/AspectYoungMel/compare/2a59f3eba279511760a4077aaa7e72010d51936c...0.1.0
