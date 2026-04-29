@@ -22,6 +22,7 @@ Replaces two aspects of Melinoe
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/StaffAspect.png" alt="PonyDressList" width="60%">
 </div>
+
 ## Known Issues
 
 - This mod replaces Aspect of Melinoe instead of only adding a new aspect
