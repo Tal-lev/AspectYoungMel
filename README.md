@@ -4,7 +4,7 @@ Replaces Melinoe aspects with aspects of Young Melinoe in their stead.
 
 ## Features
 
-Replaces three aspects of Melinoe
+Replaces three aspects of Melinoë
 
 ### Staff Aspect of Young Melinoë
 
