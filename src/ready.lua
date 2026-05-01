@@ -104,7 +104,18 @@ local current_staff_overrides = rom.data.load_package_overrides_get(weapon_staff
 table.insert(current_staff_overrides, 1, custom_staff_hash)
 table.insert(current_staff_overrides, weapon_staff_hash)
 
-rom.data.load_package_overrides_set(weapon_axe_hash, current_staff_overrides)
+rom.data.load_package_overrides_set(weapon_staff_hash, current_staff_overrides)
+
+--Importing Dagger Textures
+local weapon_dagger_hash = rom.data.get_hash_guid_from_string("WeaponDagger")
+local custom_dagger_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponDagger")
+
+local current_dagger_overrides = rom.data.load_package_overrides_get(weapon_dagger_hash)
+
+table.insert(current_dagger_overrides, 1, custom_dagger_hash)
+table.insert(current_dagger_overrides, weapon_dagger_hash)
+
+rom.data.load_package_overrides_set(weapon_dagger_hash, current_dagger_overrides)
 
 -- Loading packages
 modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
@@ -228,10 +239,8 @@ modutil.once_loaded.game(function()
 	
 	local file = rom.path.combine(rom.paths.Content, 'Game/Text/en/TraitText.en.sjson')
 	sjson.hook(file, function(data)
-
 	
-	
-	table.insert(data.Texts, sjson.to_object(
+		table.insert(data.Texts, sjson.to_object(
 		{
 			Id = "HealthThresholdStatDisplay",
 			InheritFrom = "BaseStatLine",
@@ -284,6 +293,20 @@ modutil.once_loaded.game(function()
 		end
 		if text.Id == 'BaseStaffAspect_FlavorText' then
 			text.DisplayName = "A waxing crescent moon; the promise of power, if one could get it out of her mouth."
+		end
+		--Dagger Aspect Young Mel
+		if text.Id == 'DaggerBackstabAspect' then
+			text.DisplayName = "Aspect of young Melinoë."
+			text.Description = "..."
+		end
+		if text.Id == 'DaggerBackstabAspect_Shop' then
+			text.DisplayName = "Lim and Oros, Aspect of Young Melinoë:"
+		end
+		if text.Id == 'DaggerBackstabAspect_Upgrade' then
+			text.DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}"
+		end
+		if text.Id == 'DaggerBackstabAspect_FlavorText' then
+			text.DisplayName = "Precision has to be learned and wood is a kinder teacher than steel."
 		end
 	end
 
@@ -418,6 +441,137 @@ modutil.once_loaded.game(function()
 		--	weapon.Effects =
 		end
 	end
+	return data
+	end)
+
+
+	--Dagger VFX
+	local file = rom.path.combine(rom.paths.Content, 'Game/Animations/Melinoe_Dagger_VFX.sjson')
+	sjson.hook(file, function(data)
+		table.insert(data.Animations,
+			{
+			Name = "DaggerSwipeFastBrown",
+			FilePath = "Fx\\DaggerSwipeFast\\DaggerSwipeFast",
+			GroupName = "FX_Standing_Add",
+			AddColor = true,
+			ColorFromOwner = "Ignore",
+			StartRed = 0.58,
+			StartGreen = 0.29,
+			StartBlue = 0.0,
+			EndRed = 0.39,
+			EndGreen = 0.26,
+			EndBlue = 0.12,
+			EndFrame = 19,
+			NumFrames = 19,
+			PlaySpeed = 75.0,
+			StartFrame = 1,
+			OriginX = 80.0,
+			OriginY = 160.0,
+			LocationFromOwner = "Take",
+			LocationZFromOwner = "Take",
+			PostRotateScaleY = 0.6,
+			FlipHorizontal = false,
+			Scale = 1.6,
+			OffsetZ = 60,
+			EaseIn = 0,
+			EaseOut = 1,
+			OverlayVfx = true,
+			CreateAnimations =
+			{
+				{ Name = "DaggerSwipeFastDarkBrown" },
+				{ Name = "DaggerSwipeFastLightBrown" }
+			}
+		})
+
+		table.insert(data.Animations,
+		{
+			Name = "DaggerSwipeFastFlipBrown",
+			InheritFrom = "DaggerSwipeFastBrown",
+			FlipVertical = true,
+			ClearCreateAnimations = true,
+			CreateAnimations =
+			{
+				{ Name = "DaggerSwipeFastDarkFlipBrown" },
+				{ Name = "DaggerSwipeFastLightBrown" }
+			}
+		})
+
+		table.insert(data.Animations,
+		{
+		Name = "DaggerProjectileFxBrown",
+		ChainTo = "null",
+		FilePath = "Fx\\DaggerProjectile\\DaggerProjectile",
+		GroupName = "Standing",
+		ScaleFromOwner = "Ignore",
+		VisualFx = "DaggerProjectileFxTrailBrown",
+		EndFrame = 15,
+		NumFrames = 15,
+		RandomStartFrame = true,
+		ReRandomizeOnLoop = false,
+		StartFrame = 1,
+		OriginY = 30.0,
+		Scale = 0.75,
+		ScaleY = 2,
+		Ambient = 0.0,
+		VisualFxDistanceMax = 100.0,
+		VisualFxDistanceMin = 100.0,
+		VisualFxManagerCap = 400,
+		VisualFxManagerFrameCap = 18,
+		VisualFxFrameCap = 10,
+		ColorFromOwner = "Ignore",
+		StartRed = 0.58,
+		StartGreen = 0.29,
+		StartBlue = 0.0,
+		EndRed = 0.39,
+		EndGreen = 0.26,
+		EndBlue = 0.12,
+		})
+
+		table.insert(data.Animations,
+		{
+			Name = "DaggerProjectileFxTrailBrown",
+			InheritFrom = "DaggerProjectileFxBrown",
+			ColorFromOwner = "Ignore",
+			ChainTo = "null",
+			Sound = "null",
+			FilePath = "Particles\\particle_dagger_trail_color",
+			GroupName = "FX_Standing_Add",
+			AngleFromOwner = "Take",
+			AddColor = true,
+			Duration = 0.33,
+			EaseIn = 0.9,
+			EaseOut = 1.0,
+			EndFrame = 1,
+			NumFrames = 1,
+			StartFrame = 1,
+			OriginY = 80.0,
+			OriginX = 300,
+			RandomOffsetY = 1.0,
+			LocationFromOwner = "Take",
+			LocationZFromOwner = "Take",
+			VelocityMax = 200.0,
+			VelocityMin = 100.0,
+			EndScaleY = 0.0,
+			ScaleY = 0.5,
+			StartScaleY = 0.5,
+			StartRed = 0.58,
+			StartGreen = 0.29,
+			StartBlue = 0.0,
+			EndRed = 0.39,
+			EndGreen = 0.26,
+			EndBlue = 0.12,
+			VisualFx = "DaggerProjectileCurvedTrailSparkle",
+			VisualFxIntervalMin = 0.01,
+			VisualFxIntervalMax = 0.50,
+			VisualFxCap = 1,
+			CreateAnimations =
+			{
+				{ Name = "DaggerProjectileFxTrailDarkBrown" },
+				{ Name = "DaggerProjectileFxTrailSpectralBrown" },
+				{ Name = "DaggerProjectileFxTrailDisplacementBrown" },
+			},
+		})
+
 	return data
 	end)
 
@@ -576,6 +730,75 @@ modutil.once_loaded.game(function()
 			},
 		},
 	})
+
+	table.insert(data.Projectiles,
+	{
+		Name = "ProjectileDaggerThrowEA",
+		InheritFrom = "1_BaseDamagingProjectile",
+		DetonateFx = "null",
+		Type = "HOMING",
+		AffectsEnemies = true,
+		AffectsFriends = false,
+		AffectsSelf = false,
+		CheckUnitImpact = true,
+		CheckObstacleImpact = true,
+		UnlimitedUnitPenetration = false,
+		NumPenetrations = 0,
+		AttachToOwner = false,
+		StartDelay = 0.04,
+		Damage = 25,
+		Speed = 6000,
+		Range = 830,
+		UseRadialImpact = false,
+		UseArmor = true,
+		UseVulnerability = true,
+		DissipateFx = "null",
+		GroupName = "Standing",
+		ClearOnAttackEffects = true,
+		ImpactFx = "DaggerProjectileImpactFx",
+		DeathFx = "DaggerProjectileFxFade",
+		ProjectileDefenseRadius = 45,
+		Thing =
+		{
+			Graphic = "DaggerProjectileFxBrown",
+			OffsetZ = 70,
+			RotateGeometry = true,
+			Grip = 999999,
+			Points =
+			{
+				{
+					X = 35,
+					Y = 25,
+				},
+				{
+					X = 35,
+					Y = -25,
+				},
+				{
+					X = -5,
+					Y = -25,
+				},
+				{
+					X = -5,
+					Y = 25,
+				},
+			},
+		},
+		Effects =
+		{
+			 {
+				Name = "OnHitStunHeavy",
+				Duration = 1.1,
+				DisableMove = true,
+				DisableRotate = true,
+				DisableAttack = true,
+				Active = true,
+				CanAffectInvulnerable = false,
+				FrontFx = "null",
+			},
+		},
+	})
+
 	return data
 	end)
 
@@ -940,6 +1163,96 @@ modutil.once_loaded.game(function()
 		FlavorText = "BaseStaffAspect_FlavorText",
 	}
 
+
+	-- Adding Dagger Aspect of Young Mel
+	DaggerAspectofYoungMelinoe = 
+	{
+		InheritFrom = { "WeaponEnchantmentTrait" },
+		Icon = "JarlUlsfark-AspectYoungMel\\DaggerAspectYoungMelIcon",
+		RequiredWeapon = "WeaponDagger",
+		WeaponKitGrannyModel = "WeaponDagger_Mesh",
+		ReplacementGrannyModels = 
+		{
+			WeaponDaggerA_Mesh = "WeaponDaggerA_Mesh",
+			WeaponDaggerB_Mesh = "WeaponDaggerB_Mesh"
+		},
+		WeaponDataOverride =
+		{
+			WeaponDaggerThrow = {
+				ChargeWeaponStages =
+					{
+						{ ManaCost = 12, WeaponProperties = { Projectile = "ProjectileDaggerThrowEA", FireGraphic = "Melinoe_Dagger_SpecialEx_Fire", NumProjectiles = 3, AdditionalProjectileWaveChance = 0, ProjectileInterval = 0.08}, ApplyEffects = { "WeaponDaggerThrowEXDisable", "WeaponDaggerThrowEXDisableCancellable", "WeaponDaggerThrowEXDisableMoveHold" }, Wait = 0.32, HideStageReachedFx = true, ChannelSlowEventOnEnter = true },
+						{ ManaCost = 16, WeaponProperties = { NumProjectiles = 4, AdditionalProjectileWaveChance = 0}, ApplyEffects = { "WeaponDaggerThrowEXDisable", "WeaponDaggerThrowEXDisableCancellable", "WeaponDaggerThrowEXDisableMoveHold" }, Wait = 0.14, HideStageReachedFx = true, },
+						{ ManaCost = 20, WeaponProperties = { NumProjectiles = 5, AdditionalProjectileWaveChance = 0}, ApplyEffects = { "WeaponDaggerThrowEXDisable", "WeaponDaggerThrowEXDisableCancellable", "WeaponDaggerThrowEXDisableMoveHold" }, Wait = 0.14, HideStageReachedFx = true, },
+						{ ManaCost = 24, WeaponProperties = { NumProjectiles = 6, AdditionalProjectileWaveChance = 0}, ApplyEffects = { "WeaponDaggerThrowEXDisable", "WeaponDaggerThrowEXDisableCancellable", "WeaponDaggerThrowEXDisableMoveHold" }, Wait = 0.14, },
+					},
+				Sounds = 
+					{
+						ImpactSounds = {
+							Invulnerable = "/SFX/Player Sounds/ZagreusShieldRicochet",
+							Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+							Bone = "/SFX/DaggerImpactWoodHard",
+							Brick = "/SFX/DaggerImpactWoodSoft",
+							Stone = "/SFX/DaggerImpactWoodSoft",
+							Robot = "/SFX/MetalStoneClangShort",
+							Organic = "/SFX/DaggerImpactOrganic",
+							StoneObstacle = "/SFX/SwordWallHitClankSmall",
+							BrickObstacle = "/SFX/SwordWallHitClankSmall",
+							MetalObstacle = "/SFX/SwordWallHitClankSmall",
+							BushObstacle = "/Leftovers/World Sounds/LeavesRustle",
+							Shell = "/SFX/ShellImpact",
+						}
+					},
+			}
+		},
+		PropertyChanges =
+		{
+			{
+				WeaponName = "WeaponDagger2",
+				WeaponProperty = "SwapOnFire",
+				ChangeValue = "WeaponDagger",
+			},
+			{
+				WeaponName = "WeaponDagger",
+				ProjectileName ="ProjectileDaggerSliceLeft",
+				ProjectileProperty = "Damage",
+				ChangeValue = 40,
+				ChangeType = "Absolute"
+			},
+			{
+				WeaponName = "WeaponDagger",
+				WeaponProperty = "FireFx",
+				ChangeValue = "DaggerSwipeFastBrown",
+			},
+			{
+				WeaponName = "WeaponDagger2",
+				ProjectileName ="ProjectileDaggerSliceRight",
+				ProjectileProperty = "Damage",
+				ChangeValue = 40,
+				ChangeType = "Absolute"
+			},
+			{
+				WeaponName = "WeaponDagger2",
+				WeaponProperty = "FireFx",
+				ChangeValue = "DaggerSwipeFastFlipBrown",
+			},
+			{
+				WeaponName = "WeaponDaggerThrow",
+				WeaponProperty = "Projectile",
+				ChangeValue = "ProjectileDaggerThrowEA",
+			},
+			{
+				WeaponName = "WeaponDaggerThrow",
+				ProjectileName = "ProjectileDaggerThrowEA",
+				ProjectileProperty = "Damage",
+				ChangeValue = 50,
+				ChangeType = "Absolute"
+			},
+		},
+		FlavorText = "DaggerBackstabAspect_FlavorText",
+	}
+
+
 	--RemoveWeaponPropertyFromTraits("WeaponAxeSpecial", "FireFx")
 	-- At TraitData_God.lua
 	AddGodTraitProperty({
@@ -1012,6 +1325,23 @@ modutil.once_loaded.game(function()
 				ChangeType = "Absolute",
 				ExcludeLinked = true,
 			},
+			{
+				WeaponName = "WeaponDaggerThrow",
+				ProjectileName = "ProjectileDaggerThrowEA",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "DaggerProjectile_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponDaggerThrow",
+				ProjectileName = "ProjectileDaggerThrowEA",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "DaggerProjectile_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			
 		}
 	})
 	
@@ -1070,10 +1400,25 @@ modutil.once_loaded.game(function()
 		}
 	)
 
+	OverwriteTableKeys(TraitData.DaggerAttackFinisherTrait.GameStateRequirements, {
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponDagger", },
+			},
+			{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponDagger", },
+				IsNone = {"DaggerBackstabAspect", }
+			},
+		}
+	)
+
+
 	--Adding Hammers to pool
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTrait")
 
 	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AxeAspectofYoungMelinoe)
 	OverwriteTableKeys( TraitSetData.Aspects.BaseStaffAspect, StaffAspectofYoungMelinoe)
+	OverwriteTableKeys( TraitSetData.Aspects.DaggerBackstabAspect, DaggerAspectofYoungMelinoe)
+	
 
 end)
