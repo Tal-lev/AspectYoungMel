@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Replaces Dagger Aspect of Melinoe with Dagger Aspect of Young Melinoe.
+  - changes Attack to a 2-hit combo that deals consistent damage
+  - changes special to a non penetrating 1-way projectile that is deals more damage
+  - changes omega special to a non-penetrating projectiles that deal more damage
+
 ## [0.2.3] - 2026-04-29
 
 - Added custom textures for Axe and Staff Aspects of Young Mel
@@ -23,8 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2026-04-27
 
  - Replaces Staff Aspect of Melinoe with Staff Aspect of Young Melinoe.
- - Staff Aspect of Young Melinoe changes special projectile to be weaker with lower cooldown, better homing and no hit stun.
- - Staff Aspect of Young Melinoe allows to absorb Omega special to recover health when health is below a threshold.
+   -  changes special projectile to be weaker with lower cooldown, better homing and no      hit stun.
+   - trait allows to absorb Omega special to recover health when health is below a threshold.
 ﻿
 ## [0.1.0] - 2026-04-25
 
