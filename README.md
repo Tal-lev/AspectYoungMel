@@ -4,23 +4,28 @@ Replaces Melinoe aspects with aspects of Young Melinoe in their stead.
 
 ## Features
 
-Replaces two aspects of Melinoe
+Replaces three aspects of Melinoe
 
-### Axe Aspect of Young Melinoe 
+### Staff Aspect of Young Melinoë
+
+- Replaces the special with a weaker projectile with shorter cooldown, better homing and no hit-stun
+- Trait enables to absorb the omega special to heal when health is below a threshold.
+<div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/StaffAspect.png" alt="PonyDressList" width="60%">
+</div>
+
+### Dagger Aspect of Young Melinoë
+ - replaces Attack to a 2-hit combo that deals consistent damage
+ - replaces special to a non penetrating 1-way projectile that is deals more damage
+ - replaces omega special to non-penetrating projectiles that deal more damage
+
+### Axe Aspect of Young Melinoë 
 
 - Replaces the special with Block similar to the Early Access.
 - Trait increases damage of omega special.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="60%">
-</div>
-
-### Staff Aspect of Young Melinoe
-
-- Replaces the special with a weaker projectile with shorter cooldown, better homing and no hit-stun
-- Trait enables to absorb the omega special to heal when health is below a threshold.
-<div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/StaffAspect.png" alt="PonyDressList" width="60%">
 </div>
 
 ## Known Issues
@@ -40,4 +45,4 @@ While the mod has been tested decently well it is recommended to backup your sav
 
 ## Issues
 
-Report any issues on the mod github or Hades Modding discord
+Report any issues on the mod [github](https://github.com/Tal-lev/AspectYoungMel/issues) or Hades Modding discord
