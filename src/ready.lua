@@ -1329,19 +1329,10 @@ modutil.once_loaded.game(function()
 				WeaponName = "WeaponDaggerThrow",
 				ProjectileName = "ProjectileDaggerThrowEA",
 				ProjectileProperty = "Graphic",
-				ValuePrefix = "DaggerProjectile_",
+				ValuePrefix = "DaggerProjectileFx_",
 				ChangeType = "Absolute",
 				ExcludeLinked = true,
 			},
-			{
-				WeaponName = "WeaponDaggerThrow",
-				ProjectileName = "ProjectileDaggerThrowEA",
-				ProjectileProperty = "Graphic",
-				ValuePrefix = "DaggerProjectile_",
-				ChangeType = "Absolute",
-				ExcludeLinked = true,
-			},
-			
 		}
 	})
 	
