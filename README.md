@@ -8,16 +8,22 @@ Replaces three aspects of Melinoë
 
 ### Staff Aspect of Young Melinoë
 
-- Replaces the special with a weaker projectile with shorter cooldown, better homing and no hit-stun
+- Replaces the special with a weaker projectile with shorter cooldown, better homing and no hit-stun.
 - Trait enables to absorb the omega special to heal when health is below a threshold.
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/StaffAspect.png" alt="PonyDressList" width="60%">
 </div>
 
 ### Dagger Aspect of Young Melinoë
- - replaces Attack to a 2-hit combo that deals consistent damage
- - replaces special to a non penetrating 1-way projectile that is deals more damage
- - replaces omega special to non-penetrating projectiles that deal more damage
+
+ - Replaces Attack to a 2-hit combo that deals consistent damage.
+ - Replaces special to a non penetrating 1-way projectile that is deals more damage.
+ - Replaces omega special to non-penetrating projectiles that deal more damage.
+ - Trait decreases Dash recharge time.
+ - 
+<div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/DaggerAspect.png" alt="PonyDressList" width="60%">
+</div>
 
 ### Axe Aspect of Young Melinoë 
 
@@ -32,7 +38,6 @@ Replaces three aspects of Melinoë
 
 - Add new Aspects instead of replacing
 - Replace Axe Aspect of Young Melinoë trait into giving temporary damage buff after block
-- Replace Dagger Aspect of Young Melinoë trait
 - Improve texture of Dagger (DaggerB morrigan, DaggerA Mel, each with own texture)
 - Add Aspects of Young Melinoë for Torches / Skull / Suit 
 
