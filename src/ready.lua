@@ -543,10 +543,6 @@ modutil.once_loaded.game(function()
 				ChangeType = "Absolute",
 			},
 		},
-		AddOutgoingDamageModifiers =
-		{
-
-		},
 		FlavorText = "BaseStaffAspect_FlavorText",
 	}
 
@@ -562,6 +558,33 @@ modutil.once_loaded.game(function()
 		{
 			WeaponDaggerA_Mesh = "WeaponDaggerA_Mesh",
 			WeaponDaggerB_Mesh = "WeaponDaggerB_Mesh"
+		},
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 1.00,
+			},
+			Rare =
+			{
+				Multiplier = 1.15384,
+			},
+			Epic =
+			{
+				Multiplier = 1.2962,
+			},
+			Heroic =
+			{
+				Multiplier = 1.425000,
+			},
+			Legendary =
+			{
+				Multiplier = 1.54,
+			},
+			Perfect =
+			{
+				Multiplier = 1.673,
+			},
 		},
 		WeaponDataOverride =
 		{
@@ -594,6 +617,15 @@ modutil.once_loaded.game(function()
 		},
 		PropertyChanges =
 		{
+			{
+				WeaponNames = WeaponSets.HeroBlinkWeapons,
+				WeaponProperty = "ClipRegenInterval",
+				BaseValue = 0.8,
+				SourceIsMultiplier = true,
+				DecimalPlaces = 3,
+				ChangeType = "Multiply",
+				ReportValues = { ReportedReduction = "ChangeValue"},
+			},
 			{
 				WeaponName = "WeaponDagger2",
 				WeaponProperty = "SwapOnFire",
@@ -636,6 +668,18 @@ modutil.once_loaded.game(function()
 				ChangeType = "Absolute"
 			},
 		},
+		StatLines =
+		{
+			"AspectDashRechargeStatDisplay",
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedReduction",
+				ExtractAs = "TooltipMultiplier",
+				Format = "PercentReciprocalDelta",
+			},
+		},
 		FlavorText = "DaggerBackstabAspect_FlavorText",
 	}
 
@@ -649,6 +693,5 @@ modutil.once_loaded.game(function()
 	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AxeAspectofYoungMelinoe)
 	OverwriteTableKeys( TraitSetData.Aspects.BaseStaffAspect, StaffAspectofYoungMelinoe)
 	OverwriteTableKeys( TraitSetData.Aspects.DaggerBackstabAspect, DaggerAspectofYoungMelinoe)
-	
 
 end)
