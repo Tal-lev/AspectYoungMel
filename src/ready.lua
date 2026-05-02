@@ -694,7 +694,7 @@ modutil.once_loaded.game(function()
 	OverwriteTableKeys( TraitSetData.Aspects.BaseStaffAspect, StaffAspectofYoungMelinoe)
 	--OverwriteTableKeys( TraitSetData.Aspects.DaggerBackstabAspect, DaggerAspectofYoungMelinoe)
 
-	OverwriteTableKeys( TraitSetData.Aspects, { DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe})
+	TraitData.DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe
 	
 	OverwriteTableKeys(WeaponShopItemData, { 
 		DaggerAspectofYoungMelinoe = {
@@ -734,52 +734,9 @@ modutil.once_loaded.game(function()
 			},
 		}
 	})
-	OverwriteTableKeys( ScreenData.WeaponShop.ItemCategories.WeaponShop_DaggerUpgrades, {
-			Name = "WeaponShop_DaggerUpgrades",
-			Icon = "GUI\\Screens\\WeaponShop\\Icon-Dagger",
-			WeaponName = "WeaponDagger",
-			GameStateRequirements =
-			{
-				{
-					PathTrue = { "GameState", "WorldUpgrades", "WorldUpgradeWeaponUpgradeSystem" },
-				},
-				{
-					PathTrue = { "GameState", "WeaponsUnlocked", "WeaponDagger" },
-				},
-				{
-					PathFalse = { "CurrentRun", "WeaponsUnlocked", "WeaponDagger" }
-				},
-			},
-
-			"DaggerBackstabAspect2",
-			"DaggerBackstabAspect3",
-			"DaggerBackstabAspect4",
-			"DaggerBackstabAspect5",
-
-			"DaggerAspectofYoungMelinoe",
-			"DaggerAspectofYoungMelinoe2",
-			"DaggerAspectofYoungMelinoe3",
-			"DaggerAspectofYoungMelinoe4",
-			"DaggerAspectofYoungMelinoe5",
-
-			"DaggerBlockAspect",
-			"DaggerBlockAspect2",
-			"DaggerBlockAspect3",
-			"DaggerBlockAspect4",
-			"DaggerBlockAspect5",
-
-			"DaggerHomingThrowAspect",
-			"DaggerHomingThrowAspect2",
-			"DaggerHomingThrowAspect3",
-			"DaggerHomingThrowAspect4",
-			"DaggerHomingThrowAspect5",
-
-			"DaggerTripleAspect",
-			"DaggerTripleAspect2",
-			"DaggerTripleAspect3",
-			"DaggerTripleAspect4",
-			"DaggerTripleAspect5",
-	}) 
+	table.insert( ScreenData.WeaponShop.ItemCategories[3], 
+			"DaggerAspectofYoungMelinoe"
+			) 
 	OverwriteTableKeys( ScreenData.WeaponUpgradeScreen.DisplayOrder, {
 		WeaponDagger ={
 			"DaggerBackstabAspect",
