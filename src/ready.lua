@@ -692,6 +692,60 @@ modutil.once_loaded.game(function()
 
 	OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, AxeAspectofYoungMelinoe)
 	OverwriteTableKeys( TraitSetData.Aspects.BaseStaffAspect, StaffAspectofYoungMelinoe)
-	OverwriteTableKeys( TraitSetData.Aspects.DaggerBackstabAspect, DaggerAspectofYoungMelinoe)
+	--OverwriteTableKeys( TraitSetData.Aspects.DaggerBackstabAspect, DaggerAspectofYoungMelinoe)
+
+	TraitData.DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe
+	
+	OverwriteTableKeys(WeaponShopItemData, { 
+		DaggerAspectofYoungMelinoe = {
+	
+			WeaponName = "WeaponDagger",
+			HideAfterPurchased = true,
+			IconScale = 0.8,
+			UnlockTextId = "WeaponShopAspectUnlock",
+			Cost =
+			{
+				OreHGlassrock = 1,
+				OreFSilver = 15,
+			},
+			GameStateRequirements =
+			{
+				{
+					PathTrue = { "GameState", "WorldUpgrades", "WorldUpgradeWeaponUpgradeSystem" },
+				},
+			},
+			PreRevealVoiceLines =
+			{
+				TriggerCooldowns = { "MelinoeMiscWeaponEquipSpeech" },
+				{
+					PreLineWait = 0.35,
+					UsePlayerSource = true,
+
+					{ Cue = "/VO/Melinoe_2449", Text = "Grant me the Aspect of Artemis!" },
+				},
+				{
+					BreakIfPlayed = true,
+					PreLineWait = 0.65,
+					ObjectType = "NPC_Skelly_01",
+					TriggerCooldowns = { "SkellyAnyQuipSpeech" },
+
+					{ Cue = "/VO/Skelly_0196", Text = "She knows her blades!" },
+				},
+			},
+		}
+	})
+	table.insert( ScreenData.WeaponShop.ItemCategories[3], 
+			"DaggerAspectofYoungMelinoe"
+			) 
+	OverwriteTableKeys( ScreenData.WeaponUpgradeScreen.DisplayOrder, {
+		WeaponDagger ={
+			"DaggerBackstabAspect",
+			"DaggerAspectofYoungMelinoe",
+			"DaggerBlockAspect",
+			"DaggerHomingThrowAspect",
+			"DaggerTripleAspect",
+		}
+	})
+
 
 end)
