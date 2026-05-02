@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - changes Attack to a 2-hit combo that deals consistent damage
   - changes special to a non penetrating 1-way projectile that is deals more damage
   - changes omega special to a non-penetrating projectiles that deal more damage
+  - Trait decreases Dash cooldown
 - DEV: splitting ready.lua into modules
 ## [0.2.3] - 2026-04-29
 
