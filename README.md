@@ -20,7 +20,7 @@ Replaces three aspects of Melinoë
  - Replaces special to a non penetrating 1-way projectile that is deals more damage.
  - Replaces omega special to non-penetrating projectiles that deal more damage.
  - Trait decreases Dash recharge time.
- - 
+   
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/DaggerAspect.png" alt="PonyDressList" width="60%">
 </div>
