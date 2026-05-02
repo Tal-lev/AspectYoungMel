@@ -28,9 +28,13 @@ Replaces three aspects of Melinoë
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="60%">
 </div>
 
-## Known Issues
+## Known Issues / To do list
 
-- This mod replaces Aspect of Melinoe instead of only adding a new aspect
+- Add new Aspects instead of replacing
+- Replace Axe Aspect of Young Melinoë trait into giving temporary damage buff after block
+- Replace Dagger Aspect of Young Melinoë trait
+- Improve texture of Dagger (DaggerB morrigan, DaggerA Mel, each with own texture)
+- Add Aspects of Young Melinoë for Torches / Skull / Suit 
 
 ## Installation
 
