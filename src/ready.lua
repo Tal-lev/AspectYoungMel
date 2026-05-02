@@ -27,7 +27,7 @@ function mod.LoadAspectPackage()
 	LoadPackages({ Name = packageName })
 end
 
---Function for StaffAspectYoungMel
+--Function for StaffAspectYoungMel trait
 function mod.CheckStaffSelfHit( triggerArgs, args )
 	if not IsEmpty( GetInProjectilesBlast({ Id = CurrentRun.Hero.ObjectId, DestinationName = args.ProjectileName })) then
 		if (CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth) <= args.Threshold then
@@ -99,7 +99,7 @@ end)
 
 modutil.mod.Path.Wrap("StartRoom", function(base, source, args)
         -- Check for specific Aspect traits
-        if HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("BaseStaffAspect") then  
+        if HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("BaseStaffAspect") or HeroHasTrait("DaggerBackstabAspect") then  
             mod.LoadAspectPackage()
         end
 	return base(source, args)
@@ -123,8 +123,8 @@ end)
 
 -- AxeAspectYoungMel - 1,2,3,4(a,b,c,d,e),5,6,7,8
 -- StaffAspectYoungMel - 1,3,4(a,b,d,e),5,6,8
+-- DaggerAspectYoungMel - 1,3,4(a,b,c,e),~5,6,8
 
--- Changes to special
 
 -- -- Failed Attempt to change the Aspect trait to give damage buff after Block.
 --TraitData.AxeBlockDamageBuff = {
