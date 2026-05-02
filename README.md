@@ -51,7 +51,9 @@ While the mod has been tested decently well it is recommended to backup your sav
 
 - @DDberry on discord for creating Axe_block mod
 - @IDKteam on Thunderstore for creating Aspect_of_Susie
-- @Zerp on discord for help in importing custom textures
+- @Zerp on discord for help in
+  - Importing custom textures
+  - Implementing addition of new aspects instead of replacing old ones
 
 ## Issues
 
