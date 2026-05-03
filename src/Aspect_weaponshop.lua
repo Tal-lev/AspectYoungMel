@@ -8,7 +8,7 @@ OverwriteTableKeys(WeaponShopItemData, {
 			UnlockTextId = "WeaponShopAspectUnlock",
 			Cost =
 			{
-				OreFSilver = 5,
+				PlantIShaderot = 5,
 			},
 			GameStateRequirements =
 			{
@@ -113,17 +113,17 @@ OverwriteTableKeys(WeaponShopItemData, {
         },
     })
 
-    table.insert( ScreenData.WeaponShop.ItemCategories[3], "StaffDaggerAspectofYoungMelinoe")
-	table.insert( ScreenData.WeaponShop.ItemCategories[3], "StaffDaggerAspectofYoungMelinoe2")
-	table.insert( ScreenData.WeaponShop.ItemCategories[3], "StaffDaggerAspectofYoungMelinoe3")
-	table.insert( ScreenData.WeaponShop.ItemCategories[3], "StaffDaggerAspectofYoungMelinoe4")
-	table.insert( ScreenData.WeaponShop.ItemCategories[3], "StaffDaggerAspectofYoungMelinoe5")
+    table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe")
+	table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe2")
+	table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe3")
+	table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe4")
+	table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe5")
 
     OverwriteTableKeys( ScreenData.WeaponUpgradeScreen.DisplayOrder, {
 		WeaponStaffSwing =
 		{
 			"BaseStaffAspect",
-            "StaffDaggerAspectofYoungMelinoe",
+            "StaffAspectofYoungMelinoe",
 			"StaffClearCastAspect",
 			"StaffSelfHitAspect",
 			"StaffRaiseDeadAspect",
@@ -377,17 +377,17 @@ OverwriteTableKeys(WeaponShopItemData, {
 	},
 })
 
-    table.insert( ScreenData.WeaponShop.ItemCategories[3], "AxeAspectofYoungMelinoe")
-	table.insert( ScreenData.WeaponShop.ItemCategories[3], "AxeAspectofYoungMelinoe2")
-	table.insert( ScreenData.WeaponShop.ItemCategories[3], "AxeAspectofYoungMelinoe3")
-	table.insert( ScreenData.WeaponShop.ItemCategories[3], "AxeAspectofYoungMelinoe4")
-	table.insert( ScreenData.WeaponShop.ItemCategories[3], "AxeAspectofYoungMelinoe5")
+    table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe")
+	table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe2")
+	table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe3")
+	table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe4")
+	table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe5")
 
     OverwriteTableKeys( ScreenData.WeaponUpgradeScreen.DisplayOrder, {
 		WeaponAxe = 
 		{
 			"AxeRecoveryAspect",
-            "AxeAspectofYoungMelinoe"
+            "AxeAspectofYoungMelinoe",
 			"AxeArmCastAspect",
 			"AxePerfectCriticalAspect",
 			"AxeRallyAspect",

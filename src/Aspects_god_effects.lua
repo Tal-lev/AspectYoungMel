@@ -57,7 +57,7 @@ end
 
 			-- Axe Default special (no aspect overrides)
 			{
-				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect", "AxeRecoveryAspect" },
+				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect", "AxeAspectofYoungMelinoe" },
 				WeaponName = "WeaponAxeSpecial",
 				WeaponProperty = "FireFx",
 				ValuePrefix = "AxeSpinDouble_",
@@ -68,7 +68,7 @@ end
 			-- Axe Nergal special
 			{
 				TraitName =  "AxeRallyAspect",
-				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRecoveryAspect" },
+				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeAspectofYoungMelinoe" },
 				WeaponName = "WeaponAxeSpecial",
 				WeaponProperty = "FireFx",
 				ValuePrefix = "AxeSwipeUpper_",
@@ -79,7 +79,7 @@ end
 			-- Axe farther special hammer (no FX)
 			{
 				TraitName = "AxeBlockEmpowerTrait",
-				FalseTraitNames = { "AxeRecoveryAspect", "AxeRallyAspect" },
+				FalseTraitNames = { "AxeAspectofYoungMelinoe", "AxeRallyAspect" },
 				WeaponName = "WeaponAxeSpecial",
 				WeaponProperty = "FireFx",
 				ValuePrefix = "null",
@@ -89,7 +89,7 @@ end
 
 			-- Axe YoungMel special (no FX)
 			{
-				TraitName = "AxeRecoveryAspect" ,
+				TraitName = "AxeAspectofYoungMelinoe" ,
 				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect" },
 				WeaponName = "WeaponAxeSpecial",
 				WeaponProperty = "FireFx",

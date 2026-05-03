@@ -1,10 +1,10 @@
 # AspectYoungMel
 
-Replaces Melinoe aspects with aspects of Young Melinoe in their stead.
+Adding aspects of Young Melinoe.
 
 ## Features
 
-Replaces three aspects of Melinoë
+Adds three aspects of Young Melinoë
 
 ### Staff Aspect of Young Melinoë
 
@@ -36,7 +36,7 @@ Replaces three aspects of Melinoë
 
 ## Known Issues / To do list
 
-- Add new Aspects instead of replacing
+- Retextures while keeping the original as well.
 - Replace Axe Aspect of Young Melinoë trait into giving temporary damage buff after block
 - Improve texture of Dagger (DaggerB morrigan, DaggerA Mel, each with own texture)
 - Add Aspects of Young Melinoë for Torches / Skull / Suit 
@@ -51,7 +51,9 @@ While the mod has been tested decently well it is recommended to backup your sav
 
 - @DDberry on discord for creating Axe_block mod
 - @IDKteam on Thunderstore for creating Aspect_of_Susie
-- @Zerp on discord for help in importing custom textures
+- @Zerp on discord for help in
+  - Importing custom textures
+  - Implementing addition of new aspects instead of replacing old ones
 
 ## Issues
 

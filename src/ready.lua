@@ -99,13 +99,12 @@ end)
 
 modutil.mod.Path.Wrap("StartRoom", function(base, source, args)
         -- Check for specific Aspect traits
-        if HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("BaseStaffAspect") or HeroHasTrait("DaggerBackstabAspect") then  
+        if HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("StaffAspectofYoungMelinoe") or HeroHasTrait("DaggerAspectofYoungMelinoe") then  
             mod.LoadAspectPackage()
         end
 	return base(source, args)
 end)
  
-
 -- Steps to create new Aspects
 	-- 1.Adding projectile data
 	-- 2.Adding Effects to default attack with active=false
@@ -682,13 +681,6 @@ modutil.once_loaded.game(function()
 		},
 		FlavorText = "DaggerBackstabAspect_FlavorText",
 	}
-
-
-	--Adds god specific VFX
-	import "Aspects_god_effects.lua"
-	
-	--Adds/removes Aspect specific hammers
-	import "Aspects_hammers.lua"
 	
 	TraitData.StaffAspectofYoungMelinoe = StaffAspectofYoungMelinoe
 	TraitData.DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe
@@ -697,5 +689,32 @@ modutil.once_loaded.game(function()
 	--Adds the new traits to the in-game shop
 	import "Aspect_weaponshop.lua"
 
+	--Adds god specific VFX
+	import "Aspects_god_effects.lua"
+	
+	--Adds/removes Aspect specific hammers
+	import "Aspects_hammers.lua"
 
 end)
+
+--modutil.mod.Path.Wrap("EquipWeaponUpgrade", function(base, source, args)
+--	if HeroHasTrait("BaseStaffAspect") then
+--		rom.data.load_package_overrides_set(weapon_staff_hash, weapon_staff_hash)
+--	end
+--	if HeroHasTrait("StaffAspectofYoungMelinoe") then
+--		rom.data.load_package_overrides_set(weapon_staff_hash, current_staff_overrides)
+--	end
+--	if HeroHasTrait("DaggerBackstabAspect") then
+--		rom.data.load_package_overrides_set(weapon_dagger_hash, weapon_dagger_hash)
+--	end
+--	if HeroHasTrait("DaggerAspectofYoungMelinoe") then
+--		rom.data.load_package_overrides_set(weapon_dagger_hash, current_dagger_overrides)
+--	end
+--	if HeroHasTrait("AxeRecoveryAspect") then
+--		rom.data.load_package_overrides_set(weapon_axe_hash, weapon_axe_hash)
+--	end
+--	if HeroHasTrait("AxeAspectofYoungMelinoe") then
+--		rom.data.load_package_overrides_set(weapon_axe_hash, current_axe_overrides)
+--	end
+--	return base(source, args)
+--end)

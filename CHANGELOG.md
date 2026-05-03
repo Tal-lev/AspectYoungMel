@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Changed to Adding new Aspects instead of replacing
+- Added Shop and Upgrade for new aspects
+
 ## [0.3.0] - 2026-05-02
 
 - Replaces Dagger Aspect of Melinoe with Dagger Aspect of Young Melinoe.

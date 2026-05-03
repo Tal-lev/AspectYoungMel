@@ -112,7 +112,7 @@ end
 			},
 			{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponAxe", },
-				IsNone = {"AxeRecoveryAspect", }
+				IsNone = {"AxeAspectofYoungMelinoe", }
 			},
 		}
 	)
@@ -124,7 +124,7 @@ end
 			},
 			{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponDagger", },
-				IsNone = {"DaggerBackstabAspect", }
+				IsNone = {"DaggerAspectofYoungMelinoe", }
 			},
 		}
 	)
@@ -136,7 +136,7 @@ end
 			},
 			{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponDagger", },
-				IsNone = { "DaggerTripleAspect", "DaggerBackstabAspect", }
+				IsNone = { "DaggerTripleAspect", "DaggerAspectofYoungMelinoe", }
 			},
 		}
 	)
