@@ -36,6 +36,7 @@ Adds three aspects of Young Melinoë
 
 ## Known Issues / To do list
 
+- Aspect selection menu is crowded when all aspects are unlocked
 - Retextures while keeping the original as well.
 - Replace Axe Aspect of Young Melinoë trait into giving temporary damage buff after block
 - Improve texture of Dagger (DaggerB morrigan, DaggerA Mel, each with own texture)

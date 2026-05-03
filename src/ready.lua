@@ -446,7 +446,7 @@ modutil.once_loaded.game(function()
 				Format = "PercentDelta",
 			},
 		},
-		FlavorText = "AxeRecoveryAspect_FlavorText",
+		FlavorText = "AxeAspectofYoungMelinoe_FlavorText",
 	}
 
 	-- Adding Staff Aspect of Young Mel
@@ -542,7 +542,7 @@ modutil.once_loaded.game(function()
 				ChangeType = "Absolute",
 			},
 		},
-		FlavorText = "BaseStaffAspect_FlavorText",
+		FlavorText = "StaffAspectofYoungMelinoe_FlavorText",
 	}
 
 
@@ -679,7 +679,7 @@ modutil.once_loaded.game(function()
 				Format = "PercentReciprocalDelta",
 			},
 		},
-		FlavorText = "DaggerBackstabAspect_FlavorText",
+		FlavorText = "DaggerAspectofYoungMelinoe_FlavorText",
 	}
 	
 	TraitData.StaffAspectofYoungMelinoe = StaffAspectofYoungMelinoe

@@ -6,7 +6,7 @@ schemaVersion = "0.1.0"
 namespace = "JarlUlsfark"
 name = "AspectYoungMel"
 versionNumber = "0.3.0"
-description = "Replaces Aspects of Melinoe for the Staff, Dagger and Axe with the Aspects of YoungMel in their stead."
+description = "Adds Aspects of Young Melinoe for the Staff, Dagger and Axe."
 websiteUrl = "https://github.com/Tal-lev/AspectYoungMel"
 containsNsfwContent = false
 
