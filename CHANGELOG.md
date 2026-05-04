@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fixed aspect icon not showing when loading or in run history
+- DEV: Better compatibility with other aspect mods
+- DEV: Added dependency on zerp-AspectExtender
+
 ## [0.3.1] - 2026-05-03
 
 - Changed to Adding new Aspects instead of replacing

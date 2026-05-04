@@ -113,22 +113,15 @@ OverwriteTableKeys(WeaponShopItemData, {
         },
     })
 
+	-- Adding Staff aspect into Weapon shop
     table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe")
 	table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe2")
 	table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe3")
 	table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe4")
 	table.insert( ScreenData.WeaponShop.ItemCategories[2], "StaffAspectofYoungMelinoe5")
-
-    OverwriteTableKeys( ScreenData.WeaponUpgradeScreen.DisplayOrder, {
-		WeaponStaffSwing =
-		{
-			"BaseStaffAspect",
-            "StaffAspectofYoungMelinoe",
-			"StaffClearCastAspect",
-			"StaffSelfHitAspect",
-			"StaffRaiseDeadAspect",
-		},
-	})
+	
+	-- Adding Staff aspect into aspect selection shop
+    table.insert( ScreenData.WeaponUpgradeScreen.DisplayOrder.WeaponStaffSwing, 2 , "StaffAspectofYoungMelinoe" )
     
 -- Dagger Aspect of young Mel
 OverwriteTableKeys(WeaponShopItemData, { 
@@ -244,22 +237,14 @@ OverwriteTableKeys(WeaponShopItemData, {
 		},
 	}
 	})
-	
+	--Adding Dagger Aspect to weapon shop
 	table.insert( ScreenData.WeaponShop.ItemCategories[3], "DaggerAspectofYoungMelinoe")
 	table.insert( ScreenData.WeaponShop.ItemCategories[3], "DaggerAspectofYoungMelinoe2")
 	table.insert( ScreenData.WeaponShop.ItemCategories[3], "DaggerAspectofYoungMelinoe3")
 	table.insert( ScreenData.WeaponShop.ItemCategories[3], "DaggerAspectofYoungMelinoe4")
 	table.insert( ScreenData.WeaponShop.ItemCategories[3], "DaggerAspectofYoungMelinoe5")
-
-	OverwriteTableKeys( ScreenData.WeaponUpgradeScreen.DisplayOrder, {
-		WeaponDagger ={
-			"DaggerBackstabAspect",
-			"DaggerAspectofYoungMelinoe",
-			"DaggerBlockAspect",
-			"DaggerHomingThrowAspect",
-			"DaggerTripleAspect",
-		}
-	})
+	--Adding Dagger aspect to weapon selection
+	table.insert( ScreenData.WeaponUpgradeScreen.DisplayOrder.WeaponDagger, 2 , "DaggerAspectofYoungMelinoe" )
 
 -- Axe Aspect of young Mel
 
@@ -376,20 +361,12 @@ OverwriteTableKeys(WeaponShopItemData, {
 		},
 	},
 })
-
+	--Adding Axe aspect to weapon shop
     table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe")
 	table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe2")
 	table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe3")
 	table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe4")
 	table.insert( ScreenData.WeaponShop.ItemCategories[5], "AxeAspectofYoungMelinoe5")
-
-    OverwriteTableKeys( ScreenData.WeaponUpgradeScreen.DisplayOrder, {
-		WeaponAxe = 
-		{
-			"AxeRecoveryAspect",
-            "AxeAspectofYoungMelinoe",
-			"AxeArmCastAspect",
-			"AxePerfectCriticalAspect",
-			"AxeRallyAspect",
-		},
-	})
+	
+	--Adding Axe aspect to weapon selection
+	table.insert( ScreenData.WeaponUpgradeScreen.DisplayOrder.WeaponAxe, 2 , "AxeAspectofYoungMelinoe" )

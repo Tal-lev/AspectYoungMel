@@ -69,39 +69,10 @@ table.insert(current_dagger_overrides, weapon_dagger_hash)
 
 rom.data.load_package_overrides_set(weapon_dagger_hash, current_dagger_overrides)
 
--- Loading packages
-modutil.mod.Path.Wrap("DeathAreaRoomTransition", function(base, source, args)
-	if game.CurrentHubRoom ~= '' and game.CurrentHubRoom ~= nil then  
-		if game.CurrentHubRoom.Name == "Hub_PreRun" then
-			mod.LoadAspectPackage()
-		end
-	end
-	return base(source, args)
-end)
 
-modutil.mod.Path.Wrap("HubPostBountyLoad", function(base, source, args)
-	if game.CurrentHubRoom ~= '' and game.CurrentHubRoom ~= nil then  
-		if game.CurrentHubRoom.Name == "Hub_PreRun" then
-			mod.LoadAspectPackage()
-		end
-	end
-	return base(source, args)
-end)
-
-modutil.mod.Path.Wrap("HubPostDreamLoad", function(base, source, args)
-	if game.CurrentHubRoom ~= '' and game.CurrentHubRoom ~= nil then  
-		if game.CurrentHubRoom.Name == "Hub_PreRun" then
-			mod.LoadAspectPackage()
-		end
-	end
-	return base(source, args)
-end)
-
-modutil.mod.Path.Wrap("StartRoom", function(base, source, args)
-        -- Check for specific Aspect traits
-        if HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("StaffAspectofYoungMelinoe") or HeroHasTrait("DaggerAspectofYoungMelinoe") then  
-            mod.LoadAspectPackage()
-        end
+--Loading the package at every room
+modutil.mod.Path.Wrap("SetupMap", function(base, source, args)
+	mod.LoadAspectPackage()
 	return base(source, args)
 end)
  
@@ -124,12 +95,45 @@ end)
 -- StaffAspectYoungMel - 1,3,4(a,b,d,e),5,6,8
 -- DaggerAspectYoungMel - 1,3,4(a,b,c,e),~5,6,8
 
-
+--function mod.CheckForBlockTrigger( victim, args, triggerArgs )
+--    -- triggerArgs.DamageAmount is the raw damage before reduction
+--    -- victim.LastDamageTaken is what actually hit the HP bar
+--    
+--    local wasBlocked = false
+--
+--    -- Check 1: Did the player take 0 damage while in a 'blocking' state?
+--    -- This checks for the Moonstone Axe's internal "Blocking" flag
+--    if triggerArgs.DamageAmount <= 0 then
+--        wasBlocked = true
+--    end
+--
+--    -- Check 2: Check for specific "Shield" buffs (like the Arcana or Demeter shields)
+--    if victim.HitShields and victim.HitShields > 0 and triggerArgs.DamageAmount > 0 then
+--        -- This logic depends on if you count "Shield hit" as a "Block"
+--        wasBlocked = true
+--    end
+--
+--    if wasBlocked then
+--        -- EXECUTE YOUR BLOCK EFFECTS HERE
+--        if args.ManaRegenOnBlock then
+--            ManaModifier( victim, args.ManaRegenOnBlock )
+--        end
+--
+--        if args.EffectToTrigger then
+--            -- Example: Fire a projectile or play a sound
+--            FireWeaponFromUnit({ WeaponName = args.EffectToTrigger, Id = victim.ObjectId })
+--        end
+--        
+--        -- Visual feedback so the player knows the mod is working
+--        thread( DamageSuccessPresentation, victim ) 
+--		thread(_PLUGIN.guid .. "." .. "ApplyAxeAspectBlockBuff")
+--    end
+--end
 -- -- Failed Attempt to change the Aspect trait to give damage buff after Block.
 --TraitData.AxeBlockDamageBuff = {
 --    Name = "AxeBlockDamageBuff",
 --    InheritFrom = { "DefaultTrait" },
---    IsHidden = true,
+--    IsHidden = false,
 --    -- This must be a list of tables
 --    AddOutgoingDamageModifiers = {
 --        {
@@ -225,6 +229,18 @@ modutil.once_loaded.game(function()
 		{
 			Melinoe_Axe_Mesh1 = "Melinoe_Axe_Mesh1",
 		},
+		--SetupFunction =
+		--{
+		--	Threaded = true,
+		--	Name = "SetupFrenzyUI",
+		--},
+		--OnSelfDamagedFunction =
+		--{
+		--	Name = _PLUGIN.guid .. "." .."CheckForBlockTrigger",
+		--	Args = {
+
+		--	}
+		--},
 		AddOutgoingDamageModifiers =
 		{
 			ExMultiplier =
