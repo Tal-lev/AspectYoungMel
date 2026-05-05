@@ -1,3 +1,9 @@
+--inserting Keywords
+local newKeywords = {
+	"AxeRetaliate",
+}
+game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
+
 --Inserts text
 	local TextOrder = {
     "Id",
@@ -91,10 +97,19 @@
 	
 	table.insert(data.Texts, sjson.to_object(
 		{
+			Id = "AxeRetaliate",
+			DisplayName = "Retaliate",
+			Description = "Temporarily increases {$Keywords.Attack} damage.",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
 			Id = "AxeAspectofYoungMelinoe",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Aspect of young Melinoë",
-			Description = "Replaces your {$Keywords.Special} with a Block."
+			Description = "{$Keywords.Special} Block grants {$Keywords.AxeRetaliate}."
 		},
 		TextOrder)
 	)
@@ -103,8 +118,8 @@
 		{
 			Id = "AxeAspectYoungMelStat",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Omega Special Damage:",
-			Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
+			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Retaliate Damage:",
+			Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.RetaliateDamage}%"
 		},
 		TextOrder)
 	)

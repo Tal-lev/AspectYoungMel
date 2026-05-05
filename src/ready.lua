@@ -47,83 +47,11 @@ function mod.BlockAxeBuff( blocker, args, triggerArgs )
 		if trait.RetaliateBuff ~= 1 then
 			return
 		end
-		print("Retaliate buff retrieved")
-		print(trait.RetaliateBuff)
 		trait.RetaliateBuff = args.MaxRetaliateBuff
-		print("New Retaliate buff")
-		print(trait.RetaliateBuff)
-		--wait(10)
-		--trait.RetaliateBuff = 1
-		--ApplyEffect( { DestinationId = CurrentRun.Hero.ObjectId, Id = CurrentRun.Hero.ObjectId, EffectName = args.effectName })
+		ApplyEffect({ DestinationId = CurrentRun.Hero.ObjectId, Id = CurrentRun.Hero.ObjectId, EffectName = args.EffectName, DataProperties = { Duration = args.Duration }})
+		wait(args.Duration)
+		trait.RetaliateBuff = 1
 	end
-	--	local trait = GetHeroTrait("AxeAspectofYoungMelinoe")
-	--	local functionArgs = trait.OnProjectileDeathFunction.Args
-	--	local dataProperties = MergeTables(EffectData[args.EffectName].DataProperties, functionArgs.DataProperties)
-	--	ApplyEffect( { DestinationId = CurrentRun.Hero.ObjectId, Id = CurrentRun.Hero.ObjectId, EffectName = effectName, DataProperties = dataProperties } )
-		
-	--	if CurrentRun.Hero.ActiveEffects[effectName] >= trait.OnWeaponFiredFunctions.FunctionArgs.SelfEffectMaxStacks then
-	--		SessionMapState.ShivaMaxStackPresentation = true
-	--		SetAnimation({ Name = "StaffReloadTimerReady", DestinationId = ScreenAnchors.SuitUI })
-	--	end
-	--	IncrementTableValue( CurrentRun.Hero.ActiveEffects, effectName, args.Stacks - 1 )
-	--	UpdateSuitUI()
-	--end
-end
-
---BlockAxeRetaliate = 
---	{
---		Name = "BlockAxeRetaliate",
---		Vfx = "ShivaAttackBoostFx",	
---		DataProperties = 
---		{
---			CanAffectInvulnerable = true,
---			TimeModifierFraction = 0,
---			Duration = 7200,
---			Stacks = false,
---			OnlyAffectName = "_PlayerUnit",
---		},
---		EffectData =
---		{
---			Duration = 3,
---		},
---		CustomStackHandling = true,
---		OnApplyFunctionName = "ShivaAttackBoostApply",
---		OnClearFunctionName = "ShivaAttackBoostClear",
---	}
-
-function ShivaAttackBoostApply( triggerArgs )
-	if not HeroHasTrait("SuitComboAspect") then
-		return
-	end
-	local victim = triggerArgs.Victim
-	IncrementTableValue( victim.ActiveEffects, triggerArgs.EffectName )
-
-	UpdateSuitUI()
-
-	local trait = GetHeroTrait("SuitComboAspect")
-	local maxStacks = trait.OnWeaponFiredFunctions.FunctionArgs.SelfEffectMaxStacks
-	PlaySound({ Name = "/SFX/Player Sounds/ShivaPowerUp", Id = CurrentRun.Hero.ObjectId })
-	SetAnimationFrameTarget({ Name = "StaffReloadTimer", DestinationId = ScreenAnchors.SuitUIChargeAmount, Fraction = victim.ActiveEffects[triggerArgs.EffectName]/maxStacks, Instant = true })
-	if victim.ActiveEffects[triggerArgs.EffectName] >= maxStacks then
-		SessionMapState.ShivaMaxStackPresentation = true
-		SetAnimation({ Name = "StaffReloadTimerReady", DestinationId = ScreenAnchors.SuitUI })
-	end
-end
-
-function ShivaAttackBoostClear( triggerArgs )
-	if not HeroHasTrait("SuitComboAspect") then
-		return
-	end
-	
-	local victim = triggerArgs.Victim
-	local trait = GetHeroTrait("SuitComboAspect")
-	
-	SetAnimationFrameTarget({ Name = "StaffReloadTimer", DestinationId = ScreenAnchors.SuitUIChargeAmount, Fraction = 0, Instant = true })
-	if SessionMapState.ShivaMaxStackPresentation then
-		SetAnimation({ Name = "StaffReloadTimerOut", DestinationId = ScreenAnchors.SuitUI })
-		SessionMapState.ShivaMaxStackPresentation = nil
-	end
-	UpdateSuitUI()
 end
 
 --Importing Axe Textures
@@ -238,7 +166,8 @@ modutil.once_loaded.game(function()
 			Args = 
 			{
 				MaxRetaliateBuff = { BaseValue = 1 },
-				EffectName = "AxeBlockRetaliate",
+				EffectName = "CastGripEffect",
+				Duration = 3,
 				ReportValues = 
 				{ 
 					MaxBuff = "MaxRetaliateBuff",
@@ -246,14 +175,10 @@ modutil.once_loaded.game(function()
 				}
 			}
 		},
-		AddOutgoingDamageModifiers =
-		{
+		AddOutgoingDamageModifiers = {
 			ValidWeapons = WeaponSets.HeroPrimaryWeapons,
-			ValidWeaponMultiplier =
-			{
-				HeroTraitValue = "RetaliateBuff",
-				SourceIsMultiplier = true,
-			},
+			UseTraitValue = "RetaliateBuff",
+			IsMultiplier = true,
 		},
 		RetaliateBuff = 1,
 		WeaponDataOverride =
@@ -462,8 +387,8 @@ modutil.once_loaded.game(function()
 		ExtractValues =
 		{
 			{
-				Key = "ReportedWeaponMultiplier",
-				ExtractAs = "Damage",
+				Key = "MaxBuff",
+				ExtractAs = "RetaliateDamage",
 				Format = "PercentDelta",
 			},
 		},
