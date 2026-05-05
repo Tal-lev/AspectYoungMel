@@ -36,6 +36,96 @@ function mod.CheckStaffSelfHit( triggerArgs, args )
 	end
 end
 
+function mod.BlockAxeBuff( blocker, args, triggerArgs )
+	if not blocker or not blocker.ObjectId then
+		return
+	end
+	if triggerArgs.WeaponName == "WeaponAxeSpecial" then
+	--if (CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth) < 0.5 then
+		Heal( CurrentRun.Hero, {HealAmount = 20 , SourceName = "Aspect"})
+		local trait = GetHeroTrait( "AxeAspectofYoungMelinoe")
+		if trait.RetaliateBuff ~= 1 then
+			return
+		end
+		print("Retaliate buff retrieved")
+		print(trait.RetaliateBuff)
+		trait.RetaliateBuff = args.MaxRetaliateBuff
+		print("New Retaliate buff")
+		print(trait.RetaliateBuff)
+		--wait(10)
+		--trait.RetaliateBuff = 1
+		--ApplyEffect( { DestinationId = CurrentRun.Hero.ObjectId, Id = CurrentRun.Hero.ObjectId, EffectName = args.effectName })
+	end
+	--	local trait = GetHeroTrait("AxeAspectofYoungMelinoe")
+	--	local functionArgs = trait.OnProjectileDeathFunction.Args
+	--	local dataProperties = MergeTables(EffectData[args.EffectName].DataProperties, functionArgs.DataProperties)
+	--	ApplyEffect( { DestinationId = CurrentRun.Hero.ObjectId, Id = CurrentRun.Hero.ObjectId, EffectName = effectName, DataProperties = dataProperties } )
+		
+	--	if CurrentRun.Hero.ActiveEffects[effectName] >= trait.OnWeaponFiredFunctions.FunctionArgs.SelfEffectMaxStacks then
+	--		SessionMapState.ShivaMaxStackPresentation = true
+	--		SetAnimation({ Name = "StaffReloadTimerReady", DestinationId = ScreenAnchors.SuitUI })
+	--	end
+	--	IncrementTableValue( CurrentRun.Hero.ActiveEffects, effectName, args.Stacks - 1 )
+	--	UpdateSuitUI()
+	--end
+end
+
+--BlockAxeRetaliate = 
+--	{
+--		Name = "BlockAxeRetaliate",
+--		Vfx = "ShivaAttackBoostFx",	
+--		DataProperties = 
+--		{
+--			CanAffectInvulnerable = true,
+--			TimeModifierFraction = 0,
+--			Duration = 7200,
+--			Stacks = false,
+--			OnlyAffectName = "_PlayerUnit",
+--		},
+--		EffectData =
+--		{
+--			Duration = 3,
+--		},
+--		CustomStackHandling = true,
+--		OnApplyFunctionName = "ShivaAttackBoostApply",
+--		OnClearFunctionName = "ShivaAttackBoostClear",
+--	}
+
+function ShivaAttackBoostApply( triggerArgs )
+	if not HeroHasTrait("SuitComboAspect") then
+		return
+	end
+	local victim = triggerArgs.Victim
+	IncrementTableValue( victim.ActiveEffects, triggerArgs.EffectName )
+
+	UpdateSuitUI()
+
+	local trait = GetHeroTrait("SuitComboAspect")
+	local maxStacks = trait.OnWeaponFiredFunctions.FunctionArgs.SelfEffectMaxStacks
+	PlaySound({ Name = "/SFX/Player Sounds/ShivaPowerUp", Id = CurrentRun.Hero.ObjectId })
+	SetAnimationFrameTarget({ Name = "StaffReloadTimer", DestinationId = ScreenAnchors.SuitUIChargeAmount, Fraction = victim.ActiveEffects[triggerArgs.EffectName]/maxStacks, Instant = true })
+	if victim.ActiveEffects[triggerArgs.EffectName] >= maxStacks then
+		SessionMapState.ShivaMaxStackPresentation = true
+		SetAnimation({ Name = "StaffReloadTimerReady", DestinationId = ScreenAnchors.SuitUI })
+	end
+end
+
+function ShivaAttackBoostClear( triggerArgs )
+	if not HeroHasTrait("SuitComboAspect") then
+		return
+	end
+	
+	local victim = triggerArgs.Victim
+	local trait = GetHeroTrait("SuitComboAspect")
+	
+	SetAnimationFrameTarget({ Name = "StaffReloadTimer", DestinationId = ScreenAnchors.SuitUIChargeAmount, Fraction = 0, Instant = true })
+	if SessionMapState.ShivaMaxStackPresentation then
+		SetAnimation({ Name = "StaffReloadTimerOut", DestinationId = ScreenAnchors.SuitUI })
+		SessionMapState.ShivaMaxStackPresentation = nil
+	end
+	UpdateSuitUI()
+end
+
 --Importing Axe Textures
 local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
 local custom_axe_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponAxe")
@@ -95,93 +185,6 @@ end)
 -- StaffAspectYoungMel - 1,3,4(a,b,d,e),5,6,8
 -- DaggerAspectYoungMel - 1,3,4(a,b,c,e),~5,6,8
 
---function mod.CheckForBlockTrigger( victim, args, triggerArgs )
---    -- triggerArgs.DamageAmount is the raw damage before reduction
---    -- victim.LastDamageTaken is what actually hit the HP bar
---    
---    local wasBlocked = false
---
---    -- Check 1: Did the player take 0 damage while in a 'blocking' state?
---    -- This checks for the Moonstone Axe's internal "Blocking" flag
---    if triggerArgs.DamageAmount <= 0 then
---        wasBlocked = true
---    end
---
---    -- Check 2: Check for specific "Shield" buffs (like the Arcana or Demeter shields)
---    if victim.HitShields and victim.HitShields > 0 and triggerArgs.DamageAmount > 0 then
---        -- This logic depends on if you count "Shield hit" as a "Block"
---        wasBlocked = true
---    end
---
---    if wasBlocked then
---        -- EXECUTE YOUR BLOCK EFFECTS HERE
---        if args.ManaRegenOnBlock then
---            ManaModifier( victim, args.ManaRegenOnBlock )
---        end
---
---        if args.EffectToTrigger then
---            -- Example: Fire a projectile or play a sound
---            FireWeaponFromUnit({ WeaponName = args.EffectToTrigger, Id = victim.ObjectId })
---        end
---        
---        -- Visual feedback so the player knows the mod is working
---        thread( DamageSuccessPresentation, victim ) 
---		thread(_PLUGIN.guid .. "." .. "ApplyAxeAspectBlockBuff")
---    end
---end
--- -- Failed Attempt to change the Aspect trait to give damage buff after Block.
---TraitData.AxeBlockDamageBuff = {
---    Name = "AxeBlockDamageBuff",
---    InheritFrom = { "DefaultTrait" },
---    IsHidden = false,
---    -- This must be a list of tables
---    AddOutgoingDamageModifiers = {
---        {
---            ValidWeaponMultiplier = 1.30, 
---        }
---    }
---}
---
---function mod.ApplyAxeAspectBlockBuff()
---		-- If the buff is already active, just refresh the duration (optional)
---		if HeroHasTrait("AxeBlockDamageBuff") then
---			return 
---		end
---		-- Apply the +30% damage buff
---		AddTraitToHero({ TraitName = "AxeBlockDamageBuff" })
---
---		-- Add the Frenzy Icon above the player
---		-- "FrenzyStatusIcon" is the standard internal name for the UI effect
---		local frenzyIconId = CreateAnimationToAttached({ 
---			Name = "FrenzyStatusIcon", 
---			DestinationId = CurrentRun.Hero.ObjectId, 
---			OffsetY = -150 
---		})
---		
---		-- Wait 3 seconds
---		wait(3.0, RoomThreadName)
---		
---		-- Remove the buff
---		RemoveTrait(CurrentRun.Hero, "AxeBlockDamageBuff")
---  
---		-- Remove the icon
---		StopAnimation({ Name = "FrenzyStatusIcon", DestinationId = CurrentRun.Hero.ObjectId })
---		Destroy({ Id = frenzyIconId })
---	end
---
---ModUtil.Path.Wrap("CheckWeaponBlock", function(baseFunc, victim, attacker, triggerArgs)
---    -- Execute the original block logic first
---    local successfullyBlocked = baseFunc(victim, attacker, triggerArgs)
---    
---    -- If the block was successful by the player using your Aspect, trigger the buff
---    if successfullyBlocked and victim == CurrentRun.Hero and HeroHasTrait("AxeRecoveryAspect") then
---        thread(_PLUGIN.guid .. "." .. "ApplyAxeAspectBlockBuff")
---    end
-    
---    -- Return the original block result back to the game engine
---    return successfullyBlocked
---end)
-
 modutil.once_loaded.game(function()
 	-- Changing Aspect text
 	import "Aspects_text.lua"
@@ -199,19 +202,19 @@ modutil.once_loaded.game(function()
 		{
 			Common =
 			{
-				Multiplier = 1,
+				Multiplier = 1.4,
 			},
 			Rare =
 			{
-				Multiplier = 1.5,
+				Multiplier = 1.8,
 			},
 			Epic =
 			{
-				Multiplier = 2,
+				Multiplier = 2.2,
 			},
 			Heroic =
 			{
-				Multiplier = 2.5,
+				Multiplier = 2.6,
 			},
 			Legendary =
 			{
@@ -219,7 +222,7 @@ modutil.once_loaded.game(function()
 			},
 			Perfect =
 			{
-				Multiplier = 4.5,
+				Multiplier = 3.4,
 			},
 		},
 		Icon = "JarlUlsfark-AspectYoungMel\\AxeAspectYoungMelIcon",
@@ -229,28 +232,30 @@ modutil.once_loaded.game(function()
 		{
 			Melinoe_Axe_Mesh1 = "Melinoe_Axe_Mesh1",
 		},
-		--SetupFunction =
-		--{
-		--	Threaded = true,
-		--	Name = "SetupFrenzyUI",
-		--},
-		--OnSelfDamagedFunction =
-		--{
-		--	Name = _PLUGIN.guid .. "." .."CheckForBlockTrigger",
-		--	Args = {
+		OnBlockDamageFunction = 
+		{
+			Name = _PLUGIN.guid .. "." .. "BlockAxeBuff",
+			Args = 
+			{
+				MaxRetaliateBuff = { BaseValue = 1 },
+				EffectName = "AxeBlockRetaliate",
+				ReportValues = 
+				{ 
+					MaxBuff = "MaxRetaliateBuff",
 
-		--	}
-		--},
+				}
+			}
+		},
 		AddOutgoingDamageModifiers =
 		{
-			ExMultiplier =
+			ValidWeapons = WeaponSets.HeroPrimaryWeapons,
+			ValidWeaponMultiplier =
 			{
-				BaseValue = 1.3,
+				HeroTraitValue = "RetaliateBuff",
 				SourceIsMultiplier = true,
 			},
-			ValidWeapons = WeaponSets.HeroSecondaryWeapons,
-			ReportValues = { ReportedWeaponMultiplier = "ExMultiplier"},
 		},
+		RetaliateBuff = 1,
 		WeaponDataOverride =
 		{
 			WeaponAxeSpecial =
