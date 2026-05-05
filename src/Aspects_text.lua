@@ -34,7 +34,7 @@
 		{
 			Id = "DaggerDashAttackTripleTraitYoung",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Trick Knives",
+			DisplayName = "Wooden Trick Knives",
 			Description = "Your {$Keywords.DashStrike} also fires your {$Keywords.Special} {#UpgradeFormat}{$TooltipData.ExtractData.Count} {#Prev}times at once in a fan pattern."
 
 		},

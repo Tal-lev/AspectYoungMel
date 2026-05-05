@@ -28,7 +28,7 @@ end
 				},
 				{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponAxe", },
-				IsAny = {"AxeRecoveryAspect", }
+				IsAny = {"AxeAspectofYoungMelinoe", }
 				},
 			},
 			PropertyChanges = 
@@ -60,8 +60,12 @@ end
 		GameStateRequirements =
 		{
 			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponDagger", },
+			},
+			{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponDagger", },
-				IsAny = {"DaggerBackstabAspect", }
+				IsAny = {"DaggerAspectofYoungMelinoe", }
 			},
 			{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponDagger", },
