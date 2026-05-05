@@ -41,8 +41,6 @@ function mod.BlockAxeBuff( blocker, args, triggerArgs )
 		return
 	end
 	if triggerArgs.WeaponName == "WeaponAxeSpecial" then
-	--if (CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth) < 0.5 then
-		Heal( CurrentRun.Hero, {HealAmount = 20 , SourceName = "Aspect"})
 		local trait = GetHeroTrait( "AxeAspectofYoungMelinoe")
 		if trait.RetaliateBuff ~= 1 then
 			return
