@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Replacing Axe trait to +% attack damage after block
-- DEV: fix hammer requierments
+- Fixed hammer requierments 
 - DEV: renaming new trick knives hammer
 
 ## [0.3.2] - 2026-05-04
