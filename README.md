@@ -28,7 +28,7 @@ Adds three aspects of Young Melinoë
 ### Axe Aspect of Young Melinoë 
 
 - Replaces the special with Block similar to the Early Access.
-- Trait increases damage of omega special.
+- Trait temporarily increases attack damage after blocking with special.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="60%">
@@ -37,7 +37,6 @@ Adds three aspects of Young Melinoë
 ## Known Issues / To do list
 
 - Add aspect texture insead of replacing original textures.
-- Replace Axe Aspect of Young Melinoë trait into giving temporary damage buff after block
 - Improve texture of Dagger (DaggerB morrigan, DaggerA Mel, each with own texture)
 - Add Aspects of Young Melinoë for Torches / Skull / Suit 
 
