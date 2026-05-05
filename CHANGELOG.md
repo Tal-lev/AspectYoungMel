@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.3] - 2026-05-05
+
 - Replacing Axe trait to +% attack damage after block
 - Fixed hammer requierments 
 - DEV: renaming new trick knives hammer
@@ -53,7 +55,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.2...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.3...HEAD
+[0.3.3]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.2...0.3.3
 [0.3.2]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.2.3...0.3.0
