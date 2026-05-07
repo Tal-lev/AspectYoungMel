@@ -4,7 +4,7 @@ Adding aspects of Young Melinoe.
 
 ## Features
 
-Adds three aspects of Young Melinoë
+Adds four aspects of Young Melinoë
 
 ### Staff Aspect of Young Melinoë
 
