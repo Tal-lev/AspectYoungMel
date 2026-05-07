@@ -34,6 +34,15 @@ Adds three aspects of Young Melinoë
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="60%">
 </div>
 
+### Skull Aspect of Young Melinoë 
+
+- Trait consecutive attacks grant Combo, a stacking buff that is lost when failing to retrieve ammo.
+- Reduces Ammo magnetism and increased ammo drop spread  
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/SkullAspect.png" alt="PonyDressList" width="60%">
+</div>
+
 ## Known Issues / To do list
 
 - Add aspect texture insead of replacing original textures.
