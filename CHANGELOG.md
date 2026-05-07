@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added Skull Aspect of young Mel
+  - Trait grants combo stacks upon attack hits
+  - Combo is a stacking damage buff that is lost when not retrieving ammo
+  - Reduced ammo magnetism and increased ammo drop spread.
+- Fixed rank in different color in the shop
+- Fixed icon sizes too small
+- Temp fix, Added config option to choose whether to alter textures (set to false by default as they also impact base aspects)
+
 ## [0.3.3] - 2026-05-05
 
 - Replacing Axe trait to +% attack damage after block

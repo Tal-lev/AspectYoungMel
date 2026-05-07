@@ -1,6 +1,7 @@
 --inserting Keywords
 local newKeywords = {
 	"AxeRetaliate",
+	"Combo",
 }
 game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
@@ -15,16 +16,28 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 	local file = rom.path.combine(rom.paths.Content, 'Game/Text/en/TraitText.en.sjson')
 	sjson.hook(file, function(data)
 	
-		table.insert(data.Texts, sjson.to_object(
-		{
-			Id = "HealthThresholdStatDisplay",
-			InheritFrom = "BaseStatLine",
-			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
-			Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
+	table.insert(data.Texts, sjson.to_object(
+	{
+		Id = "HealthThresholdStatDisplay",
+		InheritFrom = "BaseStatLine",
+		DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
+		Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
 
-		},
-		TextOrder)
+	},
+	TextOrder)
 	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+		Id = "SkullAspectYoungMelStat",
+		InheritFrom = "BaseStatLine",
+		DisplayName = "{!Icons.Bullet}{#PropertyFormat}Combo Stack Damage:",
+		Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.ComboMultiplier}%"
+
+	},
+	TextOrder)
+	)
+
 	table.insert(data.Texts, sjson.to_object(
 		{
 			Id = "AxeShieldDeflectTrait",
@@ -81,7 +94,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "DaggerAspectofYoungMelinoe_Upgrade",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}",
+			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
 		},
 		TextOrder)
 	)
@@ -91,6 +104,15 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 			Id = "DaggerAspectofYoungMelinoe_FlavorText",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Precision has to be learned and wood is a kinder teacher than steel.",
+		},
+		TextOrder)
+	)
+	
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "Combo",
+			DisplayName = "Combo",
+			Description = "Stacking buff that increases {$Keywords.Attack} and {$Keywords.Special} damage. lost when failing to retrieve {$Keywords.Shells}",
 		},
 		TextOrder)
 	)
@@ -137,7 +159,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "AxeAspectofYoungMelinoe_Upgrade",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}",
+			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
 		},
 		TextOrder)
 	)
@@ -174,7 +196,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "StaffAspectofYoungMelinoe_Upgrade",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë {#AltUpgradeFormat}{$TooltipData.AspectRarityText}",
+			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
 		},
 		TextOrder)
 	)
@@ -184,6 +206,43 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 			Id = "StaffAspectofYoungMelinoe_FlavorText",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "A waxing crescent moon; the promise of power, if one could get it out of her mouth."
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SkullAspectofYoungMelinoe",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Aspect of young Melinoë",
+			Description = "Consecutive {$Keywords.Attack} grants {$Keywords.Combo}."
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SkullAspectofYoungMelinoe_Shop",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Argent Skull, Aspect of Young Melinoë:",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SkullAspectofYoungMelinoe_Upgrade",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SkullAspectofYoungMelinoe_FlavorText",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "The will of Night is never to be chronicled, but rarely, on moonless nights, it is dodgeball."
 		},
 		TextOrder)
 	)

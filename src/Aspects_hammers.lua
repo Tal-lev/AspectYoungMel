@@ -116,7 +116,7 @@ end
 			},
 			{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponAxe", },
-				IsNone = {"AxeAspectofYoungMelinoe", }
+				IsNone = {"AxeAspectofYoungMelinoe", },
 			},
 		}
 	)
@@ -145,6 +145,38 @@ end
 		}
 	)
 
+	OverwriteTableKeys(TraitData.LobAmmoMagnetismTrait.GameStateRequirements, {
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponLob", },
+			},
+			{
+				Path = { "CurrentRun", "Hero", "TraitDictionary", },
+				HasNone = { "LobPulseAmmoTrait" },
+			},
+			{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponLob", },
+				IsNone = {"LobGunAspect", "SkullAspectofYoungMelinoe",}
+			}
+		}
+	)
+
+	OverwriteTableKeys(TraitData.LobPulseAmmoTrait.GameStateRequirements, {
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponLob", },
+			},
+			{
+				Path = { "CurrentRun", "Hero", "TraitDictionary", },
+				HasNone = { "LobAmmoMagnetismTrait" },
+			},
+			{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponLob", },
+				IsNone = {"LobGunAspect", "SkullAspectofYoungMelinoe",}
+			},
+		}
+	)
+	
 
 	--Adding Hammers to pool
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTrait")

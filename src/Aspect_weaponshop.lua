@@ -370,3 +370,136 @@ OverwriteTableKeys(WeaponShopItemData, {
 	
 	--Adding Axe aspect to weapon selection
 	table.insert( ScreenData.WeaponUpgradeScreen.DisplayOrder.WeaponAxe, 2 , "AxeAspectofYoungMelinoe" )
+
+-- Skull Aspect of young Mel
+
+OverwriteTableKeys(WeaponShopItemData, {
+    SkullAspectofYoungMelinoe =
+	{
+		WeaponName = "WeaponLob",
+		HideAfterPurchased = true,
+		IconScale = 0.8,
+		UnlockTextId = "WeaponShopAspectUnlock",
+		Cost =
+		{
+			PlantFNightshade =2,
+			PlantIPoppy = 2,
+
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WorldUpgrades", "WorldUpgradeWeaponUpgradeSystem" },
+			},
+		},
+		PreRevealVoiceLines =
+		{
+			TriggerCooldowns = { "MelinoeMiscWeaponEquipSpeech" },
+			{
+				BreakIfPlayed = true,
+				PreLineWait = 0.65,
+				ObjectType = "NPC_Skelly_01",
+				PreLineAnim = "Skelly_Babbling",
+				TriggerCooldowns = { "SkellyAnyQuipSpeech" },
+				{ Cue = "/VO/Skelly_0193", Text = "Oh she's a scary one!" },
+			},
+		},
+	},
+    SkullAspectofYoungMelinoe2 =
+	{
+		WeaponName = "WeaponLob",
+		IconScale = 0.8,
+		Graphic = "WeaponArt05",
+		TraitUpgrade = "SkullAspectofYoungMelinoe",
+		InheritFrom = { "BaseWeaponUpgrade", },
+		Cost =
+		{
+			WeaponPointsRare = 1
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WeaponsUnlocked", "SkullAspectofYoungMelinoe" }
+			}
+		},
+		PreRevealGlobalVoiceLines = "LobAspectUpgradedVoiceLines",
+	},
+	SkullAspectofYoungMelinoe3 =
+	{
+		WeaponName = "WeaponLob",
+		IconScale = 0.8,
+		Graphic = "WeaponArt05",
+		TraitUpgrade = "SkullAspectofYoungMelinoe",
+		InheritFrom = { "BaseWeaponUpgrade", },
+		Cost =
+		{
+			WeaponPointsRare = 1
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WeaponsUnlocked", "SkullAspectofYoungMelinoe2" },
+			}
+		},
+		PreRevealGlobalVoiceLines = "LobAspectUpgradedVoiceLines",
+	},
+	SkullAspectofYoungMelinoe4 =
+	{
+		WeaponName = "WeaponLob",
+		IconScale = 0.8,
+		Graphic = "WeaponArt05",
+		TraitUpgrade = "SkullAspectofYoungMelinoe",
+		InheritFrom = { "BaseWeaponUpgrade", },
+		Cost =
+		{
+			WeaponPointsRare = 1
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WeaponsUnlocked", "SkullAspectofYoungMelinoe3" },
+			}
+		},
+		PreRevealGlobalVoiceLines = "LobAspectUpgradedVoiceLines",
+	},
+	SkullAspectofYoungMelinoe5 =
+	{
+		WeaponName = "WeaponLob",
+		HideAfterPurchased = false,
+		IconScale = 0.8,
+		Graphic = "WeaponArt05",
+		TraitUpgrade = "SkullAspectofYoungMelinoe",
+		InheritFrom = { "BaseWeaponUpgrade", },
+		Cost =
+		{
+			WeaponPointsRare = 2
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WeaponsUnlocked", "SkullAspectofYoungMelinoe4" },
+			}
+		},
+		PreRevealVoiceLines =
+		{
+			TriggerCooldowns = { "MelinoeMiscWeaponEquipSpeech" },
+			{
+				PreLineWait = 0.35,
+				UsePlayerSource = true,
+
+				{ Cue = "/VO/Melinoe_3588", Text = "Revaal, I see what you see now." },
+			},
+			{ GlobalVoiceLines = "SkellyWeaponMaxUpgradeReactionVoiceLines" },
+			{ GlobalVoiceLines = "SkellyWeaponUpgradeReactionVoiceLines" },
+		},
+	},
+})
+	--Adding Skull aspect to weapon shop
+    table.insert( ScreenData.WeaponShop.ItemCategories[6], "SkullAspectofYoungMelinoe")
+	table.insert( ScreenData.WeaponShop.ItemCategories[6], "SkullAspectofYoungMelinoe2")
+	table.insert( ScreenData.WeaponShop.ItemCategories[6], "SkullAspectofYoungMelinoe3")
+	table.insert( ScreenData.WeaponShop.ItemCategories[6], "SkullAspectofYoungMelinoe4")
+	table.insert( ScreenData.WeaponShop.ItemCategories[6], "SkullAspectofYoungMelinoe5")
+	
+	--Adding Skull aspect to weapon selection
+	table.insert( ScreenData.WeaponUpgradeScreen.DisplayOrder.WeaponLob, 2 , "SkullAspectofYoungMelinoe" )

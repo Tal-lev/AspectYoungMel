@@ -1,5 +1,5 @@
 return {
-  version = 0;
+  version = 1;
   enabled = true;
-  message = 'Hello World!';
+  Alter_Textures = false;
 }

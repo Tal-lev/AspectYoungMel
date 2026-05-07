@@ -52,38 +52,192 @@ function mod.BlockAxeBuff( blocker, args, triggerArgs )
 	end
 end
 
---Importing Axe Textures
-local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
-local custom_axe_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponAxe")
+OverwriteTableKeys(ConsumableData, {
+	LobAmmoPackYM = {
+		InheritFrom = { "BaseConsumable" },
+		OnUsedFunctionName = "UseConsumableItem",
+		--UseFunctionNames = {_PLUGIN.guid .. "." .. "ComboPresentation"},
+		--UseFunctionArgs ={{unitId = CurrentRun.Hero.ObjectId}},
+		CanDuplicate = false,
+		Cost = 0,
+		AddAmmoWeapon = "WeaponLob",
+		AddAmmo = 1,
+		HideWorldText = true,
+		CannotUseText = "AmmoPackCannotUse",
+		CannotUseSound = "/Leftovers/SFX/OutOfAmmo",
+		ConsumeSound = "/SFX/Player Sounds/MelSkullsAmmoPickup",
 
-local current_axe_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
+		CompleteObjective = "WeaponLobPickup",
 
-table.insert(current_axe_overrides, 1, custom_axe_hash)
-table.insert(current_axe_overrides, weapon_axe_hash)
+		MagnetismEscalateDelay = 10.0,
+		MagnetismHintRemainingTime = 5.0,
+		MagnetismEscalateAmount = 99000,
 
-rom.data.load_package_overrides_set(weapon_axe_hash, current_axe_overrides)
+		SkipCheckRoomExitsReady = true,
+	}
+})
 
---Importing Staff Textures
-local weapon_staff_hash = rom.data.get_hash_guid_from_string("WeaponStaffSwing")
-local custom_staff_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponStaff")
+--ammo drops
+function mod.WeaponLobAmmoDrop( triggerArgs, weaponDataArgs )
+	if not SessionMapState.LobAmmoInFlight or SessionMapState.LobAmmoInFlight <= 0 then
+		return
+	end
+	-- Stripped optimized version of CreateConsumableItem( consumableId, "LobAmmoPack" )
+	local consumableData = ConsumableData.LobAmmoPackYM --LobAmmoPackYM
+	local consumable = DeepCopyTable( consumableData )
+	local consumableId = SpawnObstacle({ Name = "LobAmmoPackYM", --nopkg --LobAmmoPackYM
+		LocationX = triggerArgs.LocationX, LocationY = triggerArgs.LocationY, Group = "Standing",
+		TriggerOnSpawn = false, AttachedTable = consumable })	
+	consumable.ObjectId = consumableId
+	mod.ComboPresentation( CurrentRun.Hero.ObjectId )
+	AddToGroup({Id = consumableId, Name = "UsedFishingPoint" })	-- A little silly but we want to be able to collect ammo while fishing
+	local ammoDropData = weaponDataArgs.DropForces
+	DecrementTableValue( SessionMapState, "LobAmmoInFlight" )
+	if HeroHasTrait("LobAmmoMagnetismTrait") then
+		SetObstacleProperty({ Property = "MagnetismSpeedMax", Value = GetTotalHeroTraitValue("MagnetismSpeedMultiplier"), ValueChangeType = "Multiply", DestinationId = consumableId })
+	end
+	consumable.ProjectileVolley = triggerArgs.ProjectileVolley
+	if triggerArgs.HasImpact ~= nil and weaponDataArgs.CollideForces then
+		ammoDropData = weaponDataArgs.CollideForces
+	end
+	if weaponDataArgs.Cooldown then
+		UseableOff({ Id = consumableId })
+		thread( UseableOnDelay, { consumableId }, weaponDataArgs.Cooldown )
+	end
+	local magnetismMultiplier = GetTotalHeroTraitValue("AmmoMagnetismMultiplier", { IsMultiplier = true } )
+	if not triggerArgs.Armed then
+		if SessionMapState.MagnetismMultiplier then
+			magnetismMultiplier = SessionMapState.MagnetismMultiplier * magnetismMultiplier
+		elseif SessionMapState.AutoMagnetizeIds[ triggerArgs.ProjectileId ] then
+			local playerMagnetism = GetBaseDataValue({ Type = "Obstacle", Name = "LobAmmoPackYM", Property = "Magnetism"}) --LobAmmoPackYM
+			if GetDistance ({ Id = consumableId, DestinationId = CurrentRun.Hero.ObjectId }) <= SessionMapState.AutoMagnetizeIds[ triggerArgs.ProjectileId ].MagnetismMultiplier * magnetismMultiplier * playerMagnetism then 
+				magnetismMultiplier = SessionMapState.AutoMagnetizeIds[ triggerArgs.ProjectileId ].MagnetismMultiplier * magnetismMultiplier
+			end
+		end
+	end
+	SetObstacleProperty({ Property = "Magnetism", Value = magnetismMultiplier, DestinationId = consumableId, ValueChangeType = "Multiply" })
+	ApplyUpwardForce({ Id = consumableId, Speed = RandomFloat( ammoDropData.UpwardForceMin or 0, ammoDropData.UpwardForceMax or 0 ) })
+	if ammoDropData.ForceMax ~= nil then
+		local scatter = 0
+		if ammoDropData.Scatter then
+			scatter = RandomFloat( -(ammoDropData.Scatter)/2, (ammoDropData.Scatter)/2)
+		end
+		ApplyForce({ Id = consumableId, Speed = RandomFloat( ammoDropData.ForceMin, ammoDropData.ForceMax ), Angle = triggerArgs.Angle + scatter, SelfApplied = true })
+	end
+	thread( mod.EscalateMagnetismYM, consumable )
+	SessionMapState.AutoMagnetizeIds[ triggerArgs.ProjectileId ] = nil
+end
 
-local current_staff_overrides = rom.data.load_package_overrides_get(weapon_staff_hash)
+function mod.EscalateMagnetismYM( consumable )
 
-table.insert(current_staff_overrides, 1, custom_staff_hash)
-table.insert(current_staff_overrides, weapon_staff_hash)
+	if consumable.MagnetismEscalateDelay == nil then
+		return
+	end
+	wait( consumable.MagnetismEscalateDelay - consumable.MagnetismHintRemainingTime , RoomThreadName )
+	if not IsAlive({ Id = consumable.ObjectId }) then
+		return
+	end
+	CreateAnimation({ Name = "AmmoReturnTimer", DestinationId = consumable.ObjectId })
+	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe")
+	if trait.Combo ~= 0 then
+		trait.Combo = 0
+		mod.ComboPresentationCancel(CurrentRun.Hero.ObjectId)
+	end
+	wait( consumable.MagnetismHintRemainingTime, RoomThreadName )
+	SetObstacleProperty({ Property = "Magnetism", Value = consumable.MagnetismEscalateAmount, DestinationId = consumable.ObjectId })
 
-rom.data.load_package_overrides_set(weapon_staff_hash, current_staff_overrides)
+end
 
---Importing Dagger Textures
-local weapon_dagger_hash = rom.data.get_hash_guid_from_string("WeaponDagger")
-local custom_dagger_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponDagger")
+function mod.ComboPresentation(unitId)
+	if unitId ~= CurrentRun.Hero.ObjectId then
+		return
+	end
+	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe")
+	trait.Combo = trait.Combo + 1
+	if trait.Combo <= 1 then
+		return
+	end
+	PlaySound({ Name = "/Leftovers/Menu Sounds/LevelUpFlash", Id = unitId, ManagerCap = 46 })
+	Flash({ Id = unitId, Speed = 0.85, MinFraction = 0.7, MaxFraction = 0.0, Color = Color.White, Duration = 0.15, ExpireAfterCycle = true })
+	thread( InCombatText, unitId, "X" .. trait.Combo, 0.5 , { SkipShadow = true } )
+end
 
-local current_dagger_overrides = rom.data.load_package_overrides_get(weapon_dagger_hash)
+function mod.ComboPresentationCancel(unitId)
+	if unitId ~= CurrentRun.Hero.ObjectId then
+		return
+	end
+	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe")
+	if trait.Combo ~= 0 then
+		return
+	end
+	PlaySound({ Name = "/Leftovers/Menu Sounds/LevelUpFlash", Id = unitId, ManagerCap = 46 })
+	Flash({ Id = unitId, Speed = 0.85, MinFraction = 0.7, MaxFraction = 0.0, Color = Color.White, Duration = 0.15, ExpireAfterCycle = true })
+	thread( InCombatText, unitId, "X" .. trait.Combo, 0.5 , { SkipShadow = true } )
+end
 
-table.insert(current_dagger_overrides, 1, custom_dagger_hash)
-table.insert(current_dagger_overrides, weapon_dagger_hash)
+function mod.ComboDamageMod(weaponData, functionArgs, triggerArgs)
+	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe")
+	if trait.Combo <= 1 then
+		trait.ComboDamageMod = 1
+	end
+	if trait.Combo >= 2 then
+  		trait.ComboDamageMod = (functionArgs.Multiplier -1) * (trait.Combo -1) +1
+		print("trait.ComboDamageMod")
+		print(trait.ComboDamageMod)
+	end  
+end
 
-rom.data.load_package_overrides_set(weapon_dagger_hash, current_dagger_overrides)
+import "config.lua"
+if config.Alter_Textures == true then
+	--Importing Axe Textures
+	local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
+	local custom_axe_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponAxe")
+
+	local current_axe_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
+
+	table.insert(current_axe_overrides, 1, custom_axe_hash)
+	table.insert(current_axe_overrides, weapon_axe_hash)
+
+	rom.data.load_package_overrides_set(weapon_axe_hash, current_axe_overrides)
+
+	--Importing Staff Textures
+	local weapon_staff_hash = rom.data.get_hash_guid_from_string("WeaponStaffSwing")
+	local custom_staff_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponStaff")
+
+	local current_staff_overrides = rom.data.load_package_overrides_get(weapon_staff_hash)
+
+	table.insert(current_staff_overrides, 1, custom_staff_hash)
+	table.insert(current_staff_overrides, weapon_staff_hash)
+
+	rom.data.load_package_overrides_set(weapon_staff_hash, current_staff_overrides)
+
+	--Importing Dagger Textures
+	local weapon_dagger_hash = rom.data.get_hash_guid_from_string("WeaponDagger")
+	print("weapon_dagger_hash")
+	print(weapon_dagger_hash)
+	local custom_dagger_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponDagger")
+	print("custom_dagger_hash")
+	local current_dagger_overrides = rom.data.load_package_overrides_get(weapon_dagger_hash)
+
+	table.insert(current_dagger_overrides, 1, custom_dagger_hash)
+	table.insert(current_dagger_overrides, weapon_dagger_hash)
+
+	rom.data.load_package_overrides_set(weapon_dagger_hash, current_dagger_overrides)
+
+	--Importing Skull Textures
+	local weapon_skull_hash = rom.data.get_hash_guid_from_string("WeaponLob")
+	print("weapon_skull_hash")
+	print(weapon_skull_hash)
+	local custom_skull_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponLob")
+	print("AxeTest-WeaponLob")
+	print(custom_skull_hash)
+	local current_skull_overrides = rom.data.load_package_overrides_get(weapon_skull_hash)
+
+	table.insert(current_skull_overrides, 1, custom_skull_hash)
+	table.insert(current_skull_overrides, weapon_skull_hash)
+
+	rom.data.load_package_overrides_set(weapon_skull_hash, current_skull_overrides)
+end
 
 
 --Loading the package at every room
@@ -110,8 +264,52 @@ end)
 -- AxeAspectYoungMel - 1,2,3,4(a,b,c,d,e),5,6,7,8
 -- StaffAspectYoungMel - 1,3,4(a,b,d,e),5,6,8
 -- DaggerAspectYoungMel - 1,3,4(a,b,c,e),~5,6,8
+-- SkullAspectYoungMel - 3,4(a,d,e),5,7,8
 
 modutil.once_loaded.game(function()
+	
+	local file = rom.path.combine(rom.paths.Content, 'Game/Obstacles/Gameplay.sjson')
+	sjson.hook(file, function(data)
+	-- Axe Aspect of Young Mel special 
+    	table.insert(data.Obstacles,{
+			Name = "LobAmmoPackYM",
+			InheritFrom = "BaseLoot",
+			DisplayInEditor = true,
+			Magnetism = 50.0,
+			MagnetismSpeedMax = 2000.0,
+			MagnetismSpeedMin = 1500.0,
+			MagnetismWhileBlocked = 9999.0 ,
+			RequiresUsable = true,
+			Thing = 
+			{
+				EditorOutlineDrawBounds = false,
+				Graphic = "LobProjectileIdle",
+				OffsetZ = 60.0,
+				StopsProjectiles = false,
+				StopsUnits = false,
+				Tallness = 25.0,
+				TouchdownSound = "/SFX/Player Sounds/MelSkullsAmmoBounce",
+				SortBoundsScale = 0.15,
+				UseBoundsForSortDrawArea = true,
+				Interact = 
+				{
+					AutoActivate = true,
+					Distance = 50.0,
+					UseableWhileInputDisabled = true,
+				},
+				Points =
+				{
+					{ X = 0, Y = 24 },
+					{ X = 48, Y = 0 },
+					{ X = 0, Y = -24 },
+					{ X = -48, Y = 0 },
+				},
+			},
+		})
+		return data
+		end)
+	
+	
 	-- Changing Aspect text
 	import "Aspects_text.lua"
 	-- Changing the weapon effects, adding all possible aspects and switching new effects to inactive
@@ -626,6 +824,103 @@ modutil.once_loaded.game(function()
 		FlavorText = "DaggerAspectofYoungMelinoe_FlavorText",
 	}
 	
+	SkullAspectofYoungMelinoe = 
+	{
+		InheritFrom = { "WeaponEnchantmentTrait" },
+		Icon = "JarlUlsfark-AspectYoungMel\\SkullAspectYoungMelIcon",
+		RequiredWeapon = "WeaponLob",
+		WeaponKitGrannyModel = "WeaponLob_Mesh",
+		ReplacementGrannyModels = 
+		{
+			WeaponLob_Mesh = "WeaponLob_Mesh"
+		},
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 1.2,
+			},
+			Rare =
+			{
+				Multiplier = 1.3,
+			},
+			Epic =
+			{
+				Multiplier = 1.4,
+			},
+			Heroic =
+			{
+				Multiplier = 1.5,
+			},
+			Legendary =
+			{
+				Multiplier = 1.6,
+			},
+			Perfect =
+			{
+				Multiplier = 1.8,
+			},
+		},
+		WeaponDataOverride = {
+			WeaponLob = {
+				OnProjectileDeathFunction = _PLUGIN.guid .. "." .. "WeaponLobAmmoDrop",
+				OnProjectileDeathFunctionArgs = {
+					CollideForces = 
+					{
+						UpwardForceMin = 300,
+						UpwardForceMax = 800, 
+						ForceMin = 840,
+						ForceMax = 880,
+						Scatter = 360,
+					},
+					DropForces = 
+					{
+						UpwardForceMin = 435,
+						UpwardForceMax = 445,
+						ForceMin = 500,
+						ForceMax = 530,
+						Scatter = 0,
+					},
+				},
+				
+				MagnetismMultiplier = 0.5,
+			},
+			WeaponLobSpecial = {
+				MagnetismMultiplier = 1,
+			},
+		},
+		OnWeaponFiredFunctions = 
+		{
+			ValidWeapons = WeaponSets.HeroPrimaryWeapons,
+			FunctionName = _PLUGIN.guid .. "." .. "ComboDamageMod",
+			FunctionArgs = {
+				Multiplier = { BaseValue = 1 },
+				ReportValues = { ComboMult = "Multiplier" }
+			},
+		}, 
+		AddOutgoingDamageModifiers = {
+			ValidWeapons = WeaponSets.HeroPrimarySecondaryWeapons,
+			UseTraitValue = "ComboDamageMod",
+			IsMultiplier = true,
+		},
+		Combo = 0,
+		ComboDamageMod = 1,
+		StatLines =
+		{
+			"SkullAspectYoungMelStat",
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ComboMult",
+				ExtractAs = "ComboMultiplier",
+				Format = "PercentDelta",
+			},
+		},
+		FlavorText = "SkullAspectofYoungMelinoe_FlavorText",
+	}
+
+	TraitData.SkullAspectofYoungMelinoe = SkullAspectofYoungMelinoe
 	TraitData.StaffAspectofYoungMelinoe = StaffAspectofYoungMelinoe
 	TraitData.DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe
 	TraitData.AxeAspectofYoungMelinoe = AxeAspectofYoungMelinoe
@@ -640,25 +935,3 @@ modutil.once_loaded.game(function()
 	import "Aspects_hammers.lua"
 
 end)
-
---modutil.mod.Path.Wrap("EquipWeaponUpgrade", function(base, source, args)
---	if HeroHasTrait("BaseStaffAspect") then
---		rom.data.load_package_overrides_set(weapon_staff_hash, weapon_staff_hash)
---	end
---	if HeroHasTrait("StaffAspectofYoungMelinoe") then
---		rom.data.load_package_overrides_set(weapon_staff_hash, current_staff_overrides)
---	end
---	if HeroHasTrait("DaggerBackstabAspect") then
---		rom.data.load_package_overrides_set(weapon_dagger_hash, weapon_dagger_hash)
---	end
---	if HeroHasTrait("DaggerAspectofYoungMelinoe") then
---		rom.data.load_package_overrides_set(weapon_dagger_hash, current_dagger_overrides)
---	end
---	if HeroHasTrait("AxeRecoveryAspect") then
---		rom.data.load_package_overrides_set(weapon_axe_hash, weapon_axe_hash)
---	end
---	if HeroHasTrait("AxeAspectofYoungMelinoe") then
---		rom.data.load_package_overrides_set(weapon_axe_hash, current_axe_overrides)
---	end
---	return base(source, args)
---end)
