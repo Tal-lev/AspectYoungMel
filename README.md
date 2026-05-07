@@ -45,9 +45,8 @@ Adds four aspects of Young Melinoë
 
 ## Known Issues / To do list
 
-- Add aspect texture insead of replacing original textures.
-- Improve texture of Dagger (DaggerB morrigan, DaggerA Mel, each with own texture)
-- Add Aspects of Young Melinoë for Torches / Skull / Suit 
+- Add aspect texture insead of replacing original textures (temp fix made replacement optional).
+- Add Aspects of Young Melinoë for Torches / Suit 
 
 ## Installation
 
