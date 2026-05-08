@@ -106,6 +106,23 @@ end
 			},
 		}
 	    },
+		--Effect is in ready.lua mod.EscalateMagnetismYM()
+		LobExtendComboTrait = 
+		{
+			InheritFrom = { "WeaponTrait", "LobHammerTrait" },
+			Icon = "JarlUlsfark-AspectYoungMel\\GameOnIcon",
+			GameStateRequirements =
+			{
+				{
+					Path = { "CurrentRun", "Hero", "Weapons", },
+					HasAll = { "WeaponLob", },
+				},
+				{
+					Path = { "GameState", "LastWeaponUpgradeName", "WeaponLob", },
+					IsAny = {"SkullAspectofYoungMelinoe", }
+				},
+			},
+		},
 	})
 
 -- Removing incompatible Hammers
@@ -181,3 +198,5 @@ end
 	--Adding Hammers to pool
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTrait")
     table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYoung")
+	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTrait")
+	

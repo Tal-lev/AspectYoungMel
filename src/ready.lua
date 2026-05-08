@@ -35,7 +35,7 @@ function mod.CheckStaffSelfHit( triggerArgs, args )
 		end
 	end
 end
-
+--Function for AxeAspectYoungMel trait
 function mod.BlockAxeBuff( blocker, args, triggerArgs )
 	if not blocker or not blocker.ObjectId then
 		return
@@ -51,7 +51,7 @@ function mod.BlockAxeBuff( blocker, args, triggerArgs )
 		trait.RetaliateBuff = 1
 	end
 end
-
+--Functions and consumables for SkullAspectYoungMel trait 
 OverwriteTableKeys(ConsumableData, {
 	LobAmmoPackYM = {
 		InheritFrom = { "BaseConsumable" },
@@ -89,7 +89,7 @@ function mod.WeaponLobAmmoDrop( triggerArgs, weaponDataArgs )
 		LocationX = triggerArgs.LocationX, LocationY = triggerArgs.LocationY, Group = "Standing",
 		TriggerOnSpawn = false, AttachedTable = consumable })	
 	consumable.ObjectId = consumableId
-	mod.ComboPresentation( CurrentRun.Hero.ObjectId )
+	--mod.ComboPresentation( CurrentRun.Hero.ObjectId )
 	AddToGroup({Id = consumableId, Name = "UsedFishingPoint" })	-- A little silly but we want to be able to collect ammo while fishing
 	local ammoDropData = weaponDataArgs.DropForces
 	DecrementTableValue( SessionMapState, "LobAmmoInFlight" )
@@ -139,19 +139,23 @@ function mod.EscalateMagnetismYM( consumable )
 	end
 	CreateAnimation({ Name = "AmmoReturnTimer", DestinationId = consumable.ObjectId })
 	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe")
-	if trait.Combo ~= 0 then
+	if trait.Combo ~= 0 and not HeroHasTrait("LobExtendComboTrait") then
 		trait.Combo = 0
 		mod.ComboPresentationCancel(CurrentRun.Hero.ObjectId)
 	end
 	wait( consumable.MagnetismHintRemainingTime, RoomThreadName )
 	SetObstacleProperty({ Property = "Magnetism", Value = consumable.MagnetismEscalateAmount, DestinationId = consumable.ObjectId })
-
+	if trait.Combo ~= 0 and HeroHasTrait("LobExtendComboTrait") then
+		trait.Combo = 0
+		mod.ComboPresentationCancel(CurrentRun.Hero.ObjectId)
+	end
 end
 
-function mod.ComboPresentation(unitId)
-	if unitId ~= CurrentRun.Hero.ObjectId then
-		return
-	end
+function mod.ComboPresentation(weaponData, functionArgs, triggerArgs)
+	--if unitId ~= CurrentRun.Hero.ObjectId then
+	--	return
+	--end
+	local unitId = CurrentRun.Hero.ObjectId
 	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe")
 	trait.Combo = trait.Combo + 1
 	if trait.Combo <= 1 then
@@ -177,16 +181,26 @@ end
 
 function mod.ComboDamageMod(weaponData, functionArgs, triggerArgs)
 	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe")
+	local Multi = (functionArgs.Multiplier -1)
 	if trait.Combo <= 1 then
 		trait.ComboDamageMod = 1
 	end
-	if trait.Combo >= 2 then
-  		trait.ComboDamageMod = (functionArgs.Multiplier -1) * (trait.Combo -1) +1
-		print("trait.ComboDamageMod")
-		print(trait.ComboDamageMod)
+	if trait.Combo >= 2 and trait.Combo <= 10 then
+  		trait.ComboDamageMod = Multi * (trait.Combo -1) +1
 	end  
+	if trait.Combo > 10 and trait.Combo <= 20 then
+		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * (trait.Combo -11)) + 1
+	end
+	if trait.Combo > 20 and trait.Combo <= 30 then
+		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * (trait.Combo -21)) + 1
+	end
+	if trait.Combo > 30 then
+		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * 10) + (Multi / 8 * (trait.Combo -31)) + 1
+	end
 end
+  
 
+--Whether to change new aspect textures
 import "config.lua"
 if config.Alter_Textures == true then
 	--Importing Axe Textures
@@ -238,7 +252,6 @@ if config.Alter_Textures == true then
 
 	rom.data.load_package_overrides_set(weapon_skull_hash, current_skull_overrides)
 end
-
 
 --Loading the package at every room
 modutil.mod.Path.Wrap("SetupMap", function(base, source, args)
@@ -898,6 +911,15 @@ modutil.once_loaded.game(function()
 				ReportValues = { ComboMult = "Multiplier" }
 			},
 		}, 
+		OnEnemyDamagedAction = 
+		{
+			ValidWeapons = WeaponSets.HeroPrimaryWeapons,
+			FunctionName = _PLUGIN.guid .. "." .. "ComboPresentation",
+			FirstHitOnly = false,
+			Args = {
+				test =''
+			},
+		},
 		AddOutgoingDamageModifiers = {
 			ValidWeapons = WeaponSets.HeroPrimarySecondaryWeapons,
 			UseTraitValue = "ComboDamageMod",
