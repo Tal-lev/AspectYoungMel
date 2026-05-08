@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-05-08
+
 - Added Skull Aspect of young Mel
   - Trait grants combo stacks upon attack hits
   - Combo is a stacking damage buff that is lost when not retrieving ammo
@@ -63,7 +65,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.3...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.4.0...HEAD
+[0.4.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.3...0.4.0
 [0.3.3]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.2...0.3.3
 [0.3.2]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.1...0.3.2
 [0.3.1]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.0...0.3.1
