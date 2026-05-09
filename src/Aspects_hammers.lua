@@ -123,6 +123,23 @@ end
 				},
 			},
 		},
+		--Effect is in ready.lua mod.ComboDamageMod()
+		LobComboScalingTrait = 
+		{
+			InheritFrom = { "WeaponTrait", "LobHammerTrait" },
+			Icon = "JarlUlsfark-AspectYoungMel\\UltimateComboIcon",
+			GameStateRequirements =
+			{
+				{
+					Path = { "CurrentRun", "Hero", "Weapons", },
+					HasAll = { "WeaponLob", },
+				},
+				{
+					Path = { "GameState", "LastWeaponUpgradeName", "WeaponLob", },
+					IsAny = {"SkullAspectofYoungMelinoe", }
+				},
+			},
+		},
 	})
 
 -- Removing incompatible Hammers
@@ -199,4 +216,5 @@ end
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTrait")
     table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYoung")
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTrait")
+	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTrait")
 	

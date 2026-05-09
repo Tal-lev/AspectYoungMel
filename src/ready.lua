@@ -188,13 +188,13 @@ function mod.ComboDamageMod(weaponData, functionArgs, triggerArgs)
 	if trait.Combo >= 2 and trait.Combo <= 10 then
   		trait.ComboDamageMod = Multi * (trait.Combo -1) +1
 	end  
-	if trait.Combo > 10 and trait.Combo <= 20 then
+	if (trait.Combo > 10 and trait.Combo <= 20) or (trait.Combo > 20 and HeroHasTrait("LobComboScalingTrait")) then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * (trait.Combo -11)) + 1
 	end
-	if trait.Combo > 20 and trait.Combo <= 30 then
+	if trait.Combo > 20 and trait.Combo <= 30 and not HeroHasTrait("LobComboScalingTrait") then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * (trait.Combo -21)) + 1
 	end
-	if trait.Combo > 30 then
+	if trait.Combo > 30 and not HeroHasTrait("LobComboScalingTrait") then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * 10) + (Multi / 8 * (trait.Combo -31)) + 1
 	end
 end
@@ -942,11 +942,12 @@ modutil.once_loaded.game(function()
 		FlavorText = "SkullAspectofYoungMelinoe_FlavorText",
 	}
 
-	TraitData.SkullAspectofYoungMelinoe = SkullAspectofYoungMelinoe
+	
 	TraitData.StaffAspectofYoungMelinoe = StaffAspectofYoungMelinoe
 	TraitData.DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe
 	TraitData.AxeAspectofYoungMelinoe = AxeAspectofYoungMelinoe
-	
+	TraitData.SkullAspectofYoungMelinoe = SkullAspectofYoungMelinoe
+
 	--Adds the new traits to the in-game shop
 	import "Aspect_weaponshop.lua"
 

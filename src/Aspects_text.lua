@@ -73,6 +73,17 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
+			Id = "LobComboScalingTrait",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Ultimate Combo",
+			Description = "Increased damage scaling at high {$Keywords.Combo}."
+
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
 			Id = "AspectDashRechargeStatDisplay",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Dash Recovery Speed:",
