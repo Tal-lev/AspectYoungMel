@@ -371,6 +371,137 @@ OverwriteTableKeys(WeaponShopItemData, {
 	--Adding Axe aspect to weapon selection
 	table.insert( ScreenData.WeaponUpgradeScreen.DisplayOrder.WeaponAxe, 2 , "AxeAspectofYoungMelinoe" )
 
+-- Torch Aspect of young Mel
+
+OverwriteTableKeys(WeaponShopItemData, {
+	TorchAspectofYoungMelinoe =
+	{
+		WeaponName = "WeaponTorch",
+		HideAfterPurchased = true,
+		IconScale = 0.8,
+		UnlockTextId = "WeaponShopAspectUnlock",
+		Cost =
+		{
+			OreNBronze = 1,
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WorldUpgrades", "WorldUpgradeWeaponUpgradeSystem" },
+			},
+		},
+		PreRevealVoiceLines =
+		{
+			TriggerCooldowns = { "MelinoeMiscWeaponEquipSpeech" },
+			{
+				BreakIfPlayed = true,
+				PreLineWait = 0.65,
+				ObjectType = "NPC_Skelly_01",
+				TriggerCooldowns = { "SkellyAnyQuipSpeech" },
+
+				{ Cue = "/VO/Skelly_0348", Text = "I shoulda known!" },
+			},
+		},
+	},
+	TorchAspectofYoungMelinoe2 =
+	{
+		WeaponName = "WeaponTorch",
+		IconScale = 0.8,
+		Graphic = "WeaponArt05",
+		TraitUpgrade = "TorchAspectofYoungMelinoe",
+		InheritFrom = { "BaseWeaponUpgrade", },
+		Cost =
+		{
+			WeaponPointsRare = 1,
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WeaponsUnlocked", "TorchAspectofYoungMelinoe" },
+			}
+		},
+		PreRevealGlobalVoiceLines = "TorchAspectUpgradedVoiceLines",
+	},
+	TorchAspectofYoungMelinoe3 =
+	{
+		WeaponName = "WeaponTorch",
+		IconScale = 0.8,
+		Graphic = "WeaponArt05",
+		TraitUpgrade = "TorchAspectofYoungMelinoe",
+		InheritFrom = { "BaseWeaponUpgrade", },
+		Cost =
+		{
+			WeaponPointsRare = 1,
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WeaponsUnlocked", "TorchAspectofYoungMelinoe2" },
+			}
+		},
+		PreRevealGlobalVoiceLines = "TorchAspectUpgradedVoiceLines",
+	},
+	TorchAspectofYoungMelinoe4 =
+	{
+		WeaponName = "WeaponTorch",
+		IconScale = 0.8,
+		Graphic = "WeaponArt05",
+		TraitUpgrade = "TorchAspectofYoungMelinoe",
+		InheritFrom = { "BaseWeaponUpgrade", },
+		Cost =
+		{
+			WeaponPointsRare = 1,
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WeaponsUnlocked", "TorchAspectofYoungMelinoe3" },
+			}
+		},
+		PreRevealGlobalVoiceLines = "TorchAspectUpgradedVoiceLines",
+	},
+	TorchAspectofYoungMelinoe5 =
+	{
+		WeaponName = "WeaponTorch",
+		HideAfterPurchased = false,
+		IconScale = 0.8,
+		Graphic = "WeaponArt05",
+		TraitUpgrade = "TorchAspectofYoungMelinoe",
+		InheritFrom = { "BaseWeaponUpgrade", },
+		Cost =
+		{
+			WeaponPointsRare = 2,
+		},
+		GameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "WeaponsUnlocked", "TorchAspectofYoungMelinoe4" },
+			}
+		},
+		PreRevealVoiceLines =
+		{
+			TriggerCooldowns = { "MelinoeMiscWeaponEquipSpeech" },
+			{
+				PreLineWait = 0.25,
+				UsePlayerSource = true,
+
+				{ Cue = "/VO/Melinoe_3585", Text = "Ygnium, we're forged together in flame." },
+			},
+			{ GlobalVoiceLines = "SkellyWeaponMaxUpgradeReactionVoiceLines" },
+			{ GlobalVoiceLines = "SkellyWeaponUpgradeReactionVoiceLines" },
+		},
+	},
+})
+	--Adding Torch aspect to weapon shop
+    table.insert( ScreenData.WeaponShop.ItemCategories[4], "TorchAspectofYoungMelinoe")
+	table.insert( ScreenData.WeaponShop.ItemCategories[4], "TorchAspectofYoungMelinoe2")
+	table.insert( ScreenData.WeaponShop.ItemCategories[4], "TorchAspectofYoungMelinoe3")
+	table.insert( ScreenData.WeaponShop.ItemCategories[4], "TorchAspectofYoungMelinoe4")
+	table.insert( ScreenData.WeaponShop.ItemCategories[4], "TorchAspectofYoungMelinoe5")
+	
+	--Adding Torch aspect to weapon selection
+	table.insert( ScreenData.WeaponUpgradeScreen.DisplayOrder.WeaponTorch, 2 , "TorchAspectofYoungMelinoe" )
+
 -- Skull Aspect of young Mel
 
 OverwriteTableKeys(WeaponShopItemData, {

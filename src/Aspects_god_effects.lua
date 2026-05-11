@@ -131,5 +131,30 @@ end
 				ChangeType = "Absolute",
 				ExcludeLinked = true,
 			},
+			-- Torches Aspect of young Mel special 
+			--{
+			--	WeaponName = "WeaponCastYM",
+			--	ProjectileName = "ProjectileCastYM",
+			--	ProjectileProperty = "Graphic",
+			--	ValuePrefix = "CastCircleIn_",
+			--	ChangeType = "Absolute",
+			--	ExcludeLinked = true,
+			--},
+			--{
+			--	WeaponName = "WeaponCastYM",
+			--	ProjectileName = "ProjectileCastYM",
+			--	ProjectileProperty = "DetonateFx",
+			--	ValuePrefix = "CastCircleOut_",
+			--	ChangeType = "Absolute",
+			--	ExcludeLinked = true,
+			--},
+			--{
+			--	WeaponName = "WeaponCastYM",
+			--	ProjectileName = "ProjectileCastYM",
+			--	ProjectileProperty = "ImpactFx",
+			--	ValuePrefix = "CastCircleUnitFxFront_",
+			--	ChangeType = "Absolute",
+			--	ExcludeLinked = true,
+			--},
 		}
 	})

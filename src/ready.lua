@@ -198,7 +198,8 @@ function mod.ComboDamageMod(weaponData, functionArgs, triggerArgs)
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * 10) + (Multi / 8 * (trait.Combo -31)) + 1
 	end
 end
-  
+
+import "Aspect_cast_functions.lua"
 
 --Whether to change new aspect textures
 import "config.lua"
@@ -227,10 +228,8 @@ if config.Alter_Textures == true then
 
 	--Importing Dagger Textures
 	local weapon_dagger_hash = rom.data.get_hash_guid_from_string("WeaponDagger")
-	print("weapon_dagger_hash")
-	print(weapon_dagger_hash)
 	local custom_dagger_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponDagger")
-	print("custom_dagger_hash")
+	
 	local current_dagger_overrides = rom.data.load_package_overrides_get(weapon_dagger_hash)
 
 	table.insert(current_dagger_overrides, 1, custom_dagger_hash)
@@ -240,11 +239,8 @@ if config.Alter_Textures == true then
 
 	--Importing Skull Textures
 	local weapon_skull_hash = rom.data.get_hash_guid_from_string("WeaponLob")
-	print("weapon_skull_hash")
-	print(weapon_skull_hash)
 	local custom_skull_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponLob")
-	print("AxeTest-WeaponLob")
-	print(custom_skull_hash)
+
 	local current_skull_overrides = rom.data.load_package_overrides_get(weapon_skull_hash)
 
 	table.insert(current_skull_overrides, 1, custom_skull_hash)
@@ -331,6 +327,8 @@ modutil.once_loaded.game(function()
 	-- import "Aspect_VFX.lua"	-- Adds new VFX for attacks, Inside Aspects_projectiles.lua
 	-- Adds new projectiles
 	import "Aspects_projectiles.lua"
+
+	import "Aspects_weapon_data.lua"
 
 	-- Adding Axe Aspect of Young Mel
 	AxeAspectofYoungMelinoe = {
@@ -422,78 +420,22 @@ modutil.once_loaded.game(function()
 		{
 			{
 				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "Projectile",
-				ChangeValue = "ProjectileAxeBlockSpin",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "ExpireProjectilesOnFire",
-				ChangeVlaue = "ProjectileAxeSpin",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "DoProjectileBlockPresentation",
-				ChangeVlaue = true,
-				ChangeType = "Absolute",
-			},
-			{	
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "DefaultKnockbackForce",
-				ChangeVlaue = 480,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "DefaultKnockbackScale",
-				ChangeVlaue = 0.6,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "ActiveProjectileCap",
-				ChangeValue = 1,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "FizzleOldSpawns",
-				ChangeValue = true,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "BlockedByAllOtherFireRequest",
-				ChangeValue = false,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "RootOwnerWhileFiring",
-				ChangeValue = true,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "FireFx",
-				ChangeValue = "null",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "FullyAutomatic",
-				ChangeValue = true,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "Cooldown",
-				ChangeValue = 0.4,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "AddOnFire",
-				ChangeValue = "WeaponAxeSpecialSwing",
-
+				WeaponProperties = {
+					Projectile = "ProjectileAxeBlockSpin",
+					ExpireProjectilesOnFire = "ProjectileAxeSpin",
+					DoProjectileBlockPresentation = true,
+					DefaultKnockbackForce = 480,
+					DefaultKnockbackScale = 0.6,
+					ActiveProjectileCap = 1,
+					FizzleOldSpawns = true,
+					BlockedByAllOtherFireRequest = false,
+					RootOwnerWhileFiring = true,
+					FireFx = "null",
+					FullyAutomatic = true,
+					Cooldown = 0.4,
+					AddOnFire = "WeaponAxeSpecialSwing",
+				},
+				ExcludeLinked = true,
 			},
 			{
 				WeaponName = "WeaponAxeSpecialSwing",
@@ -681,20 +623,12 @@ modutil.once_loaded.game(function()
 		{
 			{
 				WeaponName = "WeaponStaffBall",
-				WeaponProperty = "Projectile",
-				ChangeValue = "ProjectileStaffBoltEA",
-			},
-			{
-				WeaponName = "WeaponStaffBall",
-				WeaponProperty = "InitialCooldown",
-				ChangeValue = 0,
-				ChangeType = "Absolute",
-			},
-			{
-				WeaponName = "WeaponStaffBall",
-				WeaponProperty = "Cooldown",
-				ChangeValue = 0.4,
-				ChangeType = "Absolute",
+				WeaponProperties = {
+					Projectile = "ProjectileStaffBoltEA",
+					InitialCooldown = 0,
+					Cooldown = 0.4,
+				},
+				ExcludeLinked = true,
 			},
 		},
 		FlavorText = "StaffAspectofYoungMelinoe_FlavorText",
@@ -915,7 +849,7 @@ modutil.once_loaded.game(function()
 		{
 			ValidWeapons = WeaponSets.HeroPrimaryWeapons,
 			FunctionName = _PLUGIN.guid .. "." .. "ComboPresentation",
-			FirstHitOnly = false,
+			FirstHitOnly = true,
 			Args = {
 				test =''
 			},
@@ -943,13 +877,119 @@ modutil.once_loaded.game(function()
 	}
 
 	
+	TorchAspectofYoungMelinoe = {
+		InheritFrom = { "WeaponEnchantmentTrait" },
+		PreEquipWeapons = { "WeaponCastYM" },
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 0,
+			},
+			Rare =
+			{
+				Multiplier = 1,
+			},
+			Epic =
+			{
+				Multiplier = 1.5,
+			},
+			Heroic =
+			{
+				Multiplier = 2,
+			},
+			Legendary =
+			{
+				Multiplier = 2.5,
+			},
+			Perfect =
+			{
+				Multiplier = 4,
+			},
+		},
+		Icon = "Hammer_Torch_39",
+		RequiredWeapon = "WeaponTorch",
+		WeaponKitGrannyModel = "WeaponHecateMultiple_Mesh",
+		ReplacementGrannyModels = 
+		{
+			WeaponTorchR_Mesh = "WeaponTorchR_Mesh",
+			WeaponTorchL_Mesh = "WeaponTorchL_Mesh"
+		},
+		OnProjectileDeathFunction = {
+			Name = _PLUGIN.guid .. "." .. "FireCastAtLocationYM",
+			ValidProjectiles = { "ProjectileCastLobYM" },
+		},
+		--WeaponDataOverride = {
+		--	WeaponTorchSpecial = {
+		--		OnProjectileDeathFunction = _PLUGIN.guid .. "." .. "FireCastAtLocationYM",
+		--	},
+		--},
+		PropertyChanges =
+		{
+			{
+				WeaponName = "WeaponTorchSpecial",
+				WeaponProperties = {
+					Projectile = "ProjectileCastLobYM",
+					ActiveProjectileCap = 1,
+					--Cooldown = 2,
+					Cooldown = 0.2,
+					FireFx = "StaffProjectileFireFxRing",
+					FireGraphic = "Melinoe_Cast_Fire_Quick",
+					ChargeStartAnimation = "Melinoe_Cast_Start",
+					ChargeCancelGraphic = "Melinoe_Cast_Fire_Quick",
+					AutoLock = false,
+					AutoLockRange = 1200,
+					AutoLockArcDistance = 75,
+					LockTriggerForCharge =false,
+					FullyAutomatic = false,
+					BlockMoveInput = true,
+					RootOwnerWhileFiring = false,
+					TargetReticleAnimation = "CastProjectileReticle",
+					ShowFreeAimLine = true,
+					AimLineAnimation = "null",
+					ManualAiming = true,
+					ManualAimingInitialOffset = 420,
+					CancelMovement = true,
+					ChargeCancelMovement = true,
+					BarrelLength = 0,
+					RetainAimLocationWindow = 0.95,
+					ChargeStartFx = "CastFireBallCharge",
+					ChargeFinishFx = "null",
+					FailedToFireCooldownDuration = 0.1,
+					AllowMultiFireRequest = false,
+					SwapOnFire = "null",
+					WeaponRange = 500,
+					ProjectileSpacing = 0,
+					IgnoreOwnerAttackDisabled = true,
+					PriorityFireRequest = true,
+					IgnoreUnitChargeMultiplier = true,
+					FizzleOldSpawns = false,
+					ProjectileAngleStartOffset = 0,
+					ProjectileAngleOffset = 0,
+					ActiveProjectileCap2 = 0,
+					ActiveProjectileNameCap2 = "null",
+				},
+			},
+		},
+		StatLines = {
+			""
+		},
+	}
+
+	--OverwriteTableKeys( TraitSetData.Aspects.TorchSpecialDurationAspect, TorchAspectofYoungMelinoe)
+	
 	TraitData.StaffAspectofYoungMelinoe = StaffAspectofYoungMelinoe
 	TraitData.DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe
+	TraitData.TorchAspectofYoungMelinoe = TorchAspectofYoungMelinoe
 	TraitData.AxeAspectofYoungMelinoe = AxeAspectofYoungMelinoe
 	TraitData.SkullAspectofYoungMelinoe = SkullAspectofYoungMelinoe
 
+
 	--Adds the new traits to the in-game shop
 	import "Aspect_weaponshop.lua"
+
+	--Adding special boons for the torch
+	import "Aspect_Torch_boons.lua"
 
 	--Adds god specific VFX
 	import "Aspects_god_effects.lua"
@@ -957,4 +997,5 @@ modutil.once_loaded.game(function()
 	--Adds/removes Aspect specific hammers
 	import "Aspects_hammers.lua"
 
+	
 end)

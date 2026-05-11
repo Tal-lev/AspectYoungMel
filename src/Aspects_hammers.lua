@@ -140,81 +140,114 @@ end
 				},
 			},
 		},
+		TorchExSpecialCountTraitYM = 
+	{
+		InheritFrom = { "WeaponTrait", "TorchHammerTrait" },
+		Icon = "Hammer_Torch_30",
+		GameStateRequirements =
+		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorch", },
+			},
+			{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponTorch", },
+				IsAny = { "TorchAspectofYoungMelinoe" }
+			},
+		},
+		TorchSpecialCountIncrease = 1,
+		ChargeStageModifiers = 
+		{
+			ValidWeapons = { "WeaponTorchSpecial" },
+			IncreaseNumProjectiles =
+			{
+				NumProjectiles = 1,
+				ReportValues = { ReportedCount = "NumProjectiles" }
+			},
+			AddWeaponProperties = 
+			{
+				ProjectileAngleOffset = math.rad(360/3),
+			},
+		},
+		PropertyChanges = 
+		{
+			{
+				WeaponName = "WeaponTorchSpecial",
+				WeaponProperty = "NumProjectiles",
+				ChangeValue = 1,
+				ChangeType = "Add",
+			},
+			{
+				WeaponName = "WeaponTorchSpecial",
+				WeaponProperty = "ActiveProjectileCap",
+				ChangeValue = 1,
+				ChangeType = "Add",
+			},
+			{
+				WeaponName = "WeaponCastYM",
+				WeaponProperty = "ActiveProjectileCap",
+				ChangeValue = 1,
+				ChangeType = "Add",
+			},
+			{
+				WeaponName = "WeaponTorchSpecial",
+				WeaponProperty = "ProjectileAngleOffset",
+				ChangeValue = math.rad(-360/2),
+				ChangeType = "Absolute",
+			},
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedCount",
+				ExtractAs = "Count",
+			},
+		},
+	},
 	})
 
 -- Removing incompatible Hammers
-	OverwriteTableKeys(TraitData.AxeBlockEmpowerTrait.GameStateRequirements, {
-			{
-				Path = { "CurrentRun", "Hero", "Weapons", },
-				HasAll = { "WeaponAxe", },
-			},
-			{
-				Path = { "GameState", "LastWeaponUpgradeName", "WeaponAxe", },
-				IsNone = {"AxeAspectofYoungMelinoe", },
-			},
-		}
-	)
+table.insert(TraitData.AxeBlockEmpowerTrait.GameStateRequirements, {
+			Path = {"CurrentRun", "Hero", "TraitDictionary"},
+			HasNone = {"AxeAspectofYoungMelinoe", },
+})
 
-	OverwriteTableKeys(TraitData.DaggerAttackFinisherTrait.GameStateRequirements, {
-			{
-				Path = { "CurrentRun", "Hero", "Weapons", },
-				HasAll = { "WeaponDagger", },
-			},
-			{
-				Path = { "GameState", "LastWeaponUpgradeName", "WeaponDagger", },
-				IsNone = {"DaggerAspectofYoungMelinoe", }
-			},
-		}
-	)
+table.insert(TraitData.DaggerAttackFinisherTrait.GameStateRequirements, {
+			Path = {"CurrentRun", "Hero", "TraitDictionary"},
+			HasNone = {"DaggerAspectofYoungMelinoe", },
+})
 
-    OverwriteTableKeys(TraitData.DaggerDashAttackTripleTrait.GameStateRequirements, {
-			{
-				Path = { "CurrentRun", "Hero", "Weapons", },
-				HasAll = { "WeaponDagger", },
-			},
-			{
-				Path = { "GameState", "LastWeaponUpgradeName", "WeaponDagger", },
-				IsNone = { "DaggerTripleAspect", "DaggerAspectofYoungMelinoe", }
-			},
-		}
-	)
+table.insert(TraitData.DaggerDashAttackTripleTrait.GameStateRequirements, {
+			Path = {"CurrentRun", "Hero", "TraitDictionary"},
+			HasNone = {"DaggerAspectofYoungMelinoe", },
+})
 
-	OverwriteTableKeys(TraitData.LobAmmoMagnetismTrait.GameStateRequirements, {
-			{
-				Path = { "CurrentRun", "Hero", "Weapons", },
-				HasAll = { "WeaponLob", },
-			},
-			{
-				Path = { "CurrentRun", "Hero", "TraitDictionary", },
-				HasNone = { "LobPulseAmmoTrait" },
-			},
-			{
-				Path = { "GameState", "LastWeaponUpgradeName", "WeaponLob", },
-				IsNone = {"LobGunAspect", "SkullAspectofYoungMelinoe",}
-			}
-		}
-	)
+table.insert(TraitData.LobAmmoMagnetismTrait.GameStateRequirements, {
+			Path = {"CurrentRun", "Hero", "TraitDictionary"},
+			HasNone = {"SkullAspectofYoungMelinoe", },
+})	
 
-	OverwriteTableKeys(TraitData.LobPulseAmmoTrait.GameStateRequirements, {
-			{
-				Path = { "CurrentRun", "Hero", "Weapons", },
-				HasAll = { "WeaponLob", },
-			},
-			{
-				Path = { "CurrentRun", "Hero", "TraitDictionary", },
-				HasNone = { "LobAmmoMagnetismTrait" },
-			},
-			{
-				Path = { "GameState", "LastWeaponUpgradeName", "WeaponLob", },
-				IsNone = {"LobGunAspect", "SkullAspectofYoungMelinoe",}
-			},
-		}
-	)
+table.insert(TraitData.LobAmmoMagnetismTrait.GameStateRequirements, {
+			Path = {"CurrentRun", "Hero", "TraitDictionary"},
+			HasNone = {"SkullAspectofYoungMelinoe", },
+})	
+
+table.insert(TraitData.LobPulseAmmoTrait.GameStateRequirements, {
+			Path = {"CurrentRun", "Hero", "TraitDictionary"},
+			HasNone = {"SkullAspectofYoungMelinoe", },
+})	
+
+--Torch
+table.insert(TraitData.TorchExSpecialCountTrait.GameStateRequirements, {
+			Path = {"CurrentRun", "Hero", "TraitDictionary"},
+			HasNone = {"TorchAspectofYoungMelinoe", },
+})	
 	
-
 	--Adding Hammers to pool
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTrait")
     table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYoung")
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTrait")
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTrait")
+	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "TorchExSpecialCountTraitYM")
+	
 	
