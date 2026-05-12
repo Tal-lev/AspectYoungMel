@@ -16,7 +16,7 @@ end
 
 --Adding Hammers Traits
 	OverwriteTableKeys( TraitData, {
-	    AxeShieldDeflectTrait = 
+	    AxeShieldDeflectTraitYM = 
 		{
 			InheritFrom = { "WeaponTrait", "AxeHammerTrait" },
 			Icon = "JarlUlsfark-AspectYoungMel\\ShieldBlockIcon",
@@ -53,7 +53,7 @@ end
 				},
 			}
 		},
-        DaggerDashAttackTripleTraitYoung =
+        DaggerDashAttackTripleTraitYM =
         {
 		InheritFrom = { "WeaponTrait", "DaggerHammerTrait" },
 		Icon = "Hammer_Daggers_41",
@@ -107,7 +107,7 @@ end
 		}
 	    },
 		--Effect is in ready.lua mod.EscalateMagnetismYM()
-		LobExtendComboTrait = 
+		LobExtendComboTraitYM = 
 		{
 			InheritFrom = { "WeaponTrait", "LobHammerTrait" },
 			Icon = "JarlUlsfark-AspectYoungMel\\GameOnIcon",
@@ -124,7 +124,7 @@ end
 			},
 		},
 		--Effect is in ready.lua mod.ComboDamageMod()
-		LobComboScalingTrait = 
+		LobComboScalingTraitYM = 
 		{
 			InheritFrom = { "WeaponTrait", "LobHammerTrait" },
 			Icon = "JarlUlsfark-AspectYoungMel\\UltimateComboIcon",
@@ -140,10 +140,10 @@ end
 				},
 			},
 		},
-		TorchExSpecialCountTraitYM = 
+		ReflectiveCastTraitYM = 
 	{
 		InheritFrom = { "WeaponTrait", "TorchHammerTrait" },
-		Icon = "Hammer_Torch_30",
+		Icon = "JarlUlsfark-AspectYoungMel\\ReflectiveCastIcon",
 		GameStateRequirements =
 		{
 			{
@@ -155,46 +155,31 @@ end
 				IsAny = { "TorchAspectofYoungMelinoe" }
 			},
 		},
-		TorchSpecialCountIncrease = 1,
-		ChargeStageModifiers = 
-		{
+		OnWeaponFiredFunctions = {
 			ValidWeapons = { "WeaponTorchSpecial" },
-			IncreaseNumProjectiles =
-			{
-				NumProjectiles = 1,
-				ReportValues = { ReportedCount = "NumProjectiles" }
-			},
-			AddWeaponProperties = 
-			{
-				ProjectileAngleOffset = math.rad(360/3),
-			},
+			FunctionName = _PLUGIN.guid .. "." .. "FireLobBackYM",
 		},
 		PropertyChanges = 
 		{
-			{
-				WeaponName = "WeaponTorchSpecial",
-				WeaponProperty = "NumProjectiles",
-				ChangeValue = 1,
-				ChangeType = "Add",
-			},
-			{
-				WeaponName = "WeaponTorchSpecial",
-				WeaponProperty = "ActiveProjectileCap",
-				ChangeValue = 1,
-				ChangeType = "Add",
-			},
+			--{
+			--	WeaponName = "WeaponTorchSpecial",
+			--	WeaponProperty = "ActiveProjectileCap",
+			--	ChangeValue = 1,
+			--	ChangeType = "Add",
+			--	ReportValues = { ReportedCount = "ChangeValue" },
+			--},
 			{
 				WeaponName = "WeaponCastYM",
 				WeaponProperty = "ActiveProjectileCap",
-				ChangeValue = 1,
-				ChangeType = "Add",
-			},
-			{
-				WeaponName = "WeaponTorchSpecial",
-				WeaponProperty = "ProjectileAngleOffset",
-				ChangeValue = math.rad(-360/2),
+				ChangeValue = 2,
 				ChangeType = "Absolute",
 			},
+			--{
+			--	WeaponName = "WeaponTorchSpecial",
+			--	WeaponProperty = "ProjectileAngleOffset",
+			--	ChangeValue = math.rad(-360/2),
+			--	ChangeType = "Absolute",
+			--},
 		},
 		ExtractValues =
 		{
@@ -244,10 +229,10 @@ table.insert(TraitData.TorchExSpecialCountTrait.GameStateRequirements, {
 })	
 	
 	--Adding Hammers to pool
-	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTrait")
-    table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYoung")
-	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTrait")
-	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTrait")
-	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "TorchExSpecialCountTraitYM")
+	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTraitYM")
+    table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYM")
+	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTraitYM")
+	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTraitYM")
+	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "ReflectiveCastTraitYM")
 	
 	

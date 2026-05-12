@@ -2,6 +2,7 @@
 local newKeywords = {
 	"AxeRetaliate",
 	"Combo",
+	"Special_Cast",
 }
 game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
@@ -40,7 +41,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
-			Id = "AxeShieldDeflectTrait",
+			Id = "AxeShieldDeflectTraitYM",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Mirror Shield",
 			Description = "Your {$Keywords.Special} can {$Keywords.Deflect}"
@@ -51,7 +52,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
-			Id = "DaggerDashAttackTripleTraitYoung",
+			Id = "DaggerDashAttackTripleTraitYM",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Wooden Trick Knives",
 			Description = "Your {$Keywords.DashStrike} also fires your {$Keywords.Special} {#UpgradeFormat}{$TooltipData.ExtractData.Count} {#Prev}times at once in a fan pattern."
@@ -62,7 +63,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
-			Id = "LobExtendComboTrait",
+			Id = "LobExtendComboTraitYM",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Game On",
 			Description = "Your {$Keywords.Combo} takes longer to reset."
@@ -73,10 +74,21 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
-			Id = "LobComboScalingTrait",
+			Id = "LobComboScalingTraitYM",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Ultimate Combo",
 			Description = "Increased damage scaling at high {$Keywords.Combo}."
+
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "ReflectiveCastTraitYM",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Reflective Cast",
+			Description = "Your {$Keywords.Special_Cast} is reflected from behind."
 
 		},
 		TextOrder)
@@ -150,10 +162,68 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
+			Id = "Special_Cast",
+			DisplayName = "Special-Cast",
+			Description = "Your {$Keywords.Special} creates an additional {$Keywords.Cast}.",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "TorchAspectofYoungMelinoe",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Aspect of young Melinoë",
+			Description = "Your {$Keywords.Special} fires a {$Keywords.Special_Cast}."
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "TorchAspectofYoungMelinoe_Shop",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Umbral Flames, Aspect of Young Melinoë:",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "TorchAspectofYoungMelinoe_Upgrade",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+		Id = "TorchAspectofYoungMelinoe_FlavorText",
+		InheritFrom = "BaseBoonMultiline",
+		DisplayName = "Stop flinging your juice around the crossroads.",
+	},
+	TextOrder)
+	)
+
+	
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "TorchAspectYoungMelStat",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Olympian Bonus Damage:",
+			Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.OlympicBoonsYM}%"
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
 			Id = "AxeAspectofYoungMelinoe",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Aspect of young Melinoë",
-			Description = "{$Keywords.Special} Block grants {$Keywords.AxeRetaliate}."
+			Description = "Your {$Keywords.Special} Block grants {$Keywords.AxeRetaliate}."
 		},
 		TextOrder)
 	)
@@ -267,6 +337,97 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 			DisplayName = "The will of Night is never to be chronicled, but rarely, on moonless nights, it is dodgeball."
 		},
 		TextOrder)
+	)
+
+	--Torch boons
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "ZeusCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Storm Ring",
+      Description = "Your {$Keywords.Special_Cast} cause lightning bolts to repeatedly strike {#BoldFormatGraft}1 {#Prev}foe at a time in the binding circle.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "HeraCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Engagement Ring",
+      Description = "Your {$Keywords.Special_Cast} inflict {$Keywords.Link} and immediately deal damage based on foes in the binding circle.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "PoseidonCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Tidal Ring",
+      Description = "Your {$Keywords.Special_Cast} also immediately hit foes with a powerful splash that inflicts {$Keywords.KnockbackAmplify}.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "DemeterCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Arctic Ring",
+      Description = "Your {$Keywords.Special_Cast} inflict {$Keywords.Root} and repeatedly deal damage to foes in the binding circle.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "ApolloCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Solar Ring",
+      Description = "Your {$Keywords.Special_Cast} inflict {$Keywords.Blind}, and deal a burst of damage before they expire.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "AphroditeCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Rapture Ring",
+      Description = "Your {$Keywords.Special_Cast} inflict {$Keywords.Weak}, and damage foes while dragging them toward the center.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "HephaestusCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Anvil Ring",
+      Description = "Your {$Keywords.Special_Cast} deal damage {$TooltipData.ExtractData.Detonations} times in succession to foes in the binding circle.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "HestiaCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Smolder Ring",
+      Description = "Your {$Keywords.Special_Cast} repeatedly inflict {$Keywords.Burn} on foes in the binding circle.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "AresCastBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Sword Ring" ,
+      Description = "Your {$Keywords.Special_Cast} create a falling blade over each foe in the binding circle."
+    },
+	TextOrder)
 	)
 
 	return data

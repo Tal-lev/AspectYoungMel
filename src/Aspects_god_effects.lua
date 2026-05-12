@@ -50,6 +50,9 @@ end
 --Starting to add god_effects
 
 --RemoveWeaponPropertyFromTraits("WeaponAxeSpecial", "FireFx")
+RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "Graphic")
+RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "DetonateFx")
+RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 	-- At TraitData_God.lua
 	AddGodTraitProperty({
 		TraitSuffix = "SpecialBoon",
@@ -131,30 +134,36 @@ end
 				ChangeType = "Absolute",
 				ExcludeLinked = true,
 			},
+		}
+	})
+
+	AddGodTraitProperty({
+		TraitSuffix = "CastBoonYM",
+		PropertyChanges = {
 			-- Torches Aspect of young Mel special 
-			--{
-			--	WeaponName = "WeaponCastYM",
-			--	ProjectileName = "ProjectileCastYM",
-			--	ProjectileProperty = "Graphic",
-			--	ValuePrefix = "CastCircleIn_",
-			--	ChangeType = "Absolute",
-			--	ExcludeLinked = true,
-			--},
-			--{
-			--	WeaponName = "WeaponCastYM",
-			--	ProjectileName = "ProjectileCastYM",
-			--	ProjectileProperty = "DetonateFx",
-			--	ValuePrefix = "CastCircleOut_",
-			--	ChangeType = "Absolute",
-			--	ExcludeLinked = true,
-			--},
-			--{
-			--	WeaponName = "WeaponCastYM",
-			--	ProjectileName = "ProjectileCastYM",
-			--	ProjectileProperty = "ImpactFx",
-			--	ValuePrefix = "CastCircleUnitFxFront_",
-			--	ChangeType = "Absolute",
-			--	ExcludeLinked = true,
-			--},
+			{
+				WeaponName = "WeaponCastYM",
+				ProjectileName = "ProjectileCastYM",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "CastCircleIn",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponCastYM",
+				ProjectileName = "ProjectileCastYM",
+				ProjectileProperty = "DetonateFx",
+				ValuePrefix = "CastCircleOut",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponCastYM",
+				ProjectileName = "ProjectileCastYM",
+				ProjectileProperty = "ImpactFx",
+				ValuePrefix = "CastCircleUnitFxFront",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
 		}
 	})

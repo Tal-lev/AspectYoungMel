@@ -114,7 +114,7 @@ OverwriteTableKeys( TraitData,{
             },
             OnWeaponFiredFunctions =
             {
-                ValidWeapons = { "WeaponCastYM" },
+                ValidWeapons = { "WeaponCastYM", "WeaponCastHammerYM" },
                 FunctionName = _PLUGIN.guid .. "." .. "OnZeusCastYM",
                 FunctionArgs = 
                 {
@@ -202,7 +202,7 @@ OverwriteTableKeys( TraitData,{
 		},
 		OnWeaponFiredFunctions =
 		{
-			ValidWeapons = { "WeaponCastYM" },
+			ValidWeapons = { "WeaponCastYM", "WeaponCastHammerYM" },
 			FunctionName = _PLUGIN.guid .. "." .. "HeraCastCountBlastYM",
 			FunctionArgs =
 			{
@@ -338,7 +338,7 @@ OverwriteTableKeys( TraitData,{
 
 		OnWeaponFiredFunctions = 
 		{
-			ValidWeapons = { "WeaponCastYM" },
+			ValidWeapons = { "WeaponCastYM", "WeaponCastHammerYM" },
 			ExcludeLinked = true,
 			FunctionName = "CheckPoseidonCastSplash",
 			FunctionArgs = 
@@ -454,7 +454,7 @@ DemeterCastBoonYM =
 		},
 		OnWeaponFiredFunctions =
 		{
-			ValidWeapons = { "WeaponCastYM" },
+			ValidWeapons = { "WeaponCastYM", "WeaponCastHammerYM" },
 			ExcludeLinked = true,
 			FunctionName = "ContinuousDemeterCast",
 			FunctionArgs = 
@@ -628,7 +628,7 @@ DemeterCastBoonYM =
 		},
 		OnWeaponFiredFunctions =
 		{
-			ValidWeapons = { "WeaponCastYM" },
+			ValidWeapons = { "WeaponCastYM", "WeaponCastHammerYM" },
 			FunctionName = "ApolloDelayedBlast",
 			FunctionArgs =
 			{
@@ -752,7 +752,7 @@ DemeterCastBoonYM =
 		},
 		OnWeaponFiredFunctions =
 		{
-			ValidWeapons = { "WeaponCastYM" },
+			ValidWeapons = { "WeaponCastYM", "WeaponCastHammerYM" },
 			FunctionName = _PLUGIN.guid .. "." .. "CheckProjectilePullYM",
 			FunctionArgs = 
 			{
@@ -885,7 +885,7 @@ DemeterCastBoonYM =
 		},
 		OnWeaponFiredFunctions =
 		{
-			ValidWeapons = { "WeaponCastYM" },
+			ValidWeapons = { "WeaponCastYM", "WeaponCastHammerYM" },
 			ExcludeLinked = true,
 			FunctionName = "IntermittentHephCastStrike",
 			FunctionArgs = 

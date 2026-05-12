@@ -1,9 +1,28 @@
 --Default
 function mod.FireCastAtLocationYM( triggerArgs )
+	local WeaponToFire = ""
+	local WeaponToFireSecond = ""
 	if triggerArgs.LocationX and triggerArgs.LocationY then
+		if triggerArgs.name == "ProjectileCastLobYM" then
+			WeaponToFire = "WeaponCastYM"
+			WeaponToFireSecond = "WeaponCastHammerYM"
+		elseif triggerArgs.name == "ProjectileCastLobChargeYM" then
+			WeaponToFire = "WeaponCastArmYM"
+			WeaponToFireSecond = "WeaponCastArmHammerYM"
+		end
+		print("WeaponToFire !!!!!")
+		print(WeaponToFire)
 		local dropLocation = SpawnObstacle({ Name = "InvisibleTarget", LocationX = triggerArgs.LocationX, LocationY = triggerArgs.LocationY  })
-		FireWeaponFromUnit({ Weapon = "WeaponCastYM", Id = CurrentRun.Hero.ObjectId, DestinationId = dropLocation, FireFromTarget = true, Angle = fireAngle })
+		FireWeaponFromUnit({ Weapon = WeaponToFire, Id = CurrentRun.Hero.ObjectId, DestinationId = dropLocation, FireFromTarget = true, Angle = fireAngle })
 		Destroy({Id = dropLocation })
+		if HeroHasTrait("ReflectiveCastTraitYM") then
+			local heroLocation = GetLocation({ Id = CurrentRun.Hero.ObjectId })
+			local newlocal_X = heroLocation.X - triggerArgs.LocationX + heroLocation.X
+			local newlocal_Y = heroLocation.Y - triggerArgs.LocationY + heroLocation.Y
+			local dropLocation2 = SpawnObstacle({ Name = "InvisibleTarget", LocationX = newlocal_X, LocationY = newlocal_Y  })
+			FireWeaponFromUnit({ Weapon = WeaponToFireSecond, Id = CurrentRun.Hero.ObjectId, DestinationId = dropLocation2, FireFromTarget = true, Angle = fireAngle })
+			Destroy({Id = dropLocation2 })
+		end
 	end 		
 end
 
@@ -28,7 +47,7 @@ function mod.WeaponCastFiredYM( owner, weaponData, args, triggerArgs)
 		thread(CheckCastCompleteGraphic, weaponData)
 	end
 	if SessionMapState.ArmCast then
-		RunWeaponMethod({ Id = CurrentRun.Hero.ObjectId, Weapon = "WeaponCastArm", Method = "ArmProjectiles" })
+		RunWeaponMethod({ Id = CurrentRun.Hero.ObjectId, Weapon = "WeaponCastArmYM", Method = "ArmProjectiles" })
 		SessionMapState.ArmCast = nil
 		local interestedTraits = 
 		{

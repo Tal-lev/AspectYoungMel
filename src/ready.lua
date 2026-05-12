@@ -139,13 +139,13 @@ function mod.EscalateMagnetismYM( consumable )
 	end
 	CreateAnimation({ Name = "AmmoReturnTimer", DestinationId = consumable.ObjectId })
 	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe")
-	if trait.Combo ~= 0 and not HeroHasTrait("LobExtendComboTrait") then
+	if trait.Combo ~= 0 and not HeroHasTrait("LobExtendComboTraitYM") then
 		trait.Combo = 0
 		mod.ComboPresentationCancel(CurrentRun.Hero.ObjectId)
 	end
 	wait( consumable.MagnetismHintRemainingTime, RoomThreadName )
 	SetObstacleProperty({ Property = "Magnetism", Value = consumable.MagnetismEscalateAmount, DestinationId = consumable.ObjectId })
-	if trait.Combo ~= 0 and HeroHasTrait("LobExtendComboTrait") then
+	if trait.Combo ~= 0 and HeroHasTrait("LobExtendComboTraitYM") then
 		trait.Combo = 0
 		mod.ComboPresentationCancel(CurrentRun.Hero.ObjectId)
 	end
@@ -188,13 +188,13 @@ function mod.ComboDamageMod(weaponData, functionArgs, triggerArgs)
 	if trait.Combo >= 2 and trait.Combo <= 10 then
   		trait.ComboDamageMod = Multi * (trait.Combo -1) +1
 	end  
-	if (trait.Combo > 10 and trait.Combo <= 20) or (trait.Combo > 20 and HeroHasTrait("LobComboScalingTrait")) then
+	if (trait.Combo > 10 and trait.Combo <= 20) or (trait.Combo > 20 and HeroHasTrait("LobComboScalingTraitYM")) then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * (trait.Combo -11)) + 1
 	end
-	if trait.Combo > 20 and trait.Combo <= 30 and not HeroHasTrait("LobComboScalingTrait") then
+	if trait.Combo > 20 and trait.Combo <= 30 and not HeroHasTrait("LobComboScalingTraitYM") then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * (trait.Combo -21)) + 1
 	end
-	if trait.Combo > 30 and not HeroHasTrait("LobComboScalingTrait") then
+	if trait.Combo > 30 and not HeroHasTrait("LobComboScalingTraitYM") then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * 10) + (Multi / 8 * (trait.Combo -31)) + 1
 	end
 end
@@ -701,7 +701,7 @@ modutil.once_loaded.game(function()
 							Shell = "/SFX/ShellImpact",
 						}
 					},
-			}
+			},
 		},
 		PropertyChanges =
 		{
@@ -879,35 +879,35 @@ modutil.once_loaded.game(function()
 	
 	TorchAspectofYoungMelinoe = {
 		InheritFrom = { "WeaponEnchantmentTrait" },
-		PreEquipWeapons = { "WeaponCastYM" },
+		PreEquipWeapons = { "WeaponCastYM", "WeaponCastHammerYM", "WeaponCastArmYM",  "WeaponCastArmHammerYM"},
 		RarityLevels =
 		{
 			Common =
 			{
-				Multiplier = 0,
+				Multiplier = 1.05,
 			},
 			Rare =
 			{
-				Multiplier = 1,
+				Multiplier = 1.1,
 			},
 			Epic =
 			{
-				Multiplier = 1.5,
+				Multiplier = 1.15,
 			},
 			Heroic =
 			{
-				Multiplier = 2,
+				Multiplier = 1.2,
 			},
 			Legendary =
 			{
-				Multiplier = 2.5,
+				Multiplier = 1.25,
 			},
 			Perfect =
 			{
-				Multiplier = 4,
+				Multiplier = 1.4,
 			},
 		},
-		Icon = "Hammer_Torch_39",
+		Icon = "JarlUlsfark-AspectYoungMel\\TorchAspectYoungMelIcon",
 		RequiredWeapon = "WeaponTorch",
 		WeaponKitGrannyModel = "WeaponHecateMultiple_Mesh",
 		ReplacementGrannyModels = 
@@ -917,13 +917,39 @@ modutil.once_loaded.game(function()
 		},
 		OnProjectileDeathFunction = {
 			Name = _PLUGIN.guid .. "." .. "FireCastAtLocationYM",
-			ValidProjectiles = { "ProjectileCastLobYM" },
+			ValidProjectiles = { "ProjectileCastLobYM", "ProjectileCastLobChargeYM" },
 		},
-		--WeaponDataOverride = {
-		--	WeaponTorchSpecial = {
-		--		OnProjectileDeathFunction = _PLUGIN.guid .. "." .. "FireCastAtLocationYM",
-		--	},
-		--},
+		WeaponDataOverride = {
+			WeaponTorchSpecial = {
+				OnProjectileDeathFunction = "null",
+				ChargeWeaponStages = 
+				{
+					{
+						ManaCost = 0,
+						--ManaCost = 25,
+						Wait = 0.925,
+						ChannelSlowEventOnStart = true,
+						ForceRelease = true,
+						WeaponProperties =
+						{
+							Projectile = "ProjectileCastLobYM",
+							--Projectile = "ProjectileCastLobChargeYM",
+							NumProjectiles = 1,
+							ProjectileAngleStartOffset = 0,
+							ProjectileAngleOffset = 0,
+							FireGraphic = "Melinoe_Torch_Special1Ex_Fire",
+							FireFx = "null",
+							AdditionalProjectileWaveChance = 0,
+						},
+						ProjectileProperties = 
+						{
+							ArcEnd = 0,
+						},
+						CompleteObjective = "WeaponTorchSpecialCharged",
+					},
+				},
+			},
+		},
 		PropertyChanges =
 		{
 			{
@@ -931,8 +957,7 @@ modutil.once_loaded.game(function()
 				WeaponProperties = {
 					Projectile = "ProjectileCastLobYM",
 					ActiveProjectileCap = 1,
-					--Cooldown = 2,
-					Cooldown = 0.2,
+					Cooldown = 2,
 					FireFx = "StaffProjectileFireFxRing",
 					FireGraphic = "Melinoe_Cast_Fire_Quick",
 					ChargeStartAnimation = "Melinoe_Cast_Start",
@@ -970,10 +995,49 @@ modutil.once_loaded.game(function()
 					ActiveProjectileNameCap2 = "null",
 				},
 			},
+			{
+				WeaponName = "WeaponTorch",
+				ProjectileName = "ProjectileTorchBall",
+				ProjectileProperty = "Graphic",
+				ChangeValue = "DionysusLobProjectile",
+			},
+			{
+				WeaponName = "WeaponTorch",
+				ProjectileName = "ProjectileTorchWave",
+				ProjectileProperty = "Graphic",
+				ChangeValue = "PoseidonSprintBallIn",
+			},
+			{
+				WeaponName = "WeaponTorch",
+				ProjectileName = "ProjectileTorchWave",
+				ProjectileProperty = "AttachedAnim",
+				ChangeValue = "MedusaShadow",
+			},
+		},
+		AddOutgoingDamageModifiersArray = 
+		{
+			{
+				ValidProjectiles = WeaponSets.OlympianProjectileNames,
+				ValidWeaponMultiplier = {BaseValue = 1},
+				ReportValues = { ReportedMultiplier = "ValidWeaponMultiplier"}
+			},
+			{
+				ValidEffects = WeaponSets.OlympianEffectNames,
+				ValidWeaponMultiplier = {BaseValue = 1},
+			}
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedMultiplier",
+				ExtractAs = "OlympicBoonsYM",
+				Format = "PercentDelta",
+			},
 		},
 		StatLines = {
-			""
+			"TorchAspectYoungMelStat"
 		},
+		FlavorText = "TorchAspectofYoungMelinoe_FlavorText",
 	}
 
 	--OverwriteTableKeys( TraitSetData.Aspects.TorchSpecialDurationAspect, TorchAspectofYoungMelinoe)

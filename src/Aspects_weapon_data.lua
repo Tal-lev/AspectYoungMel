@@ -105,4 +105,60 @@ WeaponCastYM =
 		Using = { EffectNames = { "ImpactSlowYM", "ImpactGripYM" }, WeaponName = "WeaponCastProjectileHades" },
 	}
 
+WeaponCastArmYM =
+	{
+		UpgradeChoiceText = "UpgradeChoiceMenu_Ranged",
+		ManaCost = 15,
+		HideChargeDuration = 0.25,
+		--ManaChargeStartAnimation = "Melinoe_Cast_Start",
+		HideOutOfManaPresentation = true,
+		FireScreenshake = { Distance = 3, Speed = 1000, Duration = 0.05, FalloffSpeed = 3000 },
+		
+		OnFiredFunctionNames = { "CastArmedFunction", },
+		RepeatFailToFireFunction = true,
+
+		OnChargeFunctionNames = {},
+		ChargeWeaponData = {},
+		ChargeWeaponStages = {},
+
+		FireRumbleParameters =
+		{
+			{ ScreenPreWait = 0.06, Fraction = 0.21, Duration = 0.21 },
+		},
+		
+		SpeedPropertyChanges = 
+		{
+			{
+				WeaponProperty = "ChargeTime",
+			},
+		},
+		Sounds =
+		{
+			FireSounds =
+			{
+				{ Name = "/VO/MelinoeEmotes/EmotePowerAttackingStaff" },
+				{ Name = "/Leftovers/SFX/AuraThrowSmall" },
+			},
+
+			ImpactSounds =
+			{
+				Invulnerable = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+				Armored = "/SFX/Player Sounds/ZagreusShieldRicochet",
+				Bone = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+				Brick = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+				Stone = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+				Organic = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+				StoneObstacle = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+				BrickObstacle = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+				MetalObstacle = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+				BushObstacle = "/SFX/Player Sounds/ZagreusBloodshotImpact",
+			},
+		},
+
+		SelfMultiplier = 0,
+	}
+
 WeaponData.WeaponCastYM = WeaponCastYM
+WeaponData.WeaponCastHammerYM = WeaponCastYM
+WeaponData.WeaponCastArmYM = WeaponCastArmYM
+WeaponData.WeaponCastArmHammerYM = WeaponCastArmYM
