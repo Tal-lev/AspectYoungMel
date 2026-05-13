@@ -4,7 +4,7 @@ Adding aspects of Young Melinoe.
 
 ## Features
 
-Adds four aspects of Young Melinoë
+Adds five aspects of Young Melinoë
 
 ### Staff Aspect of Young Melinoë
 
@@ -23,6 +23,16 @@ Adds four aspects of Young Melinoë
    
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/DaggerAspect.png" alt="PonyDressList" width="60%">
+</div>
+
+### Torches Aspect of Young Melinoë 
+
+- Replaces the special with a lobbed projectile which casts Special-Cast, an additional cast.
+- Replaces all special boons for the aspect to influence the Special-Cast.
+- Trait increases damage from Olympian curses
+
+<div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/TorchAspect.png" alt="PonyDressList" width="60%">
 </div>
 
 ### Axe Aspect of Young Melinoë 
@@ -46,7 +56,11 @@ Adds four aspects of Young Melinoë
 ## Known Issues / To do list
 
 - Add aspect texture insead of replacing original textures (temp fix made replacement optional).
-- Add Aspects of Young Melinoë for Torches / Suit 
+- Add Aspects of Young Melinoë for Suit
+- Torches Special-Cast god boons replaces the Special-Cast graphic only after room-transition.
+- Omega Special-Cast is not implemented.
+- Hestia Cast effect leaks between Special-Cast and regular Cast
+- Ares's Special-Cast effect does not stack with the reflected Special-Cast when using Reflective Cast hammer.
 
 ## Installation
 
