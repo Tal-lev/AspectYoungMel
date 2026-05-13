@@ -926,8 +926,8 @@ modutil.once_loaded.game(function()
 				{
 					{
 						ManaCost = 0,
-						--ManaCost = 25,
-						Wait = 0.925,
+						--ManaCost = 15,
+						Wait = 0.8,
 						ChannelSlowEventOnStart = true,
 						ForceRelease = true,
 						WeaponProperties =
