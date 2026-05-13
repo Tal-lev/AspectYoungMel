@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added Torches Aspect of Young Melinoë
+  - Replaces the special with a lobbed projectile which casts Special-Cast, an additional cast.
+  - Replaces all special boons for the aspect to influence the Special-Cast.
+  - Adds boons for secondary effects on Special-Cast
+  - Trait increases damage from Olympian curses
 - Added Skull hammer "UltimateCombo"
 - DEV: merging WeaponProperty to WeaponProperties
 - DEV: Changing overwrite requirement of existing hammers to table.insert
