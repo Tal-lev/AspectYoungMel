@@ -30,6 +30,7 @@ Adds five aspects of Young Melinoë
 - Replaces the special with a lobbed projectile which casts Special-Cast, an additional cast.
 - Replaces all special boons for the aspect to influence the Special-Cast.
 - Trait increases damage from Olympian curses
+- Introduces a new hammer.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/TorchAspect.png" alt="PonyDressList" width="60%">
@@ -39,6 +40,7 @@ Adds five aspects of Young Melinoë
 
 - Replaces the special with Block similar to the Early Access.
 - Trait temporarily increases attack damage after blocking with special.
+- Introduces a new hammer.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="60%">
@@ -47,7 +49,8 @@ Adds five aspects of Young Melinoë
 ### Skull Aspect of Young Melinoë 
 
 - Trait consecutive attacks grant Combo, a stacking buff that is lost when failing to retrieve ammo.
-- Reduces Ammo magnetism and increased ammo drop spread  
+- Reduces Ammo magnetism and increased ammo drop spread
+- Introduces two new hammers.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
   <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/SkullAspect.png" alt="PonyDressList" width="60%">
