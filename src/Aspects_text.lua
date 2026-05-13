@@ -430,5 +430,46 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 	TextOrder)
 	)
 
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "SpawnCastDamageBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Rousing Reception",
+      Description = "Your {$Keywords.Special_Cast} damage any foes as they join the {$Keywords.EncounterAlt}, wherever they appear.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "CastNovaBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Arctic Gale",
+      Description = "Your {$Keywords.Special_Cast} also create a {$Keywords.SlowField} around the binding circle.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "ApolloManaBoonYM",
+      DisplayName = "Special Lucid Gain",
+      Description = "Whenever your {$Keywords.Special_Cast} expire, restore {!Icons.Mana}.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "BurnSprintBoonYM",
+      InheritFrom = "BaseBoonMultiline",
+      DisplayName = "Special Fire Away",
+      Description = "Your {$Keywords.Special_Cast} destroy many foes' ranged shots, and inflict {$Keywords.Burn} on the attacking foes.",
+    },
+	TextOrder)
+	)
+
+
+
 	return data
 	end)

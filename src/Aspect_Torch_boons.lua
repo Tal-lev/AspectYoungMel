@@ -68,6 +68,10 @@ OverwriteTableKeys( TraitData,{
             GameStateRequirements =
             {
                 {
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+				},
+				{
                     Path = {"CurrentRun", "Hero", "TraitDictionary"},
                     HasAll = {"TorchAspectofYoungMelinoe"}
                 },
@@ -167,6 +171,10 @@ OverwriteTableKeys( TraitData,{
         BoonInfoIgnoreRequirements = true,
 		GameStateRequirements =
 		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
 			{
 				Path = {"CurrentRun", "Hero", "TraitDictionary"},
                 HasAll = {"TorchAspectofYoungMelinoe"}
@@ -274,6 +282,133 @@ OverwriteTableKeys( TraitData,{
 			},
 		}
 	},
+
+	SpawnCastDamageBoonYM = 
+	{
+		Icon = "Boon_Hera_48",
+		InheritFrom = { "BaseTrait", "AirBoon" },
+		BoonInfoIgnoreRequirements = true,
+		GameStateRequirements =
+		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
+			{
+				Path = {"CurrentRun", "Hero", "TraitDictionary"},
+                HasAll = {"TorchAspectofYoungMelinoe"}
+			},
+		},
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 1.00,
+			},
+			Rare =
+			{
+				Multiplier = 4/3,
+			},
+			Epic =
+			{
+				Multiplier = 5/3,
+			},
+			Heroic =
+			{
+				Multiplier = 6/3,
+			},
+		},
+		OnEnemySpawnFunction =
+		{
+			FunctionName = _PLUGIN.guid .. "." .. "CheckCastSummonDamageYM",
+			Args = 
+			{
+				ProjectileName = "HeraCastSummonProjectile",
+				DamageMultiplier = 
+				{ 
+					BaseValue = 1,
+					AbsoluteStackValues = 
+					{
+						[1] = 0.50,
+						[2] = 0.25,
+						[3] = 0.20,
+						--[4] = 0.10,
+					},
+				},
+				ReportValues = 
+				{
+					ReportedMultiplier = "DamageMultiplier",
+				}
+			},
+		},
+		PropertyChanges =
+		{	
+			{
+				WeaponName = "WeaponCastYM",
+				ProjectileProperties = 
+				{
+					Graphic = "CastCircleInHera",
+				}
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
+				ProjectileProperties = 
+				{
+					Graphic = "CastCircleInHera",
+				}
+			},
+			{
+				WeaponName = "WeaponCastYM",
+				ProjectileName = "ProjectileCast",
+				ProjectileProperties = 
+				{
+					DetonateFx = "CastCircleOutHera",
+				}
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
+				ProjectileName = "ProjectileCast",
+				ProjectileProperties = 
+				{
+					DetonateFx = "CastCircleOutHera",
+				}
+			},
+		},
+		StatLines = 
+		{
+			"CastSpawnDamageDisplay1",
+		},
+		ExtractValues = 
+		{
+			{
+				Key = "ReportedMultiplier",
+				Format = "MultiplyByBase",
+				BaseType = "Projectile",
+				BaseName = "HeraCastSummonProjectile",
+				BaseProperty = "Damage",
+				ExtractAs = "Damage",
+			},
+			{
+				ExtractAs = "DamageShareDuration",
+				SkipAutoExtract = true,
+				External = true,
+				BaseType = "EffectData",
+				BaseName = "DamageShareEffect",
+				BaseProperty = "Duration",
+			},
+			{
+				ExtractAs = "DamageShareAmount",
+				SkipAutoExtract = true,
+				External = true,
+				BaseType = "EffectData",
+				BaseName = "DamageShareEffect",
+				BaseProperty = "Amount",
+				Format = "Percent",
+				HideSigns = true,
+			},
+		}
+	},
+
 -- Poseidon
     PoseidonCastBoonYM =
 	{
@@ -282,6 +417,10 @@ OverwriteTableKeys( TraitData,{
         BoonInfoIgnoreRequirements = true,
 		GameStateRequirements =
 		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
 			{
 				Path = {"CurrentRun", "Hero", "TraitDictionary"},
                 HasAll = {"TorchAspectofYoungMelinoe"}
@@ -408,6 +547,10 @@ DemeterCastBoonYM =
         BoonInfoIgnoreRequirements = true,
 		GameStateRequirements =
 		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
 			{
 				Path = {"CurrentRun", "Hero", "TraitDictionary"},
                 HasAll = {"TorchAspectofYoungMelinoe"}
@@ -546,6 +689,134 @@ DemeterCastBoonYM =
 			},
 		},
 	},
+
+	CastNovaBoonYM =
+	{
+		InheritFrom = { "BaseTrait", "WaterBoon" },
+		Icon = "Boon_Demeter_32",
+		God = "Demeter",
+		BoonInfoIgnoreRequirements = true,
+		GameStateRequirements =
+		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
+			{
+				Path = {"CurrentRun", "Hero", "TraitDictionary"},
+                HasAll = {"TorchAspectofYoungMelinoe"}
+			},
+		},
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 1.00,
+			},
+			Rare =
+			{
+				Multiplier = 2,
+			},
+			Epic =
+			{
+				Multiplier = 3,
+			},
+			Heroic =
+			{
+				Multiplier = 4,
+			},
+		},		
+
+		OnEnemyDamagedAction = 
+		{
+			ValidProjectiles = { "DemeterCastStorm" },
+			EffectName = "LegacyChillEffect",
+		},
+		OnWeaponFiredFunctions =
+		{
+			ValidWeapons = { "WeaponCastYM" },
+			FunctionName = _PLUGIN.guid .. "." .. "DemeterCastBlastYM",
+			FunctionArgs =
+			{
+				ProjectileNames = {"DemeterCastStorm"},
+				MaxProjectiles = 1,
+				StartDelay = 0.2,
+				DamageMultiplier = 
+				{ 
+					BaseValue = 1.0,
+					AbsoluteStackValues = 
+					{
+						[1] = 0.5,
+						[2] = 0.5,
+						[3] = 0.25,
+					},
+				},
+				BlastRadiusMultiplier = 1,
+				ReportValues = { ReportedMultiplier = "DamageMultiplier"},
+			},
+		},
+		StatLines =
+		{
+			"StormDamageStatDisplay",
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedMultiplier",
+				ExtractAs = "Damage",
+				Format = "MultiplyByBase",
+				BaseType = "Projectile",
+				BaseName = "DemeterCastStorm",
+				BaseProperty = "Damage",
+			},
+			{
+				ExtractAs = "Duration",
+				External = true,
+				BaseType = "ProjectileBase",
+				BaseName = "DemeterCastStorm",
+				BaseProperty = "TotalFuse",
+				DecimalPlaces = 2,
+				SkipAutoExtract = true,
+			},
+			{
+				ExtractAs = "ProjectileSlow",
+				External = true,
+				BaseType = "ProjectileBase",
+				BaseName = "DemeterSprintDefense",
+				BaseProperty = "SpeedMultiplierOfEnemyProjectilesInside",
+				Format = "NegativePercentDelta",
+				SkipAutoExtract = true,
+			},
+			{
+				ExtractAs = "Fuse",
+				External = true,
+				BaseType = "ProjectileBase",
+				BaseName = "DemeterCastStorm",
+				BaseProperty = "Fuse",
+				DecimalPlaces = 2,
+				SkipAutoExtract = true,
+			},
+			{
+				ExtractAs = "ChillAmount",
+				SkipAutoExtract = true,
+				External = true,
+				BaseType = "EffectData",
+				BaseName = "LegacyChillEffect",
+				BaseProperty = "ElapsedTimeMultiplier",
+				Format = "NegativePercentDelta",
+			},
+			{
+				ExtractAs = "ChillDuration",
+				SkipAutoExtract = true,
+				External = true,
+				BaseType = "EffectData",
+				BaseName = "LegacyChillEffect",
+				BaseProperty = "Duration",
+			},
+		}
+	},
+	
+
 -- Apollo
     ApolloCastBoonYM =
 	{
@@ -554,6 +825,10 @@ DemeterCastBoonYM =
 		BoonInfoIgnoreRequirements = true,
 		GameStateRequirements =
 		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
 			{
 				Path = {"CurrentRun", "Hero", "TraitDictionary"},
                 HasAll = {"TorchAspectofYoungMelinoe"}
@@ -717,6 +992,77 @@ DemeterCastBoonYM =
 			},
 		}
 	},
+
+	--Apollo Mana boon
+	ApolloManaBoonYM = 
+	{
+		InheritFrom = { "BaseTrait", "AirBoon" },
+		Icon = "Boon_Apollo_35",
+		Slot = "Mana",
+		BoonInfoIgnoreRequirements = true,
+		GameStateRequirements =
+		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
+			{
+				Path = {"CurrentRun", "Hero", "TraitDictionary"},
+                HasAll = {"TorchAspectofYoungMelinoe"}
+			},
+		},
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 1.0,
+			},
+			Rare =
+			{
+				Multiplier = 1.5,
+			},
+			Epic =
+			{
+				Multiplier = 2.0,
+			},
+			Heroic =
+			{
+				Multiplier = 2.5,
+			},
+		},
+		StatLines =
+		{
+			"ManaRestoreStatDisplay1",
+		},
+		
+		OnProjectileDeathFunction = 
+		{
+			Name = _PLUGIN.guid .. "." .. "CheckApolloManaRestoreYM",
+			Args = 
+			{
+				ManaRestore = 
+				{
+					BaseValue = 40,
+					AbsoluteStackValues = 
+					{
+						[1] = 20,
+						[2] = 15,
+						[3] = 10,
+					},
+				},
+				ManaRestoreFx = "ApolloManaRegenFxEmitter",
+				ReportValues = { ReportedManaRestore = "ManaRestore" }
+			},
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedManaRestore",
+				ExtractAs = "TooltipManaRecovery",
+			},
+		
+		},
+	},
 -- Aphrodite
     AphroditeCastBoonYM =
 	{
@@ -725,6 +1071,10 @@ DemeterCastBoonYM =
 		BoonInfoIgnoreRequirements = true,
 		GameStateRequirements =
 		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
 			{
 				Path = {"CurrentRun", "Hero", "TraitDictionary"},
                 HasAll = {"TorchAspectofYoungMelinoe"}
@@ -838,6 +1188,10 @@ DemeterCastBoonYM =
 		GameStateRequirements =
 		{
 			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
+			{
 				Path = {"CurrentRun", "Hero", "TraitDictionary"},
                 HasAll = {"TorchAspectofYoungMelinoe"}
 			},
@@ -949,6 +1303,10 @@ DemeterCastBoonYM =
 		GameStateRequirements =
 		{
 			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
+			{
 				Path = {"CurrentRun", "Hero", "TraitDictionary"},
                 HasAll = {"TorchAspectofYoungMelinoe"}
 			},
@@ -1059,6 +1417,85 @@ DemeterCastBoonYM =
 			},
 		}
 	},
+
+	BurnSprintBoonYM = --Legendary
+	{
+		InheritFrom = { "LegendaryTrait", "FireBoon" },
+		Icon = "Boon_Hestia_33",
+		BoonInfoIgnoreRequirements = true,
+		GameStateRequirements =
+		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
+			{
+				Path = {"CurrentRun", "Hero", "TraitDictionary"},
+                HasAll = {"TorchAspectofYoungMelinoe"}
+			},
+		},
+		OnBlockDamageFunction = 
+		{
+			Name = "HestiaBlockSpend",
+			Args = 
+			{
+				ProjectileName = "HestiaSprintDefense",
+				EffectArgs = 
+				{
+					EffectName = "BurnEffect",
+					NumStacks = 400,
+					ReportValues = {ReportedDamage = "NumStacks"},
+				},		
+				Vfx = "HestiaFlameParticleDefense",
+				FireSound = "/SFX/BurnDamageSizzle",	
+				Cooldown = 3,
+				ReportValues = {ReportedCooldown = "Cooldown"},
+			}
+		},
+		OnWeaponFiredFunctions =
+		{
+			ValidWeapons =  {"WeaponCastYM", "WeaponCastHammerYM"},
+			FunctionName = "HestiaCastDefense",
+			FunctionArgs = 
+			{
+				ProjectileName = "HestiaSprintDefense",
+				StartDelay = 0.1,
+				BuffVfx = "HestiaFlameBuff",
+				ReportValues = { ReportedDamage = "StackCount"}
+			},
+		},
+		OnProjectileDeathFunction = 
+		{
+			ValidProjectiles = { "ProjectileCastYM" },
+			Name = "RemoveCastDefense",
+		},
+		StatLines =
+		{
+			"ProjectileBurnDamageStatDisplay1",
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedDamage",
+				ExtractAs = "TooltipDamage",
+			},
+			{
+				Key = "ReportedCooldown",
+				ExtractAs = "TooltipCooldown",
+			},
+			{
+				ExtractAs = "BurnRate",
+				SkipAutoExtract = true,
+				External = true,
+				BaseType = "EffectLuaData",
+				BaseName = "BurnEffect",
+				BaseProperty = "DamagePerSecond",
+				DecimalPlaces = 1,
+			},
+		},
+		FlavorText = "BurnSprintBoon_FlavorText",
+	},
+
 -- Ares
     AresCastBoonYM =
 	{
@@ -1067,6 +1504,10 @@ DemeterCastBoonYM =
 		BoonInfoIgnoreRequirements = true,
 		GameStateRequirements =
 		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
 			{
 				Path = {"CurrentRun", "Hero", "TraitDictionary"},
                 HasAll = {"TorchAspectofYoungMelinoe"}
@@ -1148,6 +1589,7 @@ DemeterCastBoonYM =
 			},
 		}
 	},	
+-- Athena
 -- Artemis
 -- Dionaysus
 -- Hades
@@ -1160,20 +1602,25 @@ DemeterCastBoonYM =
 table.insert( LootData.ZeusUpgrade.Traits, "ZeusCastBoonYM" )
 -- Hera
 table.insert( LootData.HeraUpgrade.Traits, "HeraCastBoonYM" )
+table.insert( LootData.HeraUpgrade.Traits, "SpawnCastDamageBoonYM" )
 -- Poseidon
 table.insert( LootData.PoseidonUpgrade.Traits, "PoseidonCastBoonYM" )
 -- Demeter
 table.insert( LootData.DemeterUpgrade.Traits, "DemeterCastBoonYM" )
+table.insert( LootData.DemeterUpgrade.Traits, "CastNovaBoonYM" )
 -- Apollo
 table.insert( LootData.ApolloUpgrade.Traits, "ApolloCastBoonYM" )
+table.insert( LootData.ApolloUpgrade.Traits, "ApolloManaBoonYM" )
 -- Aphrodite
 table.insert( LootData.AphroditeUpgrade.Traits, "AphroditeCastBoonYM" )
 -- Hephaestus
 table.insert( LootData.HephaestusUpgrade.Traits, "HephaestusCastBoonYM" )
 -- Hestia
 table.insert( LootData.HestiaUpgrade.Traits, "HestiaCastBoonYM" )
+table.insert( LootData.HestiaUpgrade.Traits, "BurnSprintBoonYM" )
 -- Ares
 table.insert( LootData.AresUpgrade.Traits, "AresCastBoonYM" )
+
 -- Artemis
 -- Dionaysus
 -- Hades

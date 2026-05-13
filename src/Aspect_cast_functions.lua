@@ -10,8 +10,6 @@ function mod.FireCastAtLocationYM( triggerArgs )
 			WeaponToFire = "WeaponCastArmYM"
 			WeaponToFireSecond = "WeaponCastArmHammerYM"
 		end
-		print("WeaponToFire !!!!!")
-		print(WeaponToFire)
 		local dropLocation = SpawnObstacle({ Name = "InvisibleTarget", LocationX = triggerArgs.LocationX, LocationY = triggerArgs.LocationY  })
 		FireWeaponFromUnit({ Weapon = WeaponToFire, Id = CurrentRun.Hero.ObjectId, DestinationId = dropLocation, FireFromTarget = true, Angle = fireAngle })
 		Destroy({Id = dropLocation })
@@ -152,8 +150,6 @@ function mod.OnZeusCastYM( weaponData, functionArgs, triggerArgs )
 	local tempObstacleId = SpawnObstacle({ Name = "InvisibleTarget", LocationX = triggerArgs.LocationX, LocationY= triggerArgs.LocationY })
 	
 	thread( mod.ManageZeusCloudYM, functionArgs, tempObstacleId, triggerArgs.ProjectileId )
-	print("triggerArgs.ProjectileId id is :::::")
-	print(triggerArgs.ProjectileId)
 end
 
 function mod.ManageZeusCloudYM( functionArgs, tempObstacleId, projectileId )
@@ -220,6 +216,31 @@ function mod.CheckApplyDamageShareYM( victim, functionArgs, triggerArgs )
 	end
 end
 
+function mod.CheckCastSummonDamageYM( enemy, traitArgs)
+	if not ProjectileExists({ Names = { "ProjectileCastYM"} }) then
+		return
+	end
+	if enemy.IsDead or enemy.IgnoreCastSummonDamage then
+		return
+	end
+	local castId = GetFirstKey( SessionMapState.CastAttachedProjectiles )
+	traitArgs = traitArgs or {}
+	delay = traitArgs.Delay or 0.1
+	wait( delay, RoomThreadName)
+	CreateProjectileFromUnit({ Name = traitArgs.ProjectileName, Id = CurrentRun.Hero.ObjectId, DestinationId = enemy.ObjectId, DamageMultiplier = traitArgs.DamageMultiplier })
+	if HeroHasTrait("ReflectiveCastTraitYM") then
+		CreateProjectileFromUnit({ Name = traitArgs.ProjectileName, Id = CurrentRun.Hero.ObjectId, DestinationId = enemy.ObjectId, DamageMultiplier = traitArgs.DamageMultiplier })
+	end
+	if CheckCooldown("HeraCastPresentation", traitArgs.VfxCooldown) then
+		local location = GetLocation({ Id = castId, IsProjectile = true})
+		local ropeTargetId = SpawnObstacle({ Name = "InvisibleTarget", LocationX = location.X, LocationY = location.Y}) 
+		CreateAnimationsBetween({
+			Animation = "HeraRope", DestinationId = enemy.ObjectId, Id = ropeTargetId, 
+			Stretch = true, UseZLocation = false})
+		thread( DestroyOnDelay, { ropeTargetId } , 0.1 )
+	end
+end
+
 -- Posideon
 function mod.CheckSlipApplyYM( victim, functionArgs, triggerArgs )
 	if triggerArgs.EffectName == "ImpactSlowYM" then
@@ -229,12 +250,62 @@ function mod.CheckSlipApplyYM( victim, functionArgs, triggerArgs )
 	end
 end
 
+--Demeter
+
+function mod.DemeterCastBlastYM( weaponData, traitArgs, triggerArgs )
+	if not triggerArgs.ProjectileX or not triggerArgs.ProjectileY then
+		return
+	end
+	local heroLocation = "null"
+	local newlocal_X = "null"
+	local newlocal_Y = "null"
+	if not MapState.CastStorms then
+		MapState.CastStorms = {}
+	end	
+	
+	local maxProjectiles = traitArgs.MaxProjectiles or 1
+	local createdProjectiles = {}
+	local dataProperties = 
+	{
+		StartDelay = traitArgs.StartDelay,
+		AttachToOwner = false
+	}
+	local targetId = SpawnObstacle({ Name = "InvisibleTarget", LocationX = triggerArgs.ProjectileX, LocationY = triggerArgs.ProjectileY })
+	targetId2 = "null"
+	if HeroHasTrait("ReflectiveCastTraitYM") then
+		heroLocation = GetLocation({ Id = CurrentRun.Hero.ObjectId })
+		newlocal_X = heroLocation.X - triggerArgs.ProjectileX + heroLocation.X
+		newlocal_Y = heroLocation.Y - triggerArgs.ProjectileY + heroLocation.Y
+		targetId2 = SpawnObstacle({ Name = "InvisibleTarget", LocationX = newlocal_X, LocationY = newlocal_Y })
+	end
+	for _, projectileName in pairs( traitArgs.ProjectileNames or {} ) do
+		local projectileId = CreateProjectileFromUnit({ Name = projectileName, DestinationId = targetId, Id = CurrentRun.Hero.ObjectId, DamageMultiplier = traitArgs.DamageMultiplier, FireFromTarget = true, DataProperties = dataProperties, BlastRadiusModifier = traitArgs.BlastRadiusMultiplier })				
+		table.insert(createdProjectiles, projectileId)
+		if HeroHasTrait("ReflectiveCastTraitYM") then
+			local projectileId2 = CreateProjectileFromUnit({ Name = projectileName, DestinationId = targetId2, Id = CurrentRun.Hero.ObjectId, DamageMultiplier = traitArgs.DamageMultiplier, FireFromTarget = true, DataProperties = dataProperties, BlastRadiusModifier = traitArgs.BlastRadiusMultiplier })		
+			table.insert(createdProjectiles, projectileId2)
+		end
+	end
+	table.insert(MapState.CastStorms, createdProjectiles )
+	Destroy({ Id = targetId })
+	if HeroHasTrait("ReflectiveCastTraitYM") then
+		Destroy({ Id = targetId2 })
+	end
+end
+
 --Apollo
 function mod.CheckBlindApplyYM( victim, functionArgs, triggerArgs )
 	if triggerArgs.EffectName == "ImpactSlowYM" then
 		local effectName = functionArgs.EffectName
 		local dataProperties = EffectData[effectName].EffectData
 		ApplyEffect({ DestinationId = victim.ObjectId, Id = CurrentRun.Hero.ObjectId, EffectName = effectName, DataProperties = dataProperties})
+	end
+end
+
+function mod.CheckApolloManaRestoreYM( triggerArgs, functionArgs )
+	if (triggerArgs.name == "ProjectileCastYM" or triggerArgs.name == "ProjectileCastHammerYM") and CurrentRun.Hero then
+		ManaDelta( functionArgs.ManaRestore )
+		CreateAnimation({ Name = functionArgs.ManaRestoreFx, DestinationId = CurrentRun.Hero.ObjectId })
 	end
 end
 

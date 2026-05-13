@@ -24,7 +24,7 @@ end
 			{
 				{
 				Path = { "CurrentRun", "Hero", "Weapons", },
-				HasAll = { "WeaponAxe", },
+				HasAll = { "WeaponAxeSpecial", },
 				},
 				{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponAxe", },
@@ -148,7 +148,7 @@ end
 		{
 			{
 				Path = { "CurrentRun", "Hero", "Weapons", },
-				HasAll = { "WeaponTorch", },
+				HasAll = { "WeaponTorchSpecial", },
 			},
 			{
 				Path = { "GameState", "LastWeaponUpgradeName", "WeaponTorch", },
