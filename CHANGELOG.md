@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-05-13
+
 - Added Torches Aspect of Young Melinoë
   - Replaces the special with a lobbed projectile which casts Special-Cast, an additional cast.
   - Replaces all special boons for the aspect to influence the Special-Cast.
@@ -74,7 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.4.0...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.0...HEAD
+[0.5.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.3...0.4.0
 [0.3.3]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.2...0.3.3
 [0.3.2]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.1...0.3.2
