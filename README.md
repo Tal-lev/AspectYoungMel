@@ -29,6 +29,7 @@ Adds five aspects of Young Melinoë
 
 - Replaces the special with a lobbed projectile which casts Special-Cast, an additional cast.
 - Replaces all special boons for the aspect to influence the Special-Cast.
+- Adds boons for Special-Cast secondary effects
 - Trait increases damage from Olympian curses
 - Introduces a new hammer.
 
