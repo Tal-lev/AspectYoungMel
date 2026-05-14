@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-05-14
+
 - Fixed boon graphic for 2nd hammer Special-cast
 - Restrict omega-special hammer for torch with young mel
 
@@ -79,7 +81,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.0...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.1...HEAD
+[0.5.1]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.3...0.4.0
 [0.3.3]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.2...0.3.3
