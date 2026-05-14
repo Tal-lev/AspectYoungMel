@@ -104,9 +104,26 @@ OverwriteTableKeys( TraitData,{
                     ChangeValue = "QuickFlashYellow",
                     ChangeType = "Absolute",
                 },
+				{
+                    WeaponName = "WeaponCastHammerYM",
+                    WeaponProperty = "FireFx",
+                    ChangeValue = "QuickFlashYellow",
+                    ChangeType = "Absolute",
+                },
                 {
                     WeaponName = "WeaponCastYM",
 					ProjectileName = "ProjectileCastYM",
+                    ProjectileProperties = 
+                    {
+                        Graphic = "CastCircleInZeus",
+                        ArmedGraphic = "CastCircleArmedZeus",
+                        DetonateFx = "CastCircleOutZeus",
+                        HideGraphicOnDetonate = false,
+                    },
+                },
+				{
+                    WeaponName = "WeaponCastHammerYM",
+					ProjectileName = "ProjectileCastHammerYM",
                     ProjectileProperties = 
                     {
                         Graphic = "CastCircleInZeus",
@@ -240,8 +257,24 @@ OverwriteTableKeys( TraitData,{
 				ExcludeLinked = true,
 			},
 			{
+				WeaponName = "WeaponCastHammerYM",
+				ProjectileName = "ProjectileCastHammerYM",
+				ProjectileProperty = "Graphic",
+				ChangeValue = "CastCircleInHera",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
 				WeaponName = "WeaponCastYM",
 				ProjectileName = "ProjectileCastYM",
+				ProjectileProperty = "DetonateFx",
+				ChangeValue = "CastCircleOutHera",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
+				ProjectileName = "ProjectileCastHammerYM",
 				ProjectileProperty = "DetonateFx",
 				ChangeValue = "CastCircleOutHera",
 				ChangeType = "Absolute",
@@ -359,7 +392,7 @@ OverwriteTableKeys( TraitData,{
 			},
 			{
 				WeaponName = "WeaponCastYM",
-				ProjectileName = "ProjectileCast",
+				ProjectileName = "ProjectileCastYM",
 				ProjectileProperties = 
 				{
 					DetonateFx = "CastCircleOutHera",
@@ -367,7 +400,7 @@ OverwriteTableKeys( TraitData,{
 			},
 			{
 				WeaponName = "WeaponCastHammerYM",
-				ProjectileName = "ProjectileCast",
+				ProjectileName = "ProjectileCastHammerYM",
 				ProjectileProperties = 
 				{
 					DetonateFx = "CastCircleOutHera",
@@ -456,7 +489,23 @@ OverwriteTableKeys( TraitData,{
 				ChangeType = "Absolute",
 			},
 			{
+				WeaponName = "WeaponCastHammerYM",
+				WeaponProperty = "FireFx",
+				ChangeValue = "QuickFlashYellow",
+				ChangeType = "Absolute",
+			},
+			{
 				WeaponName = "WeaponCastYM",
+				ProjectileProperties = 
+				{
+					Graphic = "CastCircleInPoseidon",
+					ArmedGraphic = "CastCircleArmedPoseidon",
+					DetonateFx = "CastCircleOutPoseidon",
+					HideGraphicOnDetonate = false
+				}
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
 				ProjectileProperties = 
 				{
 					Graphic = "CastCircleInPoseidon",
@@ -636,7 +685,25 @@ DemeterCastBoonYM =
 				}
 			},
 			{
+				WeaponName = "WeaponCastHammerYM",
+				ProjectileProperties = 
+				{
+					Range = 600,
+					Graphic = "CastCircleInDemeter",
+					ImpactFx = "DemeterSlowImpact",
+					ArmedImpactFx = "null",
+					-- DeathFx = "CastCircleOut",
+				}
+			},
+			{
 				WeaponName = "WeaponCastYM",
+				WeaponProperty = "FireFx2",
+				ChangeValue = "OlympianAttackFx_Apollo",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
 				WeaponProperty = "FireFx2",
 				ChangeValue = "OlympianAttackFx_Apollo",
 				ChangeType = "Absolute",
@@ -645,6 +712,13 @@ DemeterCastBoonYM =
 			{
 				WeaponName = "WeaponCastYM",
 				ProjectileName = "ProjectileCastYM",
+				EffectName = "OnHitStun",
+				EffectProperty = "Active",
+				ChangeValue = false,
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
+				ProjectileName = "ProjectileCastHammerYM",
 				EffectName = "OnHitStun",
 				EffectProperty = "Active",
 				ChangeValue = false,
@@ -946,7 +1020,25 @@ DemeterCastBoonYM =
 				ChangeType = "Absolute",
 			},
 			{
+				WeaponName = "WeaponCastHammerYM",
+				WeaponProperty = "FireFx",
+				ChangeValue = "QuickFlashYellow",
+				ChangeType = "Absolute",
+			},
+			{
 				WeaponName = "WeaponCastYM",
+				ProjectileProperties =
+				{
+					ImpactFx = "null",
+					Graphic = "CastCircleInApollo",
+					ArmedGraphic = "CastCircleArmedApollo",
+					GroupName = "FX_Terrain_Add",
+					DetonateFx = "CastCircleOutApollo",
+					HideGraphicOnDetonate = false
+				}
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
 				ProjectileProperties =
 				{
 					ImpactFx = "null",
@@ -1132,7 +1224,20 @@ DemeterCastBoonYM =
 				ChangeType = "Absolute",
 			},
 			{
+				WeaponName = "WeaponCastHammerYM",
+				WeaponProperty = "FireFx",
+				ChangeValue = "QuickFlashPink",
+				ChangeType = "Absolute",
+			},
+			{
 				WeaponName = "WeaponCastYM",
+				ProjectileProperties = 
+				{
+					Graphic = "CastCircleInAphrodite",
+				}
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
 				ProjectileProperties = 
 				{
 					Graphic = "CastCircleInAphrodite",
@@ -1145,7 +1250,16 @@ DemeterCastBoonYM =
 				{
 					DetonateFx = "CastCircleOutAphrodite",
 				}
-			},		},
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
+				ProjectileName = "ProjectileCastHammerYM",
+				ProjectileProperties = 
+				{
+					DetonateFx = "CastCircleOutAphrodite",
+				}
+			},			
+		},
 		StatLines =
 		{
 			"AphroCastDamageStatDisplay1",
@@ -1229,6 +1343,15 @@ DemeterCastBoonYM =
 		{	
 			{
 				WeaponName = "WeaponCastYM",
+				ProjectileProperties = 
+				{
+					ArmedImpactFx = "null",
+					Graphic = "CastCircleInHephaestus",
+					DetonateFx = "CastCircleOutHephaestus",
+				}
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
 				ProjectileProperties = 
 				{
 					ArmedImpactFx = "null",
@@ -1350,7 +1473,26 @@ DemeterCastBoonYM =
 				ChangeType = "Absolute",
 			},
 			{
+				WeaponName = "WeaponCastHammerYM",
+				WeaponProperty = "FireFx",
+				ChangeValue = "QuickFlashRed",
+				ChangeType = "Absolute",
+			},
+			{
 				WeaponName = "WeaponCastYM",
+				ProjectileProperties = 
+				{
+					ImpactFx = "null",
+					Graphic = "CastCircleInHestia",
+					ArmedGraphic = "CastCircleArmedHestia",
+					GroupName = "FX_Terrain_Add",
+					DetonateFx = "null",
+					DissipateFx = "CastCircleOutHestia",
+					HideGraphicOnDetonate = false
+				}
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
 				ProjectileProperties = 
 				{
 					ImpactFx = "null",
@@ -1568,7 +1710,23 @@ DemeterCastBoonYM =
 				}
 			},
 			{
+				WeaponName = "WeaponCastHammerYM",
+				ProjectileProperties = 
+				{
+					Graphic = "CastCircleInAres",
+				}
+			},
+			{
 				WeaponName = "WeaponCastYM",
+				ProjectileName = "ProjectileCastYM",
+				ProjectileProperties = 
+				{
+					DetonateFx = "CastCircleOutAres",
+					ArmedGraphic = "CastCircleArmedAres",
+				}
+			},
+			{
+				WeaponName = "WeaponCastHammerYM",
 				ProjectileName = "ProjectileCastYM",
 				ProjectileProperties = 
 				{

@@ -1040,7 +1040,20 @@ modutil.once_loaded.game(function()
 		FlavorText = "TorchAspectofYoungMelinoe_FlavorText",
 	}
 
-	--OverwriteTableKeys( TraitSetData.Aspects.TorchSpecialDurationAspect, TorchAspectofYoungMelinoe)
+	--SuitAspectofYoungMelinoe = {
+	--	InheritFrom = { "WeaponEnchantmentTrait" },
+	--	Icon = "Hammer_Suit_01",
+	--	RequiredWeapon = "WeaponSuit",
+	--	WeaponKitGrannyModel = "Icarus_Mesh",
+	--	ReplacementGrannyModels = 
+	--	{
+	--		WeaponSuitR_Base_Mesh = "WeaponSuitR_Base_Mesh",
+	--		WeaponSuitL_Base_Mesh = "WeaponSuitL_Base_Mesh",
+	--		WeaponSuitB_Base_Mesh = "Icarus_Mesh",
+	--	},
+	--}
+
+	--OverwriteTableKeys( TraitSetData.Aspects.BaseSuitAspect, SuitAspectofYoungMelinoe)
 	
 	TraitData.StaffAspectofYoungMelinoe = StaffAspectofYoungMelinoe
 	TraitData.DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe

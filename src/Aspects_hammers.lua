@@ -227,6 +227,11 @@ table.insert(TraitData.TorchExSpecialCountTrait.GameStateRequirements, {
 			Path = {"CurrentRun", "Hero", "TraitDictionary"},
 			HasNone = {"TorchAspectofYoungMelinoe", },
 })	
+
+table.insert(TraitData.TorchSpecialImpactTrait.GameStateRequirements, {
+			Path = {"CurrentRun", "Hero", "TraitDictionary"},
+			HasNone = {"TorchAspectofYoungMelinoe", },
+})	
 	
 	--Adding Hammers to pool
 	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTraitYM")
