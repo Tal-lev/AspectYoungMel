@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fixed boon graphic for 2nd hammer Special-cast
+- Restrict omega-special hammer for torch with young mel
+
 ## [0.5.0] - 2026-05-13
 
 - Added Torches Aspect of Young Melinoë
