@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-05-16
+
 - Fixed Special-Cast boons were too rare
 - Fixed Special-Cast boons now work with sacrifice boons
 
@@ -84,7 +86,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.1...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.2...HEAD
+[0.5.2]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.1...0.5.2
 [0.5.1]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.4.0...0.5.0
 [0.4.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.3.3...0.4.0
