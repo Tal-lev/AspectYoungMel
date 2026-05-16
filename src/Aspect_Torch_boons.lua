@@ -1757,27 +1757,36 @@ DemeterCastBoonYM =
 
 ------ Inserting new special traits
 -- Zeus
-table.insert( LootData.ZeusUpgrade.Traits, "ZeusCastBoonYM" )
+table.insert( LootData.ZeusUpgrade.WeaponUpgrades, "ZeusCastBoonYM" )
+table.insert( LootData.ZeusUpgrade.PriorityUpgrades, 2, "ZeusCastBoonYM" )
 -- Hera
-table.insert( LootData.HeraUpgrade.Traits, "HeraCastBoonYM" )
+table.insert( LootData.HeraUpgrade.WeaponUpgrades, "HeraCastBoonYM" )
+table.insert( LootData.HeraUpgrade.PriorityUpgrades, 2, "HeraCastBoonYM" )
 table.insert( LootData.HeraUpgrade.Traits, "SpawnCastDamageBoonYM" )
 -- Poseidon
-table.insert( LootData.PoseidonUpgrade.Traits, "PoseidonCastBoonYM" )
+table.insert( LootData.PoseidonUpgrade.WeaponUpgrades, "PoseidonCastBoonYM" )
+table.insert( LootData.PoseidonUpgrade.PriorityUpgrades, 2, "PoseidonCastBoonYM" )
 -- Demeter
-table.insert( LootData.DemeterUpgrade.Traits, "DemeterCastBoonYM" )
+table.insert( LootData.DemeterUpgrade.WeaponUpgrades, "DemeterCastBoonYM" )
+table.insert( LootData.DemeterUpgrade.PriorityUpgrades, 2, "DemeterCastBoonYM" )
 table.insert( LootData.DemeterUpgrade.Traits, "CastNovaBoonYM" )
 -- Apollo
-table.insert( LootData.ApolloUpgrade.Traits, "ApolloCastBoonYM" )
+table.insert( LootData.ApolloUpgrade.WeaponUpgrades, "ApolloCastBoonYM" )
+table.insert( LootData.ApolloUpgrade.PriorityUpgrades, 2, "ApolloCastBoonYM" )
 table.insert( LootData.ApolloUpgrade.Traits, "ApolloManaBoonYM" )
 -- Aphrodite
-table.insert( LootData.AphroditeUpgrade.Traits, "AphroditeCastBoonYM" )
+table.insert( LootData.AphroditeUpgrade.WeaponUpgrades, "AphroditeCastBoonYM" )
+table.insert( LootData.AphroditeUpgrade.PriorityUpgrades, 2, "AphroditeCastBoonYM" )
 -- Hephaestus
-table.insert( LootData.HephaestusUpgrade.Traits, "HephaestusCastBoonYM" )
+table.insert( LootData.HephaestusUpgrade.WeaponUpgrades, "HephaestusCastBoonYM" )
+table.insert( LootData.HephaestusUpgrade.PriorityUpgrades, 2, "HephaestusCastBoonYM" )
 -- Hestia
-table.insert( LootData.HestiaUpgrade.Traits, "HestiaCastBoonYM" )
+table.insert( LootData.HestiaUpgrade.WeaponUpgrades, "HestiaCastBoonYM" )
+table.insert( LootData.HestiaUpgrade.PriorityUpgrades, 2, "HestiaCastBoonYM" )
 table.insert( LootData.HestiaUpgrade.Traits, "BurnSprintBoonYM" )
 -- Ares
-table.insert( LootData.AresUpgrade.Traits, "AresCastBoonYM" )
+table.insert( LootData.AresUpgrade.WeaponUpgrades, "AresCastBoonYM" )
+table.insert( LootData.AresUpgrade.PriorityUpgrades, 2, "AresCastBoonYM" )
 
 -- Artemis
 -- Dionaysus
