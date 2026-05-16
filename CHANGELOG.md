@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fixed Special-Cast boons were too rare
+- Fixed Special-Cast boons now work with sacrifice boons
+
 ## [0.5.1] - 2026-05-14
 
 - Fixed boon graphic for 2nd hammer Special-cast
