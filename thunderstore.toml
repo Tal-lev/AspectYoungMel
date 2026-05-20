@@ -5,7 +5,7 @@ schemaVersion = "0.1.0"
 [package]
 namespace = "JarlUlsfark"
 name = "AspectYoungMel"
-versionNumber = "0.5.2"
+versionNumber = "0.5.3"
 description = "Adds Aspects of Young Melinoë for the Staff, Dagger, Torches, Axe and Skull."
 websiteUrl = "https://github.com/Tal-lev/AspectYoungMel"
 containsNsfwContent = false
