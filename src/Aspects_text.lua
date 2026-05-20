@@ -12,6 +12,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
     "InheritFrom",
     "DisplayName",
     "Description",
+	"OverwriteLocalization",
 	}
 	
 	local file = rom.path.combine(rom.paths.Content, 'Game/Text/en/TraitText.en.sjson')
@@ -335,6 +336,15 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 			Id = "SkullAspectofYoungMelinoe_FlavorText",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "The will of Night is never to be chronicled, but rarely, on moonless nights, it is dodgeball."
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "UI_ComboStacks",
+			DisplayName = "{$CurrentRun.Hero.TraitDictionary['SkullAspectofYoungMelinoe'][1].Combo}",
+      		OverwriteLocalization = true,
 		},
 		TextOrder)
 	)

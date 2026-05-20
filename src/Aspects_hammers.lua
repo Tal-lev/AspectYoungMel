@@ -189,6 +189,19 @@ end
 			},
 		},
 	},
+
+	DummyComboDisplayBoonYM = 
+	{
+		Icon = "JarlUlsfark-AspectYoungMel\\SkullAspectYoungMelIcon",
+		ShowInHUD = true,
+		CustomLabel = 
+		{
+			DisplayType = "RoomValue",
+			Key = "ComboStacks",
+			Text = "UI_ComboStacks",
+		},
+		FlavorText = "DoubleBloodDropBoon_FlavorText",
+	},
 	})
 
 -- Removing incompatible Hammers

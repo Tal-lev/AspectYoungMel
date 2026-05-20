@@ -164,6 +164,11 @@ function mod.ComboPresentation(weaponData, functionArgs, triggerArgs)
 	PlaySound({ Name = "/Leftovers/Menu Sounds/LevelUpFlash", Id = unitId, ManagerCap = 46 })
 	Flash({ Id = unitId, Speed = 0.85, MinFraction = 0.7, MaxFraction = 0.0, Color = Color.White, Duration = 0.15, ExpireAfterCycle = true })
 	thread( InCombatText, unitId, "X" .. trait.Combo, 0.5 , { SkipShadow = true } )
+	
+	if HeroHasTrait("DummyComboDisplayBoonYM") then
+		local traitData = GetHeroTrait("DummyComboDisplayBoonYM")
+		UpdateTraitNumber( traitData )
+	end
 end
 
 function mod.ComboPresentationCancel(unitId)
@@ -177,6 +182,10 @@ function mod.ComboPresentationCancel(unitId)
 	PlaySound({ Name = "/Leftovers/Menu Sounds/LevelUpFlash", Id = unitId, ManagerCap = 46 })
 	Flash({ Id = unitId, Speed = 0.85, MinFraction = 0.7, MaxFraction = 0.0, Color = Color.White, Duration = 0.15, ExpireAfterCycle = true })
 	thread( InCombatText, unitId, "X" .. trait.Combo, 0.5 , { SkipShadow = true } )
+	if HeroHasTrait("DummyComboDisplayBoonYM") then
+		local traitData = GetHeroTrait("DummyComboDisplayBoonYM")
+		UpdateTraitNumber( traitData )
+	end
 end
 
 function mod.ComboDamageMod(weaponData, functionArgs, triggerArgs)
@@ -197,6 +206,19 @@ function mod.ComboDamageMod(weaponData, functionArgs, triggerArgs)
 	if trait.Combo > 30 and not HeroHasTrait("LobComboScalingTraitYM") then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * 10) + (Multi / 8 * (trait.Combo -31)) + 1
 	end
+end
+
+function mod.SetupComboUI()
+	if TempTextData then
+		TempTextData.ComboStacks = 0
+	end
+	if not HeroHasTrait("DummyComboDisplayBoonYM") then
+		AddTraitToHero({ TraitName = "DummyComboDisplayBoonYM" })
+	end
+end
+
+function mod.CheckComboUI()
+	RemoveTrait( CurrentRun.Hero, "DummyComboDisplayBoonYM" )
 end
 
 import "Aspect_cast_functions.lua"
@@ -284,7 +306,7 @@ modutil.once_loaded.game(function()
 			Name = "LobAmmoPackYM",
 			InheritFrom = "BaseLoot",
 			DisplayInEditor = true,
-			Magnetism = 50.0,
+			Magnetism = 100.0,
 			MagnetismSpeedMax = 2000.0,
 			MagnetismSpeedMin = 1500.0,
 			MagnetismWhileBlocked = 9999.0 ,
@@ -830,12 +852,18 @@ modutil.once_loaded.game(function()
 					},
 				},
 				
-				MagnetismMultiplier = 0.5,
+				MagnetismMultiplier = 1,
 			},
 			WeaponLobSpecial = {
 				MagnetismMultiplier = 1,
 			},
 		},
+		SetupFunction =
+		{
+			Threaded = true,
+			Name = _PLUGIN.guid .. "." .. "SetupComboUI",
+		},
+		OnUnequipFunctionName = _PLUGIN.guid .. "." .. "CheckComboUI",
 		OnWeaponFiredFunctions = 
 		{
 			ValidWeapons = WeaponSets.HeroPrimaryWeapons,
