@@ -267,6 +267,7 @@ OverwriteTableKeys( QuestData, {
                     "ReflectiveCastTraitYM",
                     --Axe
                     "AxeShieldDeflectTraitYM",
+                    "AxeExtendedRetaliateTraitYM",
                     --Skull
                     "LobExtendComboTraitYM",
                     "LobComboScalingTraitYM",
@@ -290,6 +291,7 @@ OverwriteTableKeys( QuestData, {
                     "ReflectiveCastTraitYM",
                     --Axe
                     "AxeShieldDeflectTraitYM",
+                    "AxeExtendedRetaliateTraitYM",
                     --Skull
                     "LobExtendComboTraitYM",
                     "LobComboScalingTraitYM",

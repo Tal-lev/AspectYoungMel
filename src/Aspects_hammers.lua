@@ -123,6 +123,23 @@ end
 				},
 			}
 		},
+		AxeExtendedRetaliateTraitYM = 
+		{
+			InheritFrom = { "WeaponTrait", "AxeHammerTrait" },
+			Icon = "JarlUlsfark-AspectYoungMel\\ColdVengenceIcon",
+			GameStateRequirements =
+			{
+				{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponAxeSpecial", },
+				},
+				{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponAxe", },
+				IsAny = {"AxeAspectofYoungMelinoe", }
+				},
+			},
+			--Effect is in the function mod.BlockAxeBuff in ready.lua
+		},
         DaggerDashAttackTripleTraitYM =
         {
 		InheritFrom = { "WeaponTrait", "DaggerHammerTrait" },
@@ -320,6 +337,7 @@ table.insert(TraitData.TorchSpecialImpactTrait.GameStateRequirements, {
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "StaffDoubleHealTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "StaffSpecialHomingTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTraitYM")
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeExtendedRetaliateTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTraitYM")

@@ -50,6 +50,9 @@ function mod.BlockAxeBuff( blocker, args, triggerArgs )
 		if trait.RetaliateBuff ~= 1 then
 			return
 		end
+		if HeroHasTrait("AxeExtendedRetaliateTraitYM") then
+			args.Duration = args.Duration * 2
+		end
 		trait.RetaliateBuff = args.MaxRetaliateBuff
 		ApplyEffect({ DestinationId = CurrentRun.Hero.ObjectId, Id = CurrentRun.Hero.ObjectId, EffectName = args.EffectName, DataProperties = { Duration = args.Duration }})
 		wait(args.Duration)

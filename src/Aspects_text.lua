@@ -72,6 +72,16 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
+			Id = "AxeExtendedRetaliateTraitYM",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Cold Vengence",
+			Description = "The duration of your {$Keywords.AxeRetaliate} is doubled"
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
 			Id = "DaggerDashAttackTripleTraitYM",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Wooden Trick Knives",
