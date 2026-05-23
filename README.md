@@ -4,7 +4,11 @@ Adding aspects of Young Melinoe.
 
 ## Features
 
-Adds five aspects of Young Melinoë
+Adds five weapon aspects of Young Melinoë
+
+Adds seven Daedalus Hammers
+
+Adds four Minor Prophecies
 
 ### Staff Aspect of Young Melinoë
 
