@@ -31,7 +31,11 @@ end
 function mod.CheckStaffSelfHit( triggerArgs, args )
 	if not IsEmpty( GetInProjectilesBlast({ Id = CurrentRun.Hero.ObjectId, DestinationName = args.ProjectileName })) then
 		if (CurrentRun.Hero.Health / CurrentRun.Hero.MaxHealth) <= args.Threshold then
-			Heal( CurrentRun.Hero, {HealAmount = args.HealAmount, SourceName = "Aspect" })
+			if HeroHasTrait("StaffDoubleHealTraitYM") then
+				Heal( CurrentRun.Hero, {HealAmount = (args.HealAmount * 2), SourceName = "Aspect" })
+			else
+				Heal( CurrentRun.Hero, {HealAmount = args.HealAmount, SourceName = "Aspect" })
+			end
 		end
 	end
 end
@@ -196,15 +200,16 @@ function mod.ComboDamageMod(weaponData, functionArgs, triggerArgs)
 	end
 	if trait.Combo >= 2 and trait.Combo <= 10 then
   		trait.ComboDamageMod = Multi * (trait.Combo -1) +1
-	end  
-	if (trait.Combo > 10 and trait.Combo <= 20) or (trait.Combo > 20 and HeroHasTrait("LobComboScalingTraitYM")) then
+	elseif (trait.Combo > 10 and trait.Combo <= 20) or (trait.Combo > 20 and HeroHasTrait("LobComboScalingTraitYM")) then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * (trait.Combo -11)) + 1
-	end
-	if trait.Combo > 20 and trait.Combo <= 30 and not HeroHasTrait("LobComboScalingTraitYM") then
+	elseif trait.Combo > 20 and trait.Combo <= 30 and not HeroHasTrait("LobComboScalingTraitYM") then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * (trait.Combo -21)) + 1
-	end
-	if trait.Combo > 30 and not HeroHasTrait("LobComboScalingTraitYM") then
+	elseif trait.Combo > 30 and not HeroHasTrait("LobComboScalingTraitYM") then
 		trait.ComboDamageMod =   (Multi * 10) + (Multi / 2 * 10) + (Multi / 4 * 10) + (Multi / 8 * (trait.Combo -31)) + 1
+	end
+	if trait.Combo == 49 and CurrentRun.CurrentRoom and not game.CurrentHubRoom and not GameState.Flags.High_Combo then
+		GameState.Flags.High_Combo = true
+		--CheckAchievement({ Name = "AchYM_HighCombo" })
 	end
 end
 
@@ -1102,5 +1107,6 @@ modutil.once_loaded.game(function()
 	--Adds/removes Aspect specific hammers
 	import "Aspects_hammers.lua"
 
-	
+	--Adds minor propechies
+	import "Aspects_Quests.lua"
 end)

@@ -42,11 +42,30 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
+			Id = "StaffDoubleHealTraitYM",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Tasty Vigor",
+			Description = "Doubles your {$Keywords.SpecialEX} healing and increases its {$Keywords.Mana} cost by {$TooltipData.ExtractData.ManaCostAdded}",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "StaffSpecialHomingTraitYM",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Homing Bolt",
+			Description = "Your {$Keywords.Special} has improved homing and range.",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
 			Id = "AxeShieldDeflectTraitYM",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "Mirror Shield",
 			Description = "Your {$Keywords.Special} can {$Keywords.Deflect}"
-
 		},
 		TextOrder)
 	)
@@ -110,7 +129,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "DaggerAspectofYoungMelinoe",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë",
+			DisplayName = "Aspect of Trainee Melinoë",
 			Description = "You can {$Keywords.Dash} more frequently."
 		},
 		TextOrder)
@@ -120,7 +139,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "DaggerAspectofYoungMelinoe_Shop",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Lim and Oros, Aspect of Young Melinoë:",
+			DisplayName = "Lim and Oros, Aspect of Trainee Melinoë:",
 		},
 		TextOrder)
 	)
@@ -129,7 +148,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "DaggerAspectofYoungMelinoe_Upgrade",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
+			DisplayName = "Aspect of Trainee Melinoë {$TooltipData.AspectRarityText}",
 		},
 		TextOrder)
 	)
@@ -174,7 +193,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "TorchAspectofYoungMelinoe",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë",
+			DisplayName = "Aspect of Mischievous Melinoë",
 			Description = "Your {$Keywords.Special} fires a {$Keywords.Special_Cast}."
 		},
 		TextOrder)
@@ -184,7 +203,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "TorchAspectofYoungMelinoe_Shop",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Umbral Flames, Aspect of Young Melinoë:",
+			DisplayName = "Umbral Flames, Aspect of Mischievous Melinoë:",
 		},
 		TextOrder)
 	)
@@ -193,7 +212,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "TorchAspectofYoungMelinoe_Upgrade",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
+			DisplayName = "Aspect of Mischievous Melinoë {$TooltipData.AspectRarityText}",
 		},
 		TextOrder)
 	)
@@ -223,7 +242,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "AxeAspectofYoungMelinoe",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë",
+			DisplayName = "Axpect of young Melinoë",
 			Description = "Your {$Keywords.Special} Block grants {$Keywords.AxeRetaliate}."
 		},
 		TextOrder)
@@ -243,7 +262,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "AxeAspectofYoungMelinoe_Shop",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Moonstone Axe, Aspect of Young Melinoë:",
+			DisplayName = "Moonstone Axe, Axpect of Young Melinoë:",
 		},
 		TextOrder)
 	)
@@ -252,7 +271,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "AxeAspectofYoungMelinoe_Upgrade",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
+			DisplayName = "Axpect of young Melinoë {$TooltipData.AspectRarityText}",
 		},
 		TextOrder)
 	)
@@ -270,7 +289,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "StaffAspectofYoungMelinoe",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë",
+			DisplayName = "Aspect of Sweet-Tooth Melinoë",
 			Description = "While you have no more than {#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}{#Prev}, absorb your {$Keywords.SpecialEX} blast to restore {#BoldFormatGraft}{$TooltipData.ExtractData.HealAmount}{!Icons.Health}{#Prev}."
 		},
 		TextOrder)
@@ -280,7 +299,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "StaffAspectofYoungMelinoe_Shop",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Witch's Staff, Aspect of Young Melinoë:",
+			DisplayName = "Witch's Staff, Aspect of Sweet-Tooth Melinoë:",
 		},
 		TextOrder)
 	)
@@ -289,7 +308,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "StaffAspectofYoungMelinoe_Upgrade",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
+			DisplayName = "Aspect of Sweet-Tooth Melinoë {$TooltipData.AspectRarityText}",
 		},
 		TextOrder)
 	)
@@ -307,7 +326,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "SkullAspectofYoungMelinoe",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë",
+			DisplayName = "Aspect of Playful Melinoë",
 			Description = "Consecutive {$Keywords.Attack} grants {$Keywords.Combo}."
 		},
 		TextOrder)
@@ -317,7 +336,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "SkullAspectofYoungMelinoe_Shop",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Argent Skull, Aspect of Young Melinoë:",
+			DisplayName = "Argent Skull, Aspect of Playful Melinoë:",
 		},
 		TextOrder)
 	)
@@ -326,7 +345,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		{
 			Id = "SkullAspectofYoungMelinoe_Upgrade",
 			InheritFrom = "BaseBoonMultiline",
-			DisplayName = "Aspect of young Melinoë {$TooltipData.AspectRarityText}",
+			DisplayName = "Aspect of Playful Melinoë {$TooltipData.AspectRarityText}",
 		},
 		TextOrder)
 	)
@@ -480,6 +499,90 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 	)
 
 
+	--Quests
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "Quest_YM_Chronos_aspects",
+      DisplayName = "Bearing Youthful Gifts",
+      Description = "The daughter of the god of the dead shall prevail against either of her ultimate adversaries using each and every {#Emph}Aspect {#Prev}of her {#Emph}Youth {#Prev}."
+	},
+	TextOrder)
+	)
 
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "Quest_YM_HighCombo",
+      DisplayName = "Catcher of Balls",
+      Description = "The daughter of the god of the dead shall some evening catch the ball each and every time."
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "High_Combo",
+      DisplayName = "Reach 50 Combo with the aspect of Playful Melinoë",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "Quest_YM_MaxWeaponUpgrade",
+      DisplayName = "Awakened Aspects of Youth",
+      Description = "The daughter of the god of the dead shall fully upgrade {#Emph}all {#Prev}of the {#Emph}Aspects {#Prev}of her {#Emph}Youth{#Prev}.",
+    },
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "StaffAspectofYoungMelinoe5",
+      DisplayName = "Raise Aspect of Sweet-Tooth Melinoë to {#LegendaryFormat}Rank V",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "DaggerAspectofYoungMelinoe5",
+      DisplayName = "Raise Aspect of Trainee Melinoë to {#LegendaryFormat}Rank V",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "TorchAspectofYoungMelinoe5",
+      DisplayName = "Raise Aspect of Mischievous Melinoë to {#LegendaryFormat}Rank V",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "AxeAspectofYoungMelinoe5",
+      DisplayName = "Raise Axpect of young Melinoë to {#LegendaryFormat}Rank V",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "SkullAspectofYoungMelinoe5",
+      DisplayName = "Raise Aspect of Playful Melinoë to {#LegendaryFormat}Rank V",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "Quest_YM_HammerUpgrades",
+      DisplayName = "Hammers of Youth",
+      Description = "The daughter of the god of the dead shall apply various {#Emph}Daedalus {#Prev}enchantments to the {#Emph}Aspects {#Prev}of her {#Emph}Youth {#Prev}.",
+	},
+	TextOrder)
+	)
+	
 	return data
 	end)

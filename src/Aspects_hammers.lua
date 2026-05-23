@@ -16,7 +16,77 @@ end
 
 --Adding Hammers Traits
 	OverwriteTableKeys( TraitData, {
-	    AxeShieldDeflectTraitYM = 
+	    StaffDoubleHealTraitYM = 
+		{
+			InheritFrom = { "WeaponTrait", "StaffHammerTrait" },
+			Icon = "JarlUlsfark-AspectYoungMel\\TastyVigorIcon",
+			GameStateRequirements =
+			{
+				{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponStaffBall", },
+				},
+				{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponStaffSwing", },
+				IsAny = {"StaffAspectofYoungMelinoe", }
+				},
+			},
+			-- Double heal effect is in the function in ready.lua
+			ManaCostModifiers = 
+			{
+				WeaponNames = WeaponSets.HeroSecondaryWeapons ,
+				ExWeapons = true,
+				ManaCostAdd = 15,
+				ReportValues = 
+				{ 
+					ReportedCost = "ManaCostAdd" 
+				},
+			},	
+			ExtractValues =
+			{
+				{
+				Key = "ReportedCost",
+				ExtractAs = "ManaCostAdded",
+				IncludeSigns = true
+				},
+			},
+		},
+		StaffSpecialHomingTraitYM = 
+		{
+			InheritFrom = { "WeaponTrait", "StaffHammerTrait" },
+			Icon = "JarlUlsfark-AspectYoungMel\\HomingBoltIcon",
+			GameStateRequirements =
+			{
+				{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponStaffBall", },
+				},
+				{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponStaffSwing", },
+				IsAny = {"StaffAspectofYoungMelinoe", }
+				},
+			},
+			PropertyChanges = 
+			{
+				{
+					WeaponName = "WeaponStaffBall",
+					ProjectileName = "ProjectileStaffBoltEA",
+					ProjectileProperty = "Range",
+					ChangeValue = 8800,
+					ChangeType = "Absolute",
+				},
+			},
+			{
+				{
+					WeaponName = "WeaponStaffBall",
+					ProjectileName = "ProjectileStaffBoltEA",
+					ProjectileProperty = "MaxAdjustRate",
+					ChangeValue = 110,
+					ChangeType = "Absolute",
+				},
+			},
+		},
+		AxeShieldDeflectTraitYM = 
 		{
 			InheritFrom = { "WeaponTrait", "AxeHammerTrait" },
 			Icon = "JarlUlsfark-AspectYoungMel\\ShieldBlockIcon",
@@ -246,11 +316,13 @@ table.insert(TraitData.TorchSpecialImpactTrait.GameStateRequirements, {
 			HasNone = {"TorchAspectofYoungMelinoe", },
 })	
 	
-	--Adding Hammers to pool
-	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTraitYM")
-    table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYM")
-	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTraitYM")
-	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTraitYM")
-	table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "ReflectiveCastTraitYM")
-	
+--Adding Hammers to pool
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "StaffDoubleHealTraitYM")
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "StaffSpecialHomingTraitYM")
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTraitYM")
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYM")
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTraitYM")
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTraitYM")
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "ReflectiveCastTraitYM")
+
 	
