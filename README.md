@@ -6,7 +6,7 @@ Adding aspects of Young Melinoe.
 
 Adds five weapon aspects of Young Melinoë
 
-Adds seven Daedalus Hammers
+Adds eight Daedalus Hammers
 
 Adds five Minor Prophecies
 
