@@ -39,6 +39,7 @@ function mod.CheckStaffSelfHit( triggerArgs, args )
 		end
 	end
 end
+
 --Function for AxeAspectYoungMel trait
 function mod.BlockAxeBuff( blocker, args, triggerArgs )
 	if not blocker or not blocker.ObjectId then
@@ -281,7 +282,19 @@ modutil.mod.Path.Wrap("SetupMap", function(base, source, args)
 	mod.LoadAspectPackage()
 	return base(source, args)
 end)
- 
+
+ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
+        -- Fallback to the original logic first so we don't break actual gameplay healing
+        baseFunc(victim, triggerArgs)
+		if victim == CurrentRun.Hero and HeroHasTrait("StaffAspectofYoungMelinoe") then
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
+			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
+				GameState.Flags.LargeHealRun = true
+			end
+		end
+end)
+
 -- Steps to create new Aspects
 	-- 1.Adding projectile data
 	-- 2.Adding Effects to default attack with active=false

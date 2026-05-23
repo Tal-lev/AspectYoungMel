@@ -34,6 +34,7 @@ local ZagreusJourney = rom.mods["NikkelM-Zagreus-Journey"]
 table.insert( QuestOrderData, "Quest_YM_Chronos_aspects")
 table.insert( QuestOrderData, "Quest_YM_MaxWeaponUpgrade")
 table.insert( QuestOrderData, "Quest_YM_HammerUpgrades")
+table.insert( QuestOrderData, "Quest_YM_LargeHealRun")
 table.insert( QuestOrderData, "Quest_YM_HighCombo")
 
 OverwriteTableKeys( QuestData, {
@@ -200,6 +201,48 @@ OverwriteTableKeys( QuestData, {
 				ObjectType = "NPC_Moros_01",
 
 				{ Cue = "/VO/Moros_0596", Text = "Could the Fates have already expected your ascent...?" },
+			},
+		},
+	},
+
+    Quest_YM_LargeHealRun =
+	{
+		InheritFrom = { "DefaultQuestItem", "DefaultKillQuest" },
+		RewardResourceName = "MetaCurrency",
+		RewardResourceAmount = 300,
+		UnlockGameStateRequirements =
+		{
+			{
+				Path = { "GameState", "WeaponsUnlocked" },
+				HasAll = { 
+                    "StaffAspectofYoungMelinoe",
+                },
+			},
+		},
+		CompleteGameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "Flags", "LargeHealRun",},
+			},
+		},
+		CashedOutVoiceLines =
+		{
+			{
+				PreLineWait = 0.4,
+				GameStateRequirements =
+				{
+					{
+					},
+				},
+				Cooldowns =
+				{
+					{ Name = "MorosProphecyFulfilledSpeech", Time = 3 },
+				},
+				SkipAnim = true,
+				RequiredSourceValueFalse = "InPartnerConversation",
+				ObjectType = "NPC_Moros_01",
+
+				{ Cue = "/VO/Moros_0240", Text = "Ever shall you walk in the light of the Moon." },
 			},
 		},
 	},

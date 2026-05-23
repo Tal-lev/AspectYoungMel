@@ -511,6 +511,23 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 	{
+      Id = "Quest_YM_LargeHealRun",
+      DisplayName = "Mender of Health",
+      Description = "The daughter of the god of the dead shall some evening {#Emph}regain {#Prev} her {#Emph}vigor {#Prev} as she did in her {#Emph}Youth {#Prev}.",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "LargeHealRun",
+      DisplayName = "Heal 500 Health with the aspect of Sweet-Tooth Melinoë",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
       Id = "Quest_YM_HighCombo",
       DisplayName = "Catcher of Balls",
       Description = "The daughter of the god of the dead shall some evening catch the ball each and every time."
@@ -583,6 +600,9 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 	},
 	TextOrder)
 	)
+	
+	
+
 	
 	return data
 	end)
