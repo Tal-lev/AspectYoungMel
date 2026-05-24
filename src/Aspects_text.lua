@@ -566,6 +566,23 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 	{
+      Id = "Quest_YM_Block_Hades",
+      DisplayName = "Father's Little Girl",
+      Description = "The daughter of the god of the dead shall some evening dream of {#Emph}blocking {#Prev} her {#Emph}Father's {#Prev} wrath as she once did in her {#Emph}Youth{#Prev}.",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "YM_Block_Hades",
+      DisplayName = "Block Hades's Beam with the Axepect of young Melinoë",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
       Id = "Quest_YM_HighCombo",
       DisplayName = "Catcher of Balls",
       Description = "The daughter of the god of the dead shall some evening {#Emph}catch {#Prev}the {#Emph}ball {#Prev}each and every time."

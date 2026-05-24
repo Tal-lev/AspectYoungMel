@@ -1,41 +1,13 @@
-local ZagreusJourney = rom.mods["NikkelM-Zagreus-Journey"]
-
---local newQuestOrderData = {
-	-- key / mission-critical
-	--"YM_MaxAspect",
---    "YM_Chronos_aspects",
-    --"YM_UnrivaledTyphon_Staff",
-    --"YM_UnrivaledTyphon_Dagger",
-    --"YM_UnrivaledTyphon_Torch",
-    --"YM_UnrivaledTyphon_Axe",
-    --"YM_UnrivaledTyphon_Skull",
-    --"YM_HighCombo",
-    --"YM_Cerberus_Ball",
-    --"YM_Zagreus_Ball",
-    --"YM_Block_Scylla",
-
---}
-
---if ZagreusJourney then
---	local insertIndex = nil
---	for index, questKey in ipairs(newQuestOrderData) do
---		if questKey == "YM_Block_Scylla" then
---			insertIndex = index + 1
---			break
---		end
---	end
---	if insertIndex then
---		table.insert(newQuestOrderData, insertIndex, "YM_Block_Hades_Laser")
---	end
---end
-
---game.ConcatTableValuesIPairs(game.QuestOrderData, newQuestOrderData)
+local ZagreusJourney = rom.mods['NikkelM-Zagreus_Journey']
 
 table.insert( QuestOrderData, "Quest_YM_Chronos_aspects")
 table.insert( QuestOrderData, "Quest_YM_MaxWeaponUpgrade")
 table.insert( QuestOrderData, "Quest_YM_HammerUpgrades")
 table.insert( QuestOrderData, "Quest_YM_LargeHealRun")
 table.insert( QuestOrderData, "Quest_YM_Block_Scylla")
+if ZagreusJourney then
+    table.insert( QuestOrderData, "Quest_YM_Block_Hades")
+end
 table.insert( QuestOrderData, "Quest_YM_HighCombo")
 
 OverwriteTableKeys( QuestData, {
@@ -286,6 +258,53 @@ OverwriteTableKeys( QuestData, {
 				ObjectType = "NPC_Moros_01",
 
 				{ Cue = "/VO/Moros_0610", Text = "You shall be tested by a songstress of the deep." },
+			},
+		},
+	},
+
+    Quest_YM_Block_Hades =
+	{
+		InheritFrom = { "DefaultQuestItem", "DefaultKillQuest" },
+		RewardResourceName = "MetaCurrency",
+		RewardResourceAmount = 300,
+		UnlockGameStateRequirements =
+		{
+			{
+				Path = { "GameState", "WeaponsUnlocked" },
+				HasAll = { 
+                    "AxeAspectofYoungMelinoe",
+                },
+			},
+            {
+				Path = { "GameState", "ModsNikkelMHadesBiomesCompletedRunsCache" },
+				Comparison = ">=",
+				Value = 1,
+			},
+		},
+		CompleteGameStateRequirements =
+		{
+			{
+				PathTrue = { "GameState", "Flags", "YM_Block_Hades",},
+			},
+		},
+		CashedOutVoiceLines =
+		{
+			{
+				PreLineWait = 0.4,
+				GameStateRequirements =
+				{
+					{
+					},
+				},
+				Cooldowns =
+				{
+					{ Name = "MorosProphecyFulfilledSpeech", Time = 3 },
+				},
+				SkipAnim = true,
+				RequiredSourceValueFalse = "InPartnerConversation",
+				ObjectType = "NPC_Moros_01",
+
+				{ Cue = "/VO/Moros_0239", Text = "You have inherited your father's strength." },
 			},
 		},
 	},

@@ -45,16 +45,11 @@ function mod.BlockAxeBuff( blocker, args, triggerArgs )
 	if not blocker or not blocker.ObjectId then
 		return
 	end
-	print("!!!!!!!@@!!!!!")
-	for key,value in pairs(triggerArgs) do
-		print(key)
-		print(value)
-	end
 	if triggerArgs.WeaponName == "WeaponAxeSpecial" then
-		if triggerArgs.BlockedProjectileName == "ScyllaNotes" or triggerArgs.BlockedProjectileName == "ScyllaNotesFinale" and not GameState.Flags.YM_Block_Scylla then
+		if (triggerArgs.BlockedProjectileName == "ScyllaNotes" or triggerArgs.BlockedProjectileName == "ScyllaNotesFinale") and not GameState.Flags.YM_Block_Scylla then
 			GameState.Flags.YM_Block_Scylla = true
-		--elseif triggerArgs.BlockedProjectileName == "" and not GameState.Flags.YM_Block_Hades_Laser then
-		--	GameState.Flags.YM_Block_Hades_Laser = true
+		elseif (triggerArgs.BlockedProjectileName == "HadesCastBeam" or triggerArgs.BlockedProjectileName == "HadesCastBeam2" or triggerArgs.BlockedProjectileName == "HadesCastBeam360" or triggerArgs.BlockedProjectileName == "HadesCastBeam2360") and not GameState.Flags.YM_Block_Hades_Laser then
+			GameState.Flags.YM_Block_Hades = true
 		end
 		local trait = GetHeroTrait( "AxeAspectofYoungMelinoe")
 		if trait.RetaliateBuff ~= 1 then
