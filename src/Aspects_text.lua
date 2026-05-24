@@ -525,7 +525,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 	{
       Id = "Quest_YM_Chronos_aspects",
       DisplayName = "Bearing Youthful Gifts",
-      Description = "The daughter of the god of the dead shall prevail against either of her ultimate adversaries using each and every {#Emph}Aspect {#Prev}of her {#Emph}Youth {#Prev}."
+      Description = "The daughter of the god of the dead shall prevail against either of her ultimate adversaries using each and every {#Emph}Aspect {#Prev}of her {#Emph}Youth{#Prev}."
 	},
 	TextOrder)
 	)
@@ -534,7 +534,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 	{
       Id = "Quest_YM_LargeHealRun",
       DisplayName = "Mender of Health",
-      Description = "The daughter of the god of the dead shall some evening {#Emph}regain {#Prev} her {#Emph}vigor {#Prev} as she did in her {#Emph}Youth {#Prev}.",
+      Description = "The daughter of the god of the dead shall some evening {#Emph}regain {#Prev} her {#Emph}vigor {#Prev} as she did in her {#Emph}Youth{#Prev}.",
 	},
 	TextOrder)
 	)
@@ -549,9 +549,26 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 	{
+      Id = "Quest_YM_Block_Scylla",
+      DisplayName = "Siren's Silence",
+      Description = "The daughter of the god of the dead shall some evening {#Emph}block {#Prev} the {#Emph}Siren's song {#Prev}as she did in her {#Emph}Youth{#Prev}.",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "YM_Block_Scylla",
+      DisplayName = "Block Scylla's notes with the Axepect of young Melinoë",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
       Id = "Quest_YM_HighCombo",
       DisplayName = "Catcher of Balls",
-      Description = "The daughter of the god of the dead shall some evening catch the ball each and every time."
+      Description = "The daughter of the god of the dead shall some evening {#Emph}catch {#Prev}the {#Emph}ball {#Prev}each and every time."
 	},
 	TextOrder)
 	)
@@ -617,7 +634,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 	{
       Id = "Quest_YM_HammerUpgrades",
       DisplayName = "Hammers of Youth",
-      Description = "The daughter of the god of the dead shall apply various {#Emph}Daedalus {#Prev}enchantments to the {#Emph}Aspects {#Prev}of her {#Emph}Youth {#Prev}.",
+      Description = "The daughter of the god of the dead shall apply various {#Emph}Daedalus {#Prev}enchantments to the {#Emph}Aspects {#Prev}of her {#Emph}Youth{#Prev}.",
 	},
 	TextOrder)
 	)
