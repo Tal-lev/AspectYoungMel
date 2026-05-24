@@ -8,7 +8,7 @@ Adds five weapon aspects of Young Melinoë
 
 Adds nine Daedalus Hammers
 
-Adds six Minor Prophecies
+Adds seven Minor Prophecies
 
 ### Staff Aspect of Young Melinoë
 
