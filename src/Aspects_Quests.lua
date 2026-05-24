@@ -265,6 +265,7 @@ OverwriteTableKeys( QuestData, {
                     "DaggerDashAttackTripleTraitYM",
                     --Torch
                     "ReflectiveCastTraitYM",
+                    "InsideCastBuffTraitYM",
                     --Axe
                     "AxeShieldDeflectTraitYM",
                     "AxeExtendedRetaliateTraitYM",
@@ -289,6 +290,7 @@ OverwriteTableKeys( QuestData, {
                     "DaggerDashAttackTripleTraitYM",
                     --Torch
                     "ReflectiveCastTraitYM",
+                    "InsideCastBuffTraitYM",
                     --Axe
                     "AxeShieldDeflectTraitYM",
                     "AxeExtendedRetaliateTraitYM",

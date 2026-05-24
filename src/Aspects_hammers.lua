@@ -277,6 +277,37 @@ end
 		},
 	},
 
+	InsideCastBuffTraitYM = 
+	{
+		InheritFrom =  { "WeaponTrait", "TorchHammerTrait" },
+		Icon = "JarlUlsfark-AspectYoungMel\\InsideCastBuffIcon",
+		GameStateRequirements =
+		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponTorchSpecial", },
+			},
+			{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponTorch", },
+				IsAny = { "TorchAspectofYoungMelinoe" }
+			},
+		},
+		AddOutgoingDamageModifiers = 
+		{
+			ValidWeaponMultiplier = { BaseValue = 1.3, SourceIsMultiplier = true },
+			ValidActiveEffects = {"ImpactSlowYM"},
+			ReportValues = { ReportedModifier = "ValidWeaponMultiplier" }
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedModifier",
+				ExtractAs = "TooltipMultiplier",
+				Format = "PercentDelta"
+			},
+		},
+
+	},
 	DummyComboDisplayBoonYM = 
 	{
 		Icon = "JarlUlsfark-AspectYoungMel\\SkullAspectYoungMelIcon",
@@ -336,11 +367,16 @@ table.insert(TraitData.TorchSpecialImpactTrait.GameStateRequirements, {
 --Adding Hammers to pool
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "StaffDoubleHealTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "StaffSpecialHomingTraitYM")
+
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYM")
+
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "ReflectiveCastTraitYM")
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "InsideCastBuffTraitYM")
+
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeShieldDeflectTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeExtendedRetaliateTraitYM")
-table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "DaggerDashAttackTripleTraitYM")
+
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTraitYM")
-table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "ReflectiveCastTraitYM")
 
 	

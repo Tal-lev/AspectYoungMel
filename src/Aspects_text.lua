@@ -126,6 +126,17 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
+			Id = "InsideCastBuffTraitYM",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Special Fury",
+			Description = "You deal {#UpgradeFormat}+{$TooltipData.ExtractData.TooltipMultiplier}% {#Prev}to foes in your {$Keywords.Special_Cast}."
+
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
 			Id = "AspectDashRechargeStatDisplay",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Dash Recovery Speed:",
