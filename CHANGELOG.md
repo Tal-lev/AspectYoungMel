@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - Replaces the attack and omega attack with tornados.
     - Trait grants starting armor
 - Added 7 minor prophecies
-- Added 4 new hammer (9 total)
+- Added 5 new hammer (10 total)
 
 ## [0.5.3] - 2026-05-20
 
