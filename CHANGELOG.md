@@ -6,9 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+- Added Suit Aspect of Young Melinoë
+    - Replaces the attack and omega attack with tornados.
+    - Trait grants starting armor
 - Added 7 minor prophecies
-- Added 4 new hammer (9 total)
+- Added 5 new hammer (10 total)
 
 ## [0.5.3] - 2026-05-20
 
