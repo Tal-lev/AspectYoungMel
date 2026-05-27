@@ -320,6 +320,44 @@ end
 		},
 		FlavorText = "DoubleBloodDropBoon_FlavorText",
 	},
+	StackingTornadoTraitYM = 
+	{
+		InheritFrom =  { "WeaponTrait", "SuitHammerTrait" },
+		Icon = "JarlUlsfark-AspectYoungMel\\ThousandCutsIcon",
+		GameStateRequirements =
+		{
+			{
+				Path = { "CurrentRun", "Hero", "Weapons", },
+				HasAll = { "WeaponSuit", },
+			},
+			{
+				Path = { "GameState", "LastWeaponUpgradeName", "WeaponSuit", },
+				IsAny = { "SuitAspectofYoungMelinoe" }
+			},
+		},
+		PropertyChanges = {
+			{
+				WeaponName = "WeaponSuit",
+				WeaponProperty = "SwapOnFire",
+				ChangeValue = "WeaponSuit2",
+			},
+			{
+				WeaponName = "WeaponSuit2",
+				WeaponProperty = "SwapOnFire",
+				ChangeValue = "WeaponSuit3",
+			},
+			{
+				WeaponName = "WeaponSuit3",
+				WeaponProperty = "SwapOnFire",
+				ChangeValue = "WeaponSuit",
+			},
+			{
+				WeaponName = "WeaponSuitDash",
+				WeaponProperty = "Projectile",
+				ChangeValue = "HarpyFlapFastDash_YM",
+			},
+		},
+	},
 	})
 
 -- Removing incompatible Hammers
@@ -379,4 +417,5 @@ table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "AxeExtendedRetaliateTraitY
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobExtendComboTraitYM")
 table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "LobComboScalingTraitYM")
 
+table.insert( LootSetData.Loot.WeaponUpgrade.Traits, "StackingTornadoTraitYM")
 	

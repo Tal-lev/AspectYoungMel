@@ -167,3 +167,66 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 			},
 		}
 	})
+
+		AddGodTraitProperty({
+		TraitSuffix = "WeaponBoon",
+		PropertyChanges = {
+			-- Torches Aspect of young Mel special 
+			{
+				WeaponName = "WeaponSuit",
+				ProjectileName = "HarpyFlapFast_YM",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "HarpyTornadoYM_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponSuit2",
+				ProjectileName = "HarpyFlapFast_YM",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "HarpyTornadoYM_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponSuit3",
+				ProjectileName = "HarpyFlapFast_YM",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "HarpyTornadoYM_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponSuitDash",
+				ProjectileName = "HarpyFlapFast_YM",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "HarpyTornadoYM_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponSuitDash",
+				ProjectileName = "HarpyFlapFastDash_YM",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "HarpyTornadoYM_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponSuitCharged",
+				ProjectileName = "HarpyFlapFastCharge_YM",
+				ProjectileProperty = "Graphic",
+				ValuePrefix = "HarpyTornadoYM_",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			--{
+			--	WeaponName = "WeaponSuitCharged",
+			--	TraitName = "SuitAspectofYoungMelinoe",
+			--	ProjectileProperty = "FireFx",
+			--	ValuePrefix = "null",
+			--	ChangeType = "Absolute",
+			--	ExcludeLinked = true,
+			--},
+		}
+	})

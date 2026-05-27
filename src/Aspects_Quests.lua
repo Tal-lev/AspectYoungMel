@@ -27,7 +27,7 @@ OverwriteTableKeys( QuestData, {
                     "TorchAspectofYoungMelinoe",
                     "AxeAspectofYoungMelinoe",
                     "SkullAspectofYoungMelinoe",
-                    --"SuitAspectofYoungMelinoe",
+                    "SuitAspectofYoungMelinoe",
                 },
 			},
 			{
@@ -54,7 +54,7 @@ OverwriteTableKeys( QuestData, {
                     "TorchAspectofYoungMelinoe",
                     "AxeAspectofYoungMelinoe",
                     "SkullAspectofYoungMelinoe",
-                    --"SuitAspectofYoungMelinoe",
+                    "SuitAspectofYoungMelinoe",
 				},
 			},
 		},
@@ -97,6 +97,7 @@ OverwriteTableKeys( QuestData, {
                     "TorchAspectofYoungMelinoe2",
                     "AxeAspectofYoungMelinoe2",
                     "SkullAspectofYoungMelinoe2",
+					"SuitAspectofYoungMelinoe2",
 				},
 			},
 		},
@@ -111,6 +112,7 @@ OverwriteTableKeys( QuestData, {
                     "TorchAspectofYoungMelinoe5",
                     "AxeAspectofYoungMelinoe5",
                     "SkullAspectofYoungMelinoe5",
+					"SuitAspectofYoungMelinoe5",
 				},
 			},
 		},
@@ -334,6 +336,8 @@ OverwriteTableKeys( QuestData, {
                     --Skull
                     "LobExtendComboTraitYM",
                     "LobComboScalingTraitYM",
+					--Suit
+					"StackingTornadoTraitYM",
 				},
 				Comparison = ">=",
 				Value = 3,
@@ -359,6 +363,8 @@ OverwriteTableKeys( QuestData, {
                     --Skull
                     "LobExtendComboTraitYM",
                     "LobComboScalingTraitYM",
+					--Suit
+					"StackingTornadoTraitYM",
 				},
 			},
 		},

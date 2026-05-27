@@ -137,6 +137,17 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 
 	table.insert(data.Texts, sjson.to_object(
 		{
+			Id = "StackingTornadoTraitYM",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Thousand Cuts",
+			Description = "Your {#Emph}Attack {#Prev}stack together."
+
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
 			Id = "AspectDashRechargeStatDisplay",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Dash Recovery Speed:",
@@ -376,6 +387,53 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 			Id = "SkullAspectofYoungMelinoe_FlavorText",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "The will of Night is never to be chronicled, but rarely, on moonless nights, it is dodgeball."
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SuitAspectofYoungMelinoe",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Aspect of Icarus",
+			Description = "Your {$Keywords.Attack} becomes a Tornado."
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SuitAspectofYoungMelinoe_Shop",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Xinth Suit, Aspect of Icarus:",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SuitAspectofYoungMelinoe_Upgrade",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Aspect of Icarus {$TooltipData.AspectRarityText}",
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SuitAspectofYoungMelinoe_FlavorText",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "Night's light, Wings of metal soar above."
+		},
+		TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+		{
+			Id = "SuitAspectYoungMelStat",
+			InheritFrom = "BaseBoonMultiline",
+			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Starting Armor:",
+			Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.TooltipAmount}"
 		},
 		TextOrder)
 	)
@@ -643,6 +701,14 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 	{
       Id = "SkullAspectofYoungMelinoe5",
       DisplayName = "Raise Aspect of Playful Melinoë to {#LegendaryFormat}Rank V",
+	},
+	TextOrder)
+	)
+
+	table.insert(data.Texts, sjson.to_object(
+	{
+      Id = "SuitAspectofYoungMelinoe5",
+      DisplayName = "Raise Aspect of Icarus to {#LegendaryFormat}Rank V",
 	},
 	TextOrder)
 	)

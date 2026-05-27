@@ -239,6 +239,8 @@ import "Aspect_cast_functions.lua"
 
 --Whether to change new aspect textures
 import "config.lua"
+
+local Suit_back_mesh = ''
 if config.Alter_Textures == true then
 	--Importing Axe Textures
 	local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
@@ -283,6 +285,10 @@ if config.Alter_Textures == true then
 	table.insert(current_skull_overrides, weapon_skull_hash)
 
 	rom.data.load_package_overrides_set(weapon_skull_hash, current_skull_overrides)
+
+	Suit_back_mesh = "Icarus_Mesh"
+else
+	Suit_back_mesh = "WeaponSuitB_Base_Mesh"
 end
 
 --Loading the package at every room
@@ -301,6 +307,49 @@ ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
 				GameState.Flags.LargeHealRun = true
 			end
 		end
+end)
+
+ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
+        -- Fallback to the original logic first so we don't break actual gameplay healing
+        baseFunc(victim, triggerArgs)
+		if victim == CurrentRun.Hero and HeroHasTrait("StaffAspectofYoungMelinoe") then
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
+			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
+				GameState.Flags.LargeHealRun = true
+			end
+		end
+end)
+
+ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
+        -- Fallback to the original logic first so we don't break actual gameplay healing
+        baseFunc(victim, triggerArgs)
+		if victim == CurrentRun.Hero and HeroHasTrait("StaffAspectofYoungMelinoe") then
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
+			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
+				GameState.Flags.LargeHealRun = true
+			end
+		end
+end)
+
+--Replacing Textures
+--local gpk = rom.path.combine(_PLUGIN.this_path, 'Axe.gpk')
+--rom.data.add_granny_file('Axe', gpk)
+
+local gpk_path = rom.path.combine(
+	_PLUGIN.plugins_data_mod_folder_path, 'Axe.gpk')
+rom.data.add_granny_file('Axe.gpk', gpk_path)
+
+ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
+	baseFunc(hero, args)
+	if HeroHasTrait("AxeAspectofYoungMelinoe") then
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+  		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+	elseif HeroHasTrait("AxeRecoveryAspect") then
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+  		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+	end
 end)
 
 -- Steps to create new Aspects
@@ -1094,18 +1143,157 @@ modutil.once_loaded.game(function()
 		FlavorText = "TorchAspectofYoungMelinoe_FlavorText",
 	}
 
-	--SuitAspectofYoungMelinoe = {
-	--	InheritFrom = { "WeaponEnchantmentTrait" },
-	--	Icon = "Hammer_Suit_01",
-	--	RequiredWeapon = "WeaponSuit",
-	--	WeaponKitGrannyModel = "Icarus_Mesh",
-	--	ReplacementGrannyModels = 
-	--	{
-	--		WeaponSuitR_Base_Mesh = "WeaponSuitR_Base_Mesh",
-	--		WeaponSuitL_Base_Mesh = "WeaponSuitL_Base_Mesh",
-	--		WeaponSuitB_Base_Mesh = "Icarus_Mesh",
-	--	},
-	--}
+	SuitAspectofYoungMelinoe = {
+		InheritFrom = { "WeaponEnchantmentTrait", "CostumeTrait" },
+		Icon = "JarlUlsfark-AspectYoungMel\\SuitAspectYoungMelIcon",
+		RequiredWeapon = "WeaponSuit",
+		PreEquipWeapons = { "WeaponSuit3" },
+		WeaponKitGrannyModel = Suit_back_mesh,
+		ReplacementGrannyModels = 
+		{
+			WeaponSuitR_Base_Mesh = "WeaponSuitR_Base_Mesh",
+			WeaponSuitL_Base_Mesh = "WeaponSuitL_Base_Mesh",
+			WeaponSuitB_Base_Mesh = Suit_back_mesh,
+		},
+		RarityLevels =
+		{
+			Common =
+			{
+				Multiplier = 1.0,
+			},
+			Rare =
+			{
+				Multiplier = 2.0,
+			},
+			Epic =
+			{
+				Multiplier = 3.0,
+			},
+			Heroic =
+			{
+				Multiplier = 4.0,
+			},
+			Legendary =
+			{
+				Multiplier = 5.0,
+			},
+			Perfect =
+			{
+				Multiplier = 7.5,
+			},
+		},
+		SetupFunction =
+		{
+			Name = "CostumeArmor",
+			Args =
+			{
+				Source = "Aspect",
+				Delay = 0.75,
+				BaseAmount = { BaseValue = 20 },
+				ReportValues = 
+				{ 
+					ReportedArmor = "BaseAmount",
+				},
+			},
+		},
+		ExtractValues =
+		{
+			{
+				Key = "ReportedArmor",
+				ExtractAs = "TooltipAmount",
+			},
+		},
+		WeaponDataOverride = {
+			WeaponSuitCharged = {
+				ChargeWeaponStages =
+					{
+						{ ManaCost = 1, Force = 700, Scale =2, WeaponProperties = { NumProjectiles = 2, ProjectileInterval = 0.08, ProjectileAngleOffset = math.rad(20), AdditionalProjectileWaveChance = 0, FireGraphic = "Melinoe_Suit_AttackExPunch_Start", DamageMultiplier  = 1 }, Wait = 0.15, HideStageReachedFx = true },
+						{ ManaCost = 2, Force = 725, Scale =2, WeaponProperties = { DamageMultiplier  = 1.13 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 3, Force = 750, Scale =2, WeaponProperties = { DamageMultiplier = 1.26 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 4, Force = 775, Scale =2, WeaponProperties = { DamageMultiplier = 1.39 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 5, Force = 800, Scale =2, WeaponProperties = { DamageMultiplier = 1.52 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 6, Force = 825, Scale =2, WeaponProperties = { DamageMultiplier = 1.65 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 7, Force = 850, Scale =2, WeaponProperties = { DamageMultiplier = 1.78 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 8, Force = 875, Scale =2, WeaponProperties = { DamageMultiplier = 1.91 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 9, Force = 900, Scale =2, WeaponProperties = { DamageMultiplier = 2.04 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 10, Force = 900, Scale =2, WeaponProperties = { DamageMultiplier = 2.17 }, Wait = 0.05, HideStageReachedFx = true },
+
+						{ ManaCost = 11, Force = 900, WeaponProperties = { NumProjectiles = 3, DamageMultiplier  = 2.30 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 12, Force = 900, WeaponProperties = { DamageMultiplier = 2.43 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 13, Force = 900, WeaponProperties = { DamageMultiplier = 2.57 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 14, Force = 900, WeaponProperties = { DamageMultiplier = 2.70 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 15, Force = 900, WeaponProperties = { DamageMultiplier = 2.83 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 16, Force = 900, WeaponProperties = { DamageMultiplier = 2.96 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 17, Force = 900, WeaponProperties = { DamageMultiplier = 3.09 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 18, Force = 900, WeaponProperties = { DamageMultiplier = 3.22 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 19, Force = 900, WeaponProperties = { DamageMultiplier = 3.35 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 20, Force = 900, WeaponProperties = { DamageMultiplier = 3.48 }, Wait = 0.05, HideStageReachedFx = true },
+
+						{ ManaCost = 21, Force = 900, WeaponProperties = { NumProjectiles = 4, DamageMultiplier  = 3.61 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 22, Force = 900, WeaponProperties = { DamageMultiplier = 3.74 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 23, Force = 900, WeaponProperties = { DamageMultiplier = 3.87 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 24, Force = 900, WeaponProperties = { DamageMultiplier = 4.00 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 25, Force = 900, WeaponProperties = { DamageMultiplier = 4.13 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 26, Force = 900, WeaponProperties = { DamageMultiplier = 4.26 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 27, Force = 900, WeaponProperties = { DamageMultiplier = 4.39 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 28, Force = 900, WeaponProperties = { DamageMultiplier = 4.52 }, Wait = 0.05, HideStageReachedFx = true },
+						{ ManaCost = 29, Force = 900, WeaponProperties = { DamageMultiplier = 4.65 }, Wait = 0.05, HideStageReachedFx = true },
+
+						{ ManaCost = 30, Force = 900, WeaponProperties = { NumProjectiles = 5, DamageMultiplier = 5.00 }, Wait = 0.1, ForceRelease = true, BlockForceReleaseWithoutMana = true},
+					},
+			},
+			WeaponSuit2 = {
+				InheritFrom = { "WeaponSuit", },
+			},
+			WeaponSuit3 = {
+				InheritFrom = { "WeaponSuit", },
+			},
+		},
+		PropertyChanges =
+		{
+			{
+				WeaponName = "WeaponSuit",
+				WeaponProperties = {
+					SwapOnFire = "WeaponSuit",
+					BlockMoveInput = true,
+					CancelMovement = true,
+					Cooldown = 0.6,
+					FireGraphic = "Melinoe_Suit_SpecialMissile_FireQuick",
+					RootOwnerWhileFiring = true,
+					SelfVelocity = -500,
+				},
+			},
+			{
+				WeaponName = "WeaponSuit",
+				WeaponProperty = "Projectile",
+				ChangeValue = "HarpyFlapFast_YM",
+			},
+			{
+				WeaponName = "WeaponSuit2",
+				WeaponProperty = "Projectile",
+				ChangeValue = "HarpyFlapFast2_YM",
+			},
+			{
+				WeaponName = "WeaponSuit3",
+				WeaponProperty = "Projectile",
+				ChangeValue = "HarpyFlapFast3_YM",
+			},
+			{
+				WeaponName = "WeaponSuit",
+				WeaponProperty = "FireGraphic",
+				ChangeValue = "Melinoe_Suit_SpecialMissile_FireQuick",
+			},
+			{
+				WeaponName = "WeaponSuitCharged",
+				WeaponProperty = "Projectile",
+				ChangeValue = "HarpyFlapFastCharge_YM",
+			},
+		},
+		StatLines = {
+			"SuitAspectYoungMelStat",
+		},
+		FlavorText = "SuitAspectofYoungMelinoe_FlavorText",
+	}
 
 	--OverwriteTableKeys( TraitSetData.Aspects.BaseSuitAspect, SuitAspectofYoungMelinoe)
 	
@@ -1114,7 +1302,7 @@ modutil.once_loaded.game(function()
 	TraitData.TorchAspectofYoungMelinoe = TorchAspectofYoungMelinoe
 	TraitData.AxeAspectofYoungMelinoe = AxeAspectofYoungMelinoe
 	TraitData.SkullAspectofYoungMelinoe = SkullAspectofYoungMelinoe
-
+	TraitData.SuitAspectofYoungMelinoe = SuitAspectofYoungMelinoe
 
 	--Adds the new traits to the in-game shop
 	import "Aspect_weaponshop.lua"
@@ -1130,4 +1318,7 @@ modutil.once_loaded.game(function()
 
 	--Adds minor propechies
 	import "Aspects_Quests.lua"
+
+	--Adds Bounties
+	import "Aspects_Bounty.lua"
 end)

@@ -493,5 +493,131 @@ local file = rom.path.combine(rom.paths.Content, 'Game/Projectiles/PlayerProject
 		},
 	})
 
+	table.insert(data.Projectiles,
+	{
+		Name = "HarpyFlapFast_YM",
+		InheritFrom = "1_BaseDamagingProjectile",
+		Type = "STRAIGHT",
+		MultiDetonate = true,
+		--ImpactFx = "MageProjectileExplosion_LightRanged",
+		--ImpactFx = "DaggerProjectileImpactFx",
+		ImpactFX = "null",
+		TotalFuse = 4.0,
+		Fuse = 0.3,
+		ImmunityDuration = 0.3,
+		Range = 2500,
+		Speed = 1200,
+		Acceleration = -1200,
+		SpinRate = 0,
+		SpinRateVariance = 20,
+		UseArmor = true,
+		UseVulnerability = true,
+		Damage = 20,
+		BlastStartRadius = 50,
+		ExpandBlastDuringDetonation = true,
+		BlastSpeed = 700,
+		DamageRadius = 200,
+		DamageRadiusScaleY = 0.55,
+		DrawDuringPause = false,
+		UnpauseResetLocation = true,
+		CheckObstacleImpact = false,
+		UnlimitedUnitPenetration = true,
+		MultipleUnitCollisions = true,
+		GroupName = "Standing",
+		InheritOwnerElapsedTimeMultiplier = false,
+		Thing =
+		{
+			Graphic = "HarpyTornadoYM",
+			AttachedAnim = "HarpyTornadoShadow",
+			Tallness = 100,
+			UseBoundsForSortDrawArea = true,
+			RotateGeometry = false,
+			Points = { { X = 0, Y = 0 }, },
+		},
+		Effect =
+		{
+			Name = "OnHitStun",
+			Duration = 0.7,
+			DisableMove = true,
+			DisableRotate = true,
+			DisableAttack = false,
+			Active = false,
+			CanAffectInvulnerable = false,
+			Cancelable = true,
+		},
+	})
+
+	table.insert(data.Projectiles,
+	{
+		Name = "HarpyFlapFast2_YM",
+		InheritFrom = "HarpyFlapFast_YM",
+	})
+
+	table.insert(data.Projectiles,
+	{
+		Name = "HarpyFlapFast3_YM",
+		InheritFrom = "HarpyFlapFast_YM",
+	})
+
+	table.insert(data.Projectiles,
+	{
+		Name = "HarpyFlapFastDash_YM",
+		InheritFrom = "HarpyFlapFast_YM",
+	})
+
+	table.insert(data.Projectiles,
+	{
+		Name = "HarpyFlapFastCharge_YM",
+		InheritFrom = "1_BaseDamagingProjectile",
+		Type = "STRAIGHT",
+		MultiDetonate = true,
+		--ImpactFx = "MageProjectileExplosion_LightRanged",
+		--ImpactFx = "DaggerProjectileImpactFx",
+		ImpactFX = "null",
+		TotalFuse = 4.0,
+		Fuse = 0.3,
+		ImmunityDuration = 0.3,
+		Range = 2500,
+		Speed = 1200,
+		Acceleration = -1200,
+		SpinRate = 0,
+		SpinRateVariance = 20,
+		UseArmor = true,
+		UseVulnerability = true,
+		Damage = 20,
+		BlastStartRadius = 50,
+		ExpandBlastDuringDetonation = true,
+		BlastSpeed = 700,
+		DamageRadius = 250,
+		DamageRadiusScaleY = 0.55,
+		DrawDuringPause = false,
+		UnpauseResetLocation = true,
+		CheckObstacleImpact = false,
+		UnlimitedUnitPenetration = true,
+		MultipleUnitCollisions = true,
+		GroupName = "Standing",
+		InheritOwnerElapsedTimeMultiplier = false,
+		Thing =
+		{
+			Graphic = "HarpyTornadoYM",
+			AttachedAnim = "HarpyTornadoShadow",
+			Tallness = 100,
+			UseBoundsForSortDrawArea = true,
+			RotateGeometry = false,
+			Points = { { X = 0, Y = 0 }, },
+		},
+		Effect =
+		{
+			Name = "OnHitStun",
+			Duration = 0.7,
+			DisableMove = true,
+			DisableRotate = true,
+			DisableAttack = false,
+			Active = false,
+			CanAffectInvulnerable = false,
+			Cancelable = true,
+		},
+	})
+
 	return data
 	end)
