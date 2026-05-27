@@ -10,6 +10,8 @@ Adds ten Daedalus Hammers
 
 Adds seven Minor Prophecies
 
+Adds two Chaos trials
+
 ### Staff Aspect of Young Melinoë
 
 - Replaces the special with a weaker projectile with shorter cooldown, better homing and no hit-stun.
