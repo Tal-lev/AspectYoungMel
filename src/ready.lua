@@ -51,7 +51,7 @@ function mod.BlockAxeBuff( blocker, args, triggerArgs )
 		elseif (triggerArgs.BlockedProjectileName == "HadesCastBeam" or triggerArgs.BlockedProjectileName == "HadesCastBeam2" or triggerArgs.BlockedProjectileName == "HadesCastBeam360" or triggerArgs.BlockedProjectileName == "HadesCastBeam2360") and not GameState.Flags.YM_Block_Hades_Laser then
 			GameState.Flags.YM_Block_Hades = true
 		end
-		local trait = GetHeroTrait( "AxeAspectofYoungMelinoe")
+		local trait = GetHeroTrait( "AxeAspectofYoungMelinoe") or GetHeroTrait("AxeAspectofYoungMelinoe_Secondary")
 		if trait.RetaliateBuff ~= 1 then
 			return
 		end
@@ -294,7 +294,7 @@ end)
 ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
         -- Fallback to the original logic first so we don't break actual gameplay healing
         baseFunc(victim, triggerArgs)
-		if victim == CurrentRun.Hero and HeroHasTrait("StaffAspectofYoungMelinoe") then
+		if victim == CurrentRun.Hero and (HeroHasTrait("StaffAspectofYoungMelinoe") or HeroHasTrait("StaffAspectofYoungMelinoe_Secondary")) then
 			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
 			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
 			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
