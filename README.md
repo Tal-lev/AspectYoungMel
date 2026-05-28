@@ -10,7 +10,7 @@ Adds ten Daedalus Hammers
 
 Adds seven Minor Prophecies
 
-Adds two Chaos trials
+Adds three Chaos trials
 
 ### Staff Aspect of Young Melinoë
 
