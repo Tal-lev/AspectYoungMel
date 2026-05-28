@@ -8,6 +8,164 @@ local mods = rom.mods
 bountyAPI = mods["Siuhnexus-BountyAPI"]
 
 bountyAPI.RegisterBounty({
+    Id = _PLUGIN.guid .. "BountyYMStaff",
+    Title = "Trial of Healing",
+    Description = "Climb the cold mountain with limited health. Overcome the mountain and win your treat.",
+    Difficulty = 4,
+    IsStandardBounty = true,
+    BiomeChar = "P",
+
+    DataOverrides = function (RegisterValues)
+        print("Overriding all the needed game tables for this challenge run...")
+    end,
+    SetupFunctions = function (BountyRunData, FromSave)
+        if FromSave then
+            print("Reacting to the data found in the persisted storage for this challenge run...")
+        else
+            print("Setting up the persisted data storage for this challenge run...")
+        end
+    end,
+    RoomTransition = function (BountyRunData, RoomName)
+        print("Room " .. RoomName .. " is being left. Choosing next room...")
+    end,
+    CanEnd = function (BountyRunData, RoomName)
+        print("Determining whether this challenge run should end")
+        return true
+    end,
+    EndFunctions = function (BountyRunData, Cleared)
+        print("Challenge run is ending. Cleaning up...")
+    end,
+
+    BaseData = {
+		InheritFrom = { "DefaultPackagedBounty", "BasePackageBountyBiomeP", },
+        WeaponKitName = "WeaponStaffSwing",
+		WeaponUpgradeName = "StaffAspectofYoungMelinoe",
+		KeepsakeName = "LowHealthCritKeepsake",
+		RemoveFamiliar = true,
+
+		--ForcedRewards =
+		--{
+		--},
+
+		RunOverrides =
+		{
+			MaxGodsPerRun = 4,
+			LootTypeHistory =
+			{
+			HeraUpgrade = 2,
+			DemeterUpgrade = 1,
+			},
+		},
+
+        StartingTraits =
+		{
+			{ Name = "HeraWeaponBoon", Rarity = "Rare", },
+			{ Name = "DemeterSpecialBoon", Rarity ="Rare"},
+			{ Name = "HeraManaBoon", Rarity = "Rare", },
+			{ Name = "RoomRewardMaxManaTrait", },
+			{ Name = "RoomRewardMaxManaTrait", },
+			{ Name = "RoomRewardMaxManaTrait", },
+			{ Name = "RoomRewardMaxManaTrait", },
+		},
+
+		--RewardStoreOverrides = {
+		--	HubRewards =
+		--	{
+		--		{
+		--			Name = "MaxHealthDropBig",
+		--		},
+		--		{
+		--			Name = "WeaponUpgrade",
+		--			AllowDuplicates = true,
+		--			GameStateRequirements =
+		--			{
+		--				-- None
+		--			},
+		--		},
+		--	},
+		--
+		--	SubRoomRewards =
+		--	{
+		--		{
+		--			Name = "TalentDrop",
+		--			GameStateRequirements =
+		--			{
+		--				NamedRequirements = { "TalentLegal", },
+		--			},
+		--		},
+		--		{
+		--			Name = "MaxHealthDrop",
+		--			GameStateRequirements =
+		--			{
+		--				NamedRequirementsFalse = { "TalentLegal", },
+		--			},
+		--		},
+		--	},
+		--	SubRoomRewardsHard =
+		--	{
+		--		{
+		--			Name = "TalentDrop",
+		--			GameStateRequirements =
+		--			{
+		--				NamedRequirements = { "TalentLegal", },
+		--			},
+		--		},
+		--		{
+		--			Name = "MaxHealthDrop",
+		--			GameStateRequirements =
+		--			{
+		--				NamedRequirementsFalse = { "TalentLegal", },
+		--			},
+		--		},
+		--	},
+		--},
+
+		MetaUpgradeStateEquipped =
+		{
+			"LowHealthBonus", --4
+			"LowManaDamageBonus",
+			"BonusRarity",
+			"EpicRarityBoost"
+		},
+
+        ShrineUpgradesActive = --15 Fear total
+		{
+			EnemyCountShrineUpgrade = 2,
+			EnemyEliteShrineUpgrade = 2,
+			BossDifficultyShrineUpgrade = 1,
+		},
+
+        UnlockGameStateRequirements =
+		{
+			-- Biome and Shrine unlocks
+			NamedRequirements = { "PackageBountyBiomeP", "ShrineUnlocked", },
+			-- Bounty progress
+			{
+				Path = { "GameState", "PackagedBountyClears" },
+				HasAny = { "PackageBountyChaosIntro", "PackageBountyOceanus", "PackageBountyStarter", },
+			},
+			-- Weapon
+			{
+				Path = { "GameState", "WeaponsUnlocked", },
+				HasAll = { "WeaponStaffSwing", "StaffAspectofYoungMelinoe", },
+			},
+			-- FirstLoot
+			{
+				Path = { "GameState", "TextLinesRecord", },
+				HasAll = { "DemeterFirstPickUp", },
+			},
+
+			-- MetaUpgrades
+			{
+				Path = { "GameState", "MetaUpgradeLimitLevel", },
+				Comparison = ">=",
+				Value = 5,
+			},
+		},
+    },
+})
+
+bountyAPI.RegisterBounty({
     Id = _PLUGIN.guid .. "BountyYMDagger",
     Title = "Trial of Initiate",
     Description = "Pass the final step of training by overcoming the witch teacher.",
@@ -135,7 +293,7 @@ bountyAPI.RegisterBounty({
         UnlockGameStateRequirements =
 		{
 			-- Biome and Shrine unlocks
-			NamedRequirements = { "PackageBountyBiomeN", "ShrineUnlocked", },
+			NamedRequirements = { "PackageBountyBiomeF", "ShrineUnlocked", },
 			-- Bounty progress
 			{
 				Path = { "GameState", "PackagedBountyClears" },

@@ -242,28 +242,6 @@ import "config.lua"
 
 local Suit_back_mesh = ''
 if config.Alter_Textures == true then
-	--Importing Axe Textures
-	local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
-	local custom_axe_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponAxe")
-
-	local current_axe_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
-
-	table.insert(current_axe_overrides, 1, custom_axe_hash)
-	table.insert(current_axe_overrides, weapon_axe_hash)
-
-	rom.data.load_package_overrides_set(weapon_axe_hash, current_axe_overrides)
-
-	--Importing Staff Textures
-	local weapon_staff_hash = rom.data.get_hash_guid_from_string("WeaponStaffSwing")
-	local custom_staff_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponStaff")
-
-	local current_staff_overrides = rom.data.load_package_overrides_get(weapon_staff_hash)
-
-	table.insert(current_staff_overrides, 1, custom_staff_hash)
-	table.insert(current_staff_overrides, weapon_staff_hash)
-
-	rom.data.load_package_overrides_set(weapon_staff_hash, current_staff_overrides)
-
 	--Importing Dagger Textures
 	local weapon_dagger_hash = rom.data.get_hash_guid_from_string("WeaponDagger")
 	local custom_dagger_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponDagger")
@@ -333,23 +311,50 @@ ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
 		end
 end)
 
---Replacing Textures
---local gpk = rom.path.combine(_PLUGIN.this_path, 'Axe.gpk')
---rom.data.add_granny_file('Axe', gpk)
+---- Adding Custom Textures ------
+--New Axe Texture
+local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
+local custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Axe")
+
+local current_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
+table.insert(current_overrides, 1, custom_pkg_hash)
+table.insert(current_overrides, weapon_axe_hash)
+rom.data.load_package_overrides_set(weapon_axe_hash, current_overrides)
 
 local gpk_path = rom.path.combine(
-	_PLUGIN.plugins_data_mod_folder_path, 'Axe.gpk')
+    _PLUGIN.plugins_data_mod_folder_path, 'Axe.gpk')
 rom.data.add_granny_file('Axe.gpk', gpk_path)
 
+--New Staff Texture
+local weapon_staff_hash = rom.data.get_hash_guid_from_string("WeaponStaffSwing")
+custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Staff")
+
+current_overrides = rom.data.load_package_overrides_get(weapon_staff_hash)
+table.insert(current_overrides, 1, custom_pkg_hash)
+table.insert(current_overrides, weapon_staff_hash)
+rom.data.load_package_overrides_set(weapon_staff_hash, current_overrides)
+
+gpk_path = rom.path.combine(
+    _PLUGIN.plugins_data_mod_folder_path, 'Staff.gpk')
+rom.data.add_granny_file('Staff.gpk', gpk_path)
+
+
+
 ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
-	baseFunc(hero, args)
-	if HeroHasTrait("AxeAspectofYoungMelinoe") then
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
-  		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-	elseif HeroHasTrait("AxeRecoveryAspect") then
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
-  		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
-	end
+    baseFunc(hero, args)
+	if HeroHasTrait("StaffAspectofYoungMelinoe") then
+		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", true)
+        rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", false)
+	elseif HeroHasTrait("BaseStaffAspect") then
+		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", false)
+        rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", true)
+	elseif HeroHasTrait("AxeAspectofYoungMelinoe") then
+        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+    elseif HeroHasTrait("AxeRecoveryAspect") then
+        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+    end
 end)
 
 -- Steps to create new Aspects
@@ -1023,6 +1028,11 @@ modutil.once_loaded.game(function()
 			ValidProjectiles = { "ProjectileCastLobYM", "ProjectileCastLobChargeYM" },
 		},
 		WeaponDataOverride = {
+			--WeaponTorch = {
+			--	SwapAnimations = {
+			--		
+			--	},
+			--},
 			WeaponTorchSpecial = {
 				OnProjectileDeathFunction = "null",
 				ChargeWeaponStages = 
