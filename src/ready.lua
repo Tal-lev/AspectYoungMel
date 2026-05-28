@@ -253,17 +253,6 @@ if config.Alter_Textures == true then
 
 	rom.data.load_package_overrides_set(weapon_dagger_hash, current_dagger_overrides)
 
-	--Importing Skull Textures
-	local weapon_skull_hash = rom.data.get_hash_guid_from_string("WeaponLob")
-	local custom_skull_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponLob")
-
-	local current_skull_overrides = rom.data.load_package_overrides_get(weapon_skull_hash)
-
-	table.insert(current_skull_overrides, 1, custom_skull_hash)
-	table.insert(current_skull_overrides, weapon_skull_hash)
-
-	rom.data.load_package_overrides_set(weapon_skull_hash, current_skull_overrides)
-
 	Suit_back_mesh = "Icarus_Mesh"
 else
 	Suit_back_mesh = "WeaponSuitB_Base_Mesh"
@@ -338,6 +327,30 @@ gpk_path = rom.path.combine(
     _PLUGIN.plugins_data_mod_folder_path, 'Staff.gpk')
 rom.data.add_granny_file('Staff.gpk', gpk_path)
 
+--New Dagger Texture
+--local weapon_dagger_hash = rom.data.get_hash_guid_from_string("WeaponDagger")
+--custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Dagger")
+--current_overrides = rom.data.load_package_overrides_get(weapon_dagger_hash)
+--table.insert(current_overrides, 1, custom_pkg_hash)
+--table.insert(current_overrides, weapon_dagger_hash)
+--rom.data.load_package_overrides_set(weapon_dagger_hash, current_overrides)
+
+--gpk_path = rom.path.combine(
+--    _PLUGIN.plugins_data_mod_folder_path, 'Dagger.gpk')
+--rom.data.add_granny_file('Dagger.gpk', gpk_path)
+
+--new Skull texture
+local weapon_lob_hash = rom.data.get_hash_guid_from_string("WeaponLob")
+custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Lob")
+
+current_overrides = rom.data.load_package_overrides_get(weapon_lob_hash)
+table.insert(current_overrides, 1, custom_pkg_hash)
+table.insert(current_overrides, weapon_lob_hash)
+rom.data.load_package_overrides_set(weapon_lob_hash, current_overrides)
+
+gpk_path = rom.path.combine(
+    _PLUGIN.plugins_data_mod_folder_path, 'Lob.gpk')
+rom.data.add_granny_file('Lob.gpk', gpk_path)
 
 
 ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
@@ -348,14 +361,79 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
 	elseif HeroHasTrait("BaseStaffAspect") then
 		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", false)
         rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", true)
+--	elseif HeroHasTrait("DaggerAspectofYoungMelinoe") then
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerA_Rig:WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerB_Rig:WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerMultipleFree_Rig:WeaponDaggerA_WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerB_WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", true)
+--	elseif HeroHasTrait("DaggerBackstabAspect") then
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerA_Rig:WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerB_Rig:WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerMultipleFree_Rig:WeaponDaggerA_WeaponDaggerA_MeshShapeDeformed", true)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerB_WeaponDaggerB_MeshShapeDeformed", true)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
 	elseif HeroHasTrait("AxeAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
     elseif HeroHasTrait("AxeRecoveryAspect") then
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+	elseif HeroHasTrait("SkullAspectofYoungMelinoe") then
+        rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
+        rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", false)
+    elseif HeroHasTrait("LobAmmoBoostAspect") then
+        rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
+        rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
     end
+	
 end)
+
+--ModUtil.Path.Wrap("OpenWeaponUpgradeScreen",  function(baseFunc, args )
+--	baseFunc(args)
+--	if HeroHasTrait("DaggerAspectofYoungMelinoe") then
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerA_Rig:WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerB_Rig:WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerMultipleFree_Rig:WeaponDaggerA_WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerB_WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", true)
+--	elseif HeroHasTrait("DaggerBackstabAspect") then
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerA_Rig:WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerB_Rig:WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerMultipleFree_Rig:WeaponDaggerA_WeaponDaggerA_MeshShapeDeformed", true)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerB_WeaponDaggerB_MeshShapeDeformed", true)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+--	end
+--end)
+
+--ModUtil.Path.Wrap("CloseWeaponUpgradeScreen",  function(baseFunc, screen )
+--	baseFunc(screen)
+--	if HeroHasTrait("DaggerAspectofYoungMelinoe") then
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerA_Rig:WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerB_Rig:WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerMultipleFree_Rig:WeaponDaggerA_WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerB_WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", true)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", true)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+--	elseif HeroHasTrait("DaggerBackstabAspect") then
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerA_Rig:WeaponDaggerA_MeshShapeDeformed", true)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerB_Rig:WeaponDaggerB_MeshShapeDeformed", true)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerMultipleFree_Rig:WeaponDaggerA_WeaponDaggerA_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerB_WeaponDaggerB_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+--		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+--	end
+--end)
 
 -- Steps to create new Aspects
 	-- 1.Adding projectile data
