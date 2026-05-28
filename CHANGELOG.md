@@ -8,9 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - Added Suit Aspect of Young Melinoë
     - Replaces the attack and omega attack with tornados.
-    - Trait grants starting armor
+    - Trait grants starting 
+- Implemented dynamic texture swaps for the Axe and Staff
 - Added 7 minor prophecies
 - Added 5 new hammer (10 total)
+- Added 3 Chaos trials
 
 ## [0.5.3] - 2026-05-20
 
