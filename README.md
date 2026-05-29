@@ -19,7 +19,7 @@ Adds three Chaos trials
 - Introduces two new hammers.
   
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/StaffAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/StaffAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Dagger Aspect of Young Melinoë
@@ -31,7 +31,7 @@ Adds three Chaos trials
  - Introduces a new hammer.
    
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/DaggerAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/DaggerAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Torches Aspect of Young Melinoë 
@@ -43,7 +43,7 @@ Adds three Chaos trials
 - Introduces two new hammers.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/TorchAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/TorchAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Axe Aspect of Young Melinoë 
@@ -53,7 +53,7 @@ Adds three Chaos trials
 - Introduces two new hammers.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Skull Aspect of Young Melinoë 
@@ -63,7 +63,7 @@ Adds three Chaos trials
 - Introduces two new hammers.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/SkullAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/SkullAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Suit Aspect of Young Melinoë 
