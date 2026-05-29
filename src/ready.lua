@@ -235,12 +235,31 @@ function mod.CheckComboUI()
 	RemoveTrait( CurrentRun.Hero, "DummyComboDisplayBoonYM" )
 end
 
+--Loading the package at every room
+modutil.mod.Path.Wrap("SetupMap", function(base, source, args)
+	mod.LoadAspectPackage()
+	return base(source, args)
+end)
+
+ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
+        -- Fallback to the original logic first so we don't break actual gameplay healing
+        baseFunc(victim, triggerArgs)
+		if victim == CurrentRun.Hero and HeroHasTrait("StaffAspectofYoungMelinoe") then
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
+			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
+				GameState.Flags.LargeHealRun = true
+			end
+		end
+end)
+
 import "Aspect_cast_functions.lua"
 
 --Whether to change new aspect textures
 import "config.lua"
 
 local Suit_back_mesh = ''
+local Suit_comp_mesh = ''
 if config.Alter_Textures == true then
 	--Importing Dagger Textures
 	local weapon_dagger_hash = rom.data.get_hash_guid_from_string("WeaponDagger")
@@ -265,51 +284,11 @@ if config.Alter_Textures == true then
 	rom.data.load_package_overrides_set(weapon_torch_hash, current_torch_overrides)
 
 	Suit_back_mesh = "Icarus_Mesh"
+	Suit_comp_mesh = "Icarus_Mesh"
 else
 	Suit_back_mesh = "WeaponSuitB_Base_Mesh"
+	Suit_comp_mesh = "WeaponSuitMultiple_Base_Mesh"
 end
-
---Loading the package at every room
-modutil.mod.Path.Wrap("SetupMap", function(base, source, args)
-	mod.LoadAspectPackage()
-	return base(source, args)
-end)
-
-ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
-        -- Fallback to the original logic first so we don't break actual gameplay healing
-        baseFunc(victim, triggerArgs)
-		if victim == CurrentRun.Hero and HeroHasTrait("StaffAspectofYoungMelinoe") then
-			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
-			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
-			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
-				GameState.Flags.LargeHealRun = true
-			end
-		end
-end)
-
-ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
-        -- Fallback to the original logic first so we don't break actual gameplay healing
-        baseFunc(victim, triggerArgs)
-		if victim == CurrentRun.Hero and HeroHasTrait("StaffAspectofYoungMelinoe") then
-			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
-			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
-			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
-				GameState.Flags.LargeHealRun = true
-			end
-		end
-end)
-
-ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
-        -- Fallback to the original logic first so we don't break actual gameplay healing
-        baseFunc(victim, triggerArgs)
-		if victim == CurrentRun.Hero and HeroHasTrait("StaffAspectofYoungMelinoe") then
-			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
-			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
-			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
-				GameState.Flags.LargeHealRun = true
-			end
-		end
-end)
 
 ---- Adding Custom Textures ------
 --New Axe Texture
@@ -417,6 +396,54 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
     --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", true)
     end
 	
+end)
+
+ModUtil.Path.Wrap("MouseOverBounty", function(baseFunc, button )
+	if button.Data.WeaponKitName ~= nil then
+		if button.Data.WeaponUpgradeName == "StaffAspectofYoungMelinoe" then
+			rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", true)
+        	rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", false)
+		elseif button.Data.WeaponUpgradeName == "BaseStaffAspect" then
+			rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", false)
+        	rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", true)
+		elseif button.Data.WeaponUpgradeName == "AxeAspectofYoungMelinoe" then
+       		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+        	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+		elseif button.Data.WeaponUpgradeName == "AxeRecoveryAspect" then	
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+        	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+		elseif button.Data.WeaponUpgradeName == "SkullAspectofYoungMelinoe" then	
+			rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
+        	rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", false)
+		elseif button.Data.WeaponUpgradeName == "LobAmmoBoostAspect" then	
+			rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
+        	rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
+		end
+	end
+	baseFunc(button)
+end)
+
+ModUtil.Path.Wrap("CloseBountyBoardScreen",  function(baseFunc, screen, button )
+	baseFunc(screen,button)
+	if HeroHasTrait("StaffAspectofYoungMelinoe") then
+		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", true)
+        rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", false)
+	elseif HeroHasTrait("BaseStaffAspect") then
+		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", false)
+        rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", true)
+		elseif HeroHasTrait("AxeAspectofYoungMelinoe") then
+        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+    elseif HeroHasTrait("AxeRecoveryAspect") then
+        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+	elseif HeroHasTrait("SkullAspectofYoungMelinoe") then
+        rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
+        rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", false)
+    elseif HeroHasTrait("LobAmmoBoostAspect") then
+        rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
+        rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
+	end
 end)
 
 --ModUtil.Path.Wrap("OpenWeaponUpgradeScreen",  function(baseFunc, args )
@@ -1262,7 +1289,7 @@ modutil.once_loaded.game(function()
 		Icon = "JarlUlsfark-AspectYoungMel\\SuitAspectYoungMelIcon",
 		RequiredWeapon = "WeaponSuit",
 		PreEquipWeapons = { "WeaponSuit3" },
-		WeaponKitGrannyModel = Suit_back_mesh,
+		WeaponKitGrannyModel = Suit_comp_mesh,
 		ReplacementGrannyModels = 
 		{
 			WeaponSuitR_Base_Mesh = "WeaponSuitR_Base_Mesh",
