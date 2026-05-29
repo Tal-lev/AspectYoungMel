@@ -253,6 +253,17 @@ if config.Alter_Textures == true then
 
 	rom.data.load_package_overrides_set(weapon_dagger_hash, current_dagger_overrides)
 
+	--Importing Torch Textures
+	local weapon_torch_hash = rom.data.get_hash_guid_from_string("WeaponTorch")
+	local custom_torch_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponTorch")
+	
+	local current_torch_overrides = rom.data.load_package_overrides_get(weapon_torch_hash)
+
+	table.insert(current_torch_overrides, 1, custom_torch_hash)
+	table.insert(current_torch_overrides, weapon_torch_hash)
+
+	rom.data.load_package_overrides_set(weapon_torch_hash, current_torch_overrides)
+
 	Suit_back_mesh = "Icarus_Mesh"
 else
 	Suit_back_mesh = "WeaponSuitB_Base_Mesh"
@@ -352,6 +363,15 @@ gpk_path = rom.path.combine(
     _PLUGIN.plugins_data_mod_folder_path, 'Lob.gpk')
 rom.data.add_granny_file('Lob.gpk', gpk_path)
 
+--New suit texture
+--local weapon_suit_hash = rom.data.get_hash_guid_from_string("WeaponSuit")
+--custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-WeaponSuit")
+
+--current_overrides = rom.data.load_package_overrides_get(weapon_suit_hash)
+--table.insert(current_overrides, 1, custom_pkg_hash)
+--table.insert(current_overrides, weapon_suit_hash)
+--rom.data.load_package_overrides_set(weapon_suit_hash, current_overrides)
+
 
 ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
     baseFunc(hero, args)
@@ -389,6 +409,12 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
     elseif HeroHasTrait("LobAmmoBoostAspect") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
+	--elseif HeroHasTrait("SuitAspectofYoungMelinoe") then
+    --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", true)
+    --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", false)
+    --elseif HeroHasTrait("BaseSuitAspect") then
+    --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+    --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", true)
     end
 	
 end)
