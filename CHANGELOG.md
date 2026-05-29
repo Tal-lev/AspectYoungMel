@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated Skull icon
 - Added 7 minor prophecies
 - Added 5 new hammer (10 total)
-- Added 5 Chaos trials
+- Added 6 Chaos trials
 
 ## [0.5.3] - 2026-05-20
 
