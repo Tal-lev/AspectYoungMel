@@ -16,8 +16,10 @@ Adds three Chaos trials
 
 - Replaces the special with a weaker projectile with shorter cooldown, better homing and no hit-stun.
 - Trait enables to absorb the omega special to heal when health is below a threshold.
+- Introduces two new hammers.
+  
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/StaffAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/StaffAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Dagger Aspect of Young Melinoë
@@ -26,9 +28,10 @@ Adds three Chaos trials
  - Replaces special to a non penetrating 1-way projectile that is deals more damage.
  - Replaces omega special to non-penetrating projectiles that deal more damage.
  - Trait decreases Dash recharge time.
+ - Introduces a new hammer.
    
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/DaggerAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/DaggerAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Torches Aspect of Young Melinoë 
@@ -37,20 +40,20 @@ Adds three Chaos trials
 - Replaces all special boons for the aspect to influence the Special-Cast.
 - Adds boons for Special-Cast secondary effects
 - Trait increases damage from Olympian curses
-- Introduces a new hammer.
+- Introduces two new hammers.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/TorchAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/TorchAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Axe Aspect of Young Melinoë 
 
 - Replaces the special with Block similar to the Early Access.
 - Trait temporarily increases attack damage after blocking with special.
-- Introduces a new hammer.
+- Introduces two new hammers.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/AxeAspect.png" alt="PonyDressList" width="70%">
 </div>
 
 ### Skull Aspect of Young Melinoë 
@@ -60,13 +63,20 @@ Adds three Chaos trials
 - Introduces two new hammers.
 
 <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/SkullAspect.png" alt="PonyDressList" width="60%">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/SkullAspect.png" alt="PonyDressList" width="70%">
 </div>
+
+### Suit Aspect of Young Melinoë 
+
+- Trait grants starting armor.
+- Replaces Attack with a multi-hit tornado.
+- Replaces Omega-Attack with a fan of multiple tornados.
+- Introduces a new hammer.
 
 ## Known Issues / To do list
 
-- Add aspect texture insead of replacing original textures (temp fix made replacement optional).
-- Add Aspects of Young Melinoë for Suit
+- Dynamic texture changes don't work for Dagger/Torch/suit
+- Replaces original aspect texture for Dagger/Torch (optional through config).
 - Torches Special-Cast god boons replaces the Special-Cast graphic only after room-transition.
 - Omega Special-Cast is not implemented.
 - Hestia Cast effect leaks between Special-Cast and regular Cast
