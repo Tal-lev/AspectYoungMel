@@ -21,8 +21,8 @@ game = rom.game
 import_as_fallback(game)
 
 -- Utility functions
-function mod.LoadAspectPackage()
-	local packageName = _PLUGIN.guid .. ""
+function mod.LoadAspectPackage(Name)
+	local packageName = _PLUGIN.guid .. Name
 	print("AuthorName-ModName - Loading package: " .. packageName)
 	LoadPackages({ Name = packageName })
 end
@@ -237,7 +237,7 @@ end
 
 --Loading the package at every room
 modutil.mod.Path.Wrap("SetupMap", function(base, source, args)
-	mod.LoadAspectPackage()
+	mod.LoadAspectPackage("")
 	return base(source, args)
 end)
 
@@ -1462,4 +1462,7 @@ modutil.once_loaded.game(function()
 
 	--Adds Bounties
 	import "Aspects_Bounty.lua"
+
+	--Adds Arcana backs
+	import "Aspects_Cosmetics.lua"
 end)
