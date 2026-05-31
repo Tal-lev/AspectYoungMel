@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added 5 new hammer (10 total)
 - Added 6 Chaos trials
 - Added a set of Arcana backs
+- Compat with Weapon-Fusion (By Zerp)
 
 ## [0.5.3] - 2026-05-20
 
