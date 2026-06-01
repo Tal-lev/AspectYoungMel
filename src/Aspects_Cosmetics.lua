@@ -44,7 +44,7 @@ CosmeticsAPI.RegisterCardBackPack({
                 },
         },
 	},
-	InsertAfterCosmetic = "Cosmetic_CardDeck08",
+	InsertAfterCosmetic = "Cosmetic_CardDeck02",
 	PreRevealVoiceLines = {
 		Queue = "Interrupt",
 		{
