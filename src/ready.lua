@@ -364,13 +364,14 @@ rom.data.add_granny_file('Lob.gpk', gpk_path)
 --table.insert(current_overrides, weapon_suit_hash)
 --rom.data.load_package_overrides_set(weapon_suit_hash, current_overrides)
 
-
 ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
     baseFunc(hero, args)
-	if (HeroHasTrait("StaffAspectofYoungMelinoe") or HeroHasTrait("StaffAspectofYoungMelinoe_Secondary")) then
+	--if (HeroHasTrait("StaffAspectofYoungMelinoe") or HeroHasTrait("StaffAspectofYoungMelinoe_Secondary")) then
+	if HeroHasTrait("StaffAspectofYoungMelinoe") then
 		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", true)
         rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", false)
-	elseif (HeroHasTrait("BaseStaffAspect") or HeroHasTrait("BaseStaffAspect_Secondary")) then
+	--elseif (HeroHasTrait("BaseStaffAspect") or HeroHasTrait("BaseStaffAspect_Secondary")) then
+	elseif HeroHasTrait("BaseStaffAspect") then
 		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", false)
         rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", true)
 --	elseif HeroHasTrait("DaggerAspectofYoungMelinoe") then
@@ -389,26 +390,35 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
 --		rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
 --		rom.data.draw_set_mesh_visible("WeaponDaggerB_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
 --		rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
---	elseif HeroHasTrait("TorchAspectofYoungMelinoe") then
---		rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponAxeYM_MeshShape", true)
---		rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponAxeYM_MeshShape", true)
---		rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponHecateR_Rig:WeaponTorch_MeshShape", false)
---		rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponHecateL_Rig:WeaponTorch_MeshShape", false)
---	elseif HeroHasTrait("TorchSpecialDurationAspect") then
---		rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponAxeYM_MeshShape", false)
---		rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponAxeYM_MeshShape", false)
---		rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponHecateR_Rig:WeaponTorch_MeshShape", true)
---		rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponHecateL_Rig:WeaponTorch_MeshShape", true)
-	elseif (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
+	--elseif HeroHasTrait("TorchAspectofYoungMelinoe") then
+	--	Destroy({ Id = "MelTorchFlameLeft", DestinationId = weaponId })
+	--	StopAnimation({  Names = { "MelTorchFlameRight", "MelTorchFlameLeft", "MelTorchFlameGlow", "MelTorchFlameTrail" }, DestinationId = CurrentRun.Hero.ObjectId })
+		--SetAlpha({ Id = "MelTorchFlameLeft", Fraction = 0.0, Duration = 0})
+		--SetAlpha({ Id = "MelTorchFlameGlowL", Fraction = 0.0, Duration = 0})
+		--SetAlpha({ Id = "MelTorchFlameTrail", Fraction = 0.0, Duration = 0})
+	--	rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponTorchYM_MeshShape", true)
+	--	rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponTorchYM_MeshShape", true)
+	--	rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponHecateR_Rig:WeaponTorch_MeshShape", false)
+	--	rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponHecateL_Rig:WeaponTorch_MeshShape", false)
+	--elseif HeroHasTrait("TorchSpecialDurationAspect") then
+	--	rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponTorchYM_MeshShape", false)
+	--	rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponTorchYM_MeshShape", false)
+	--	rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponHecateR_Rig:WeaponTorch_MeshShape", true)
+	--	rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponHecateL_Rig:WeaponTorch_MeshShape", true)
+	--elseif (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
+	elseif HeroHasTrait("AxeAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-    elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+	--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+    elseif HeroHasTrait("AxeRecoveryAspect") then
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
-	elseif (HeroHasTrait("SkullAspectofYoungMelinoe") or HeroHasTrait("SkullAspectofYoungMelinoe_Secondary")) then
+	--elseif (HeroHasTrait("SkullAspectofYoungMelinoe") or HeroHasTrait("SkullAspectofYoungMelinoe_Secondary")) then
+	elseif HeroHasTrait("SkullAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", false)
-    elseif (HeroHasTrait("LobAmmoBoostAspect") or HeroHasTrait("LobAmmoBoostAspect_Secondary")) then
+	--elseif (HeroHasTrait("LobAmmoBoostAspect") or HeroHasTrait("LobAmmoBoostAspect_Secondary")) then
+    elseif HeroHasTrait("LobAmmoBoostAspect") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
 	--elseif HeroHasTrait("SuitAspectofYoungMelinoe") then
@@ -448,22 +458,28 @@ end)
 
 ModUtil.Path.Wrap("CloseBountyBoardScreen",  function(baseFunc, screen, button )
 	baseFunc(screen,button)
-	if (HeroHasTrait("StaffAspectofYoungMelinoe") or HeroHasTrait("StaffAspectofYoungMelinoe_Secondary")) then
+	--if (HeroHasTrait("StaffAspectofYoungMelinoe") or HeroHasTrait("StaffAspectofYoungMelinoe_Secondary")) then
+	if HeroHasTrait("StaffAspectofYoungMelinoe") then
 		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", true)
         rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", false)
-	elseif (HeroHasTrait("BaseStaffAspect") or HeroHasTrait("BaseStaffAspect_Secondary"))then
+	--elseif (HeroHasTrait("BaseStaffAspect") or HeroHasTrait("BaseStaffAspect_Secondary"))then
+	elseif HeroHasTrait("BaseStaffAspect") then
 		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", false)
         rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", true)
-		elseif (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
+	--elseif (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
+	elseif HeroHasTrait("AxeAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-    elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+    --elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+	elseif HeroHasTrait("AxeRecoveryAspect") then
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
-	elseif (HeroHasTrait("SkullAspectofYoungMelinoe") or HeroHasTrait("SkullAspectofYoungMelinoe_Secondary")) then
+	--elseif (HeroHasTrait("SkullAspectofYoungMelinoe") or HeroHasTrait("SkullAspectofYoungMelinoe_Secondary")) then
+	elseif HeroHasTrait("SkullAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", false)
-    elseif (HeroHasTrait("LobAmmoBoostAspect") or HeroHasTrait("LobAmmoBoostAspect_Secondary")) then
+    --elseif (HeroHasTrait("LobAmmoBoostAspect") or HeroHasTrait("LobAmmoBoostAspect_Secondary")) then
+	elseif HeroHasTrait("LobAmmoBoostAspect") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
 	end
@@ -1144,25 +1160,28 @@ modutil.once_loaded.game(function()
 			ValidProjectiles = { "ProjectileCastLobYM", "ProjectileCastLobChargeYM" },
 		},
 		WeaponDataOverride = {
-		--	WeaponTorch = {
-		--		FirstTimeEquipAnimation = "Melinoe_Torch_Equip_YM",
-		--		SwapAnimations =
-		--		{
-		--			["MelinoeIdle"] = "Melinoe_Torch_Idle_YM",	
-		--			["MelinoeDashStart"] = "Melinoe_Torch_Dash_Start_YM",
-		--			["MelinoeDash"] = "Melinoe_Torch_Dash_Fire_YM",	
+			--WeaponTorch = {
+				
+			--	FirstTimeEquipAnimation = "Melinoe_Torch_Equip_YM",
+			--	SwapAnimations =
+			--	{
+			--		["MelinoeIdle"] = "Melinoe_Torch_Idle_YM",	
+			--		["MelinoeDashStart"] = "Melinoe_Torch_Dash_Start_YM",
+			--		["MelinoeDash"] = "Melinoe_Torch_Dash_Fire_YM",	
 
-		--			["MelinoeStart"] = "Melinoe_Torch_Run_Start_YM",
-
-
-		--			["MelinoeGetHit"] = "Melinoe_Torch_GetHit_YM",
-		--			["Melinoe_GetHit_LastStand"] = "Melinoe_Torch_GetHit_LastStand_YM",
+			--		["MelinoeStart"] = "Melinoe_Torch_Run_Start_YM",
 
 
-		--			["MelinoeEquip"] = "Melinoe_Torch_Equip_YM",
-		--			["MelinoeActionIdle"] = "Melinoe_Torch_Idle_YM",
-		--		},
-		--	},
+			--		["MelinoeGetHit"] = "Melinoe_Torch_GetHit_YM",
+			--		["Melinoe_GetHit_LastStand"] = "Melinoe_Torch_GetHit_LastStand_YM",
+
+
+			--		["MelinoeEquip"] = "Melinoe_Torch_Equip_YM",
+			--		["MelinoeActionIdle"] = "Melinoe_Torch_Idle_YM",
+			--		["Melinoe_Torch_Idle"] = "Melinoe_Torch_Idle_YM",
+			--		["MelinoeBaseTorchAnimations"] = "MelinoeBaseTorchAnimations_YM",
+			--	},
+			--},
 			WeaponTorchSpecial = {
 				OnProjectileDeathFunction = "null",
 				ChargeWeaponStages = 
@@ -1476,6 +1495,8 @@ modutil.once_loaded.game(function()
 	import "Aspects_Cosmetics.lua"
 
 	--Add Speeches
-	--import "Aspects_Conversations.lua"
+	import "Aspects_Conversations.lua"
+
+
 
 end)
