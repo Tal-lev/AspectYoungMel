@@ -66,7 +66,7 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
         },
         { 
             Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0326,
+            PreContentSound = "/VO/Melinoe_0326",
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
@@ -105,7 +105,7 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
         },
         { 
             Cue = "/VO/Melinoe_YM0003", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0326,
+            PreContentSound = "/VO/Melinoe_0326",
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "Only water Headmistress. Per the family customs, Nectar is reserved for friends and gifts.", 
@@ -136,7 +136,7 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
         },
         { 
             Cue = "/VO/Melinoe_YM0004", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0865,
+            PreContentSound = "/VO/Melinoe_0865",
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "I have grown since then as has my resolve. Death to Chronos. I'll see to that. No one is more prepared.", 
@@ -172,7 +172,7 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
         },
         { 
             Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0326,
+            PreContentSound = "/VO/Melinoe_0326",
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
@@ -203,7 +203,7 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
         },
         { 
             Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0326,
+            PreContentSound = "/VO/Melinoe_0326",
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
