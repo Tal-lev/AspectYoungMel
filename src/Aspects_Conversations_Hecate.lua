@@ -62,7 +62,7 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
         { 
             Cue = "/VO/Hecate_YM0003",
             PreContentSound = "/VO/Hecate_0382",
-            Text = "These wooden blades were ever your favorite form during training.",
+            Text = "Wooden Lim and Oros, These wooden blades were ever your favorite form during training.",
         },
         { 
             Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
@@ -84,7 +84,135 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
             },
         },
     },
+    HecateAboutTorchYM01 =
+    {
+        PlayOnce = true,
+        UseableOffSource = true,
+        GameStateRequirements =
+        {
+            {
+                Path = {"CurrentRun", "Hero", "TraitDictionary"},
+                HasAll = {"TorchAspectofYoungMelinoe", },
+            },
+        },
+        OnQueuedFunctionName = "CheckDistanceTriggerThread",
+        OnQueuedFunctionArgs = PresetEventArgs.HecateGreeting,
+
+        { 
+            Cue = "/VO/Hecate_YM0004",
+            PreContentSound = "/VO/Hecate_0382",
+            Text = "This aspect of Ygnium? Back to your old mischief I see. At least I hope you no longer fill those balloons with nectar.",
+        },
+        { 
+            Cue = "/VO/Melinoe_YM0003", UsePlayerSource = true,
+            PreContentSound = "/VO/Melinoe_0326,
+            PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
+            PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
+            Text = "Only water Headmistress. Per the family customs, Nectar is reserved for friends and gifts.", 
+        },
+        EndVoiceLines =
+        {
         
+        },
+    }, 
+    HecateAboutAxeYM01 =
+    {
+        PlayOnce = true,
+        UseableOffSource = true,
+        GameStateRequirements =
+        {
+            {
+                Path = {"CurrentRun", "Hero", "TraitDictionary"},
+                HasAll = {"AxeAspectofYoungMelinoe", },
+            },
+        },
+        OnQueuedFunctionName = "CheckDistanceTriggerThread",
+        OnQueuedFunctionArgs = PresetEventArgs.HecateGreeting,
+
+        { 
+            Cue = "/VO/Hecate_YM0005",
+            PreContentSound = "/VO/Hecate_0382",
+            Text = "These markings on Zorephet. Do tell me you no longer fear the scary man in charge of time.",
+        },
+        { 
+            Cue = "/VO/Melinoe_YM0004", UsePlayerSource = true,
+            PreContentSound = "/VO/Melinoe_0865,
+            PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
+            PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
+            Text = "I have grown since then as has my resolve. Death to Chronos. I'll see to that. No one is more prepared.", 
+        },
+        { 
+            Cue = "/VO/Hecate_0063",
+            PreContentSound = "/VO/Hecate_0063",
+            Text = "Death to Chronos.",
+        },
+        EndVoiceLines =
+        {
+        
+        },
+    }, 
+    HecateAboutSkullYM01 =
+    {
+        PlayOnce = true,
+        UseableOffSource = true,
+        GameStateRequirements =
+        {
+            {
+                Path = {"CurrentRun", "Hero", "TraitDictionary"},
+                HasAll = {"SkullAspectofYoungMelinoe", },
+            },
+        },
+        OnQueuedFunctionName = "CheckDistanceTriggerThread",
+        OnQueuedFunctionArgs = PresetEventArgs.HecateGreeting,
+
+        { 
+            Cue = "/VO/Hecate_YM0003",
+            PreContentSound = "/VO/Hecate_0382",
+            Text = "These wooden blades were ever your favorite form during training.",
+        },
+        { 
+            Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
+            PreContentSound = "/VO/Melinoe_0326,
+            PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
+            PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
+            Text = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
+        },
+        EndVoiceLines =
+        {
+        
+        },
+    }, 
+    HecateAboutSuitYM01 =
+    {
+        PlayOnce = true,
+        UseableOffSource = true,
+        GameStateRequirements =
+        {
+            {
+                Path = {"CurrentRun", "Hero", "TraitDictionary"},
+                HasAll = {"SuitAspectofYoungMelinoe", },
+            },
+        },
+        OnQueuedFunctionName = "CheckDistanceTriggerThread",
+        OnQueuedFunctionArgs = PresetEventArgs.HecateGreeting,
+
+        { 
+            Cue = "/VO/Hecate_YM0003",
+            PreContentSound = "/VO/Hecate_0382",
+            Text = "These wooden blades were ever your favorite form during training.",
+        },
+        { 
+            Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
+            PreContentSound = "/VO/Melinoe_0326,
+            PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
+            PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
+            Text = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
+        },
+        EndVoiceLines =
+        {
+        
+        },
+    }, 
 
 } )
 
@@ -139,7 +267,7 @@ table.insert(data.Texts, sjson.to_object(
         {
          Id = "Hecate_YM0003",
         InheritFrom = "BaseNarrative",
-        DisplayName = "These wooden blades were ever your favorite form during training.",
+        DisplayName = "Wooden Lim and Oros, these wooden blades were ever your favorite form during training.",
         Speaker = "Hecate",
         Event = "HecateAboutDaggerYM01",
         },
@@ -157,10 +285,59 @@ table.insert(data.Texts, sjson.to_object(
         TextOrder)
     )
 
+    table.insert(data.Texts, sjson.to_object(
+        {
+         Id = "Hecate_YM0004",
+        InheritFrom = "BaseNarrative",
+        DisplayName = "This aspect of Ygnium? Back to your old mischief I see. At least I hope you no longer fill those balloons with nectar.",
+        Speaker = "Hecate",
+        Event = "HecateAboutTorchYM01",
+        },
+        TextOrder)
+    )
+
+    table.insert(data.Texts, sjson.to_object(
+        {
+         Id = "Melinoe_YM0003",
+        InheritFrom = "BaseNarrative",
+        DisplayName = "Only water Headmistress. Per the family customs, Nectar is reserved for friends and gifts.",
+        Speaker = "Melinoe",
+        Event = "HecateAboutTorchYM01",
+        },
+        TextOrder)
+    )
+
+        table.insert(data.Texts, sjson.to_object(
+        {
+         Id = "Hecate_YM0005",
+        InheritFrom = "BaseNarrative",
+        DisplayName = "This aspect of Ygnium? Back to your old mischief I see. At least I hope you no longer fill those balloons with nectar.",
+        Speaker = "Hecate",
+        Event = "HecateAboutAxeYM01",
+        },
+        TextOrder)
+    )
+
+        table.insert(data.Texts, sjson.to_object(
+        {
+         Id = "Melinoe_YM0004",
+        InheritFrom = "BaseNarrative",
+        DisplayName = "Only water Headmistress. Per the family customs, Nectar is reserved for friends and gifts.",
+        Speaker = "Melinoe",
+        Event = "HecateAboutAxeYM01",
+        },
+        TextOrder)
+    )
+
 return data
 	end)
 
 ---- Inserting the new events into the NarrativeData in the correct place for the priority
 table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutStaffYM01")
 table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutDaggerYM01")
+table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutTorchYM01")
+table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutAxeYM01")
+
+--table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutSkullYM01")
+--table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutSuitYM01")
 
