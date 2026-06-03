@@ -73,6 +73,10 @@ Adds six Chaos trials
 - Replaces Omega-Attack with a fan of multiple tornados.
 - Introduces a new hammer.
 
+<div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+  <img src="https://media.githubusercontent.com/media/Tal-lev/AspectYoungMel/refs/heads/main/images/SuitAspect.png" alt="PonyDressList" width="70%">
+</div>
+
 ## Known Issues / To do list
 
 - Dynamic texture changes don't work for Dagger/Torch/suit
