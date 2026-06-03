@@ -79,8 +79,7 @@ Adds six Chaos trials
 
 ## Known Issues / To do list
 
-- Dynamic texture changes don't work for Dagger/Torch/suit
-- Replaces original aspect texture for Dagger/Torch (optional through config).
+- Dynamic texture changes don't work for Torch
 - Torches Special-Cast god boons replaces the Special-Cast graphic only after room-transition.
 - Omega Special-Cast is not implemented.
 - Hestia Cast effect leaks between Special-Cast and regular Cast
