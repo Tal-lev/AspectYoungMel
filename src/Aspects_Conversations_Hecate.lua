@@ -16,12 +16,12 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
 
         { 
             Cue = "/VO/Hecate_YM0001",
-            PreContentSound = "/VO/Hecate_0382",
+            PreContentSound = "/VO/Hecate_0382", "{#Emph}Hrm..."
             Text = "That form, It's been some time since I last saw you with sweet Descura sticking out of your mouth.",
         },
         { 
             Cue = "/VO/Melinoe_YM0001", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0321",
+            PreContentSound = "/VO/Melinoe_0321", --"{#Emph}Tsch."
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "My skills have grown since that time; isn't that so, Headmistress?",
@@ -61,15 +61,15 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
 
         { 
             Cue = "/VO/Hecate_YM0003",
-            PreContentSound = "/VO/Hecate_0382",
+            PreContentSound = "/VO/Hecate_0382", --{#Emph}Hrm...
             Text = "Wooden Lim and Oros, These wooden blades were ever your favorite form during training.",
         },
         { 
             Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0326",
+            PreContentSound = "/VO/Melinoe_0326", --Truly.
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
-            Text = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
+            Text = "Truly, training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
         },
         EndVoiceLines =
         {
@@ -77,7 +77,7 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
                 PreLineWait = 0.4,
                 ObjectType = "NPC_Hecate_01",
                 { 
-                    Cue = "/VO/MelinoeField_0711", 
+                    Cue = "/VO/MelinoeField_0711", --I can't do that again...
                     --PreContentSound = "/SFX/Menu Sounds/ChaosMiscSFX",
                     Text = "I can't do that again...",
                 },
@@ -100,12 +100,12 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
 
         { 
             Cue = "/VO/Hecate_YM0004",
-            PreContentSound = "/VO/Hecate_0382",
+            PreContentSound = "/VO/Hecate_0382", --{#Emph}Hrm...
             Text = "This aspect of Ygnium? Back to your old mischief I see. At least I hope you no longer fill those balloons with nectar.",
         },
         { 
             Cue = "/VO/Melinoe_YM0003", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0326",
+            PreContentSound = "/VO/Melinoe_0253", --"{#Emph}<Sigh>"
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "Only water Headmistress. Per the family customs, Nectar is reserved for friends and gifts.", 
@@ -131,18 +131,18 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
 
         { 
             Cue = "/VO/Hecate_YM0005",
-            PreContentSound = "/VO/Hecate_0382",
+            PreContentSound = "/VO/Hecate_0382",--{#Emph}Hrm...
             Text = "These markings on Zorephet. Do tell me you no longer fear the scary man in charge of time.",
         },
         { 
             Cue = "/VO/Melinoe_YM0004", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0865",
+            PreContentSound = "/VO/Melinoe_0865", --"Death to Chronos. I'll see to that. No one is more prepared."
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "I have grown since then as has my resolve. Death to Chronos. I'll see to that. No one is more prepared.", 
         },
         { 
-            Cue = "/VO/Hecate_0063",
+            Cue = "/VO/Hecate_0063", --Death to Chronos
             PreContentSound = "/VO/Hecate_0063",
             Text = "Death to Chronos.",
         },
@@ -167,12 +167,12 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
 
         { 
             Cue = "/VO/Hecate_YM0003",
-            PreContentSound = "/VO/Hecate_0382",
+            PreContentSound = "/VO/Hecate_0382", --{#Emph}Hrm...
             Text = "These wooden blades were ever your favorite form during training.",
         },
         { 
             Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0326",
+            PreContentSound = "/VO/Melinoe_0326", --Truly.
             PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
             Text = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
@@ -197,16 +197,21 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
         OnQueuedFunctionArgs = PresetEventArgs.HecateGreeting,
 
         { 
-            Cue = "/VO/Hecate_YM0003",
-            PreContentSound = "/VO/Hecate_0382",
-            Text = "These wooden blades were ever your favorite form during training.",
+            Cue = "/VO/Hecate_YM0006",
+            PreContentSound = "/VO/Hecate_0382", --{#Emph}Hrm...
+            Text = "That form. Did you let young Icarus bear the Nocturnal Arms?",
         },
         { 
-            Cue = "/VO/Melinoe_YM0002", UsePlayerSource = true,
-            PreContentSound = "/VO/Melinoe_0326",
-            PreLineAnim = "MelTalkExplaining01", PreLineAnimTarget = "Hero",
+            Cue = "/VO/Melinoe_YM0005", UsePlayerSource = true,
+            PreContentSound = "/VO/Melinoe_0251", --Mm.
+            PreLineAnim = "MelTalkFlustered01", PreLineAnimTarget = "Hero",
             PostLineAnim = "MelinoeIdleWeaponless", PostLineAnimTarget = "Hero",
-            Text = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.", 
+            Text = "We were young and foolish wandering around the crossroads playing with things we shouldn't. The Cauldron, Xinth.", 
+        },
+        { 
+            Cue = "/VO/Hecate_YM0007",
+            PreContentSound = "/VO/Hecate_0580", --{#Emph}Hmm.
+            Text = "It was more that once that I caught you swimming in the Cauldron.",
         },
         EndVoiceLines =
         {
@@ -329,6 +334,39 @@ table.insert(data.Texts, sjson.to_object(
         TextOrder)
     )
 
+        table.insert(data.Texts, sjson.to_object(
+        {
+         Id = "Hecate_YM0006",
+        InheritFrom = "BaseNarrative",
+        DisplayName = "That form. Did you let young Icarus bear the Nocturnal Arms?",
+        Speaker = "Hecate",
+        Event = "HecateAboutSuitYM01",
+        },
+        TextOrder)
+    )
+
+            table.insert(data.Texts, sjson.to_object(
+        {
+         Id = "Melinoe_YM0005",
+        InheritFrom = "BaseNarrative",
+        DisplayName = "We were young and foolish wandering around the crossroads playing with things we shouldn't. The Cauldron, Xinth.",
+        Speaker = "Melinoe",
+        Event = "HecateAboutSuitYM01",
+        },
+        TextOrder)
+    )
+
+            table.insert(data.Texts, sjson.to_object(
+        {
+         Id = "Hecate_YM0007",
+        InheritFrom = "BaseNarrative",
+        DisplayName = "It was more that once that I caught you swimming in the Cauldron.",
+        Speaker = "Hecate",
+        Event = "HecateAboutSuitYM01",
+        },
+        TextOrder)
+    )
+
 return data
 	end)
 
@@ -339,5 +377,5 @@ table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutT
 table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutAxeYM01")
 
 --table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutSkullYM01")
---table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutSuitYM01")
+table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutSuitYM01")
 
