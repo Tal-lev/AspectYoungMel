@@ -255,30 +255,6 @@ end)
 
 import "Aspect_cast_functions.lua"
 
---Whether to change new aspect textures
-import "config.lua"
-
-local Suit_back_mesh = ''
-local Suit_comp_mesh = ''
-if config.Alter_Textures == true then
-	--Importing Torch Textures
-	--local weapon_torch_hash = rom.data.get_hash_guid_from_string("WeaponTorch")
-	--local custom_torch_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponTorch")
-	
-	--local current_torch_overrides = rom.data.load_package_overrides_get(weapon_torch_hash)
-
-	--table.insert(current_torch_overrides, 1, custom_torch_hash)
-	--table.insert(current_torch_overrides, weapon_torch_hash)
-
-	--rom.data.load_package_overrides_set(weapon_torch_hash, current_torch_overrides)
-
-	Suit_back_mesh = "Icarus_Mesh"
-	Suit_comp_mesh = "Icarus_Mesh"
-else
-	Suit_back_mesh = "WeaponSuitB_Base_Mesh"
-	Suit_comp_mesh = "WeaponSuitMultiple_Base_Mesh"
-end
-
 ---- Adding Custom Textures ------
 --New Axe Texture
 local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
@@ -345,13 +321,17 @@ gpk_path = rom.path.combine(
 rom.data.add_granny_file('Lob.gpk', gpk_path)
 
 --New suit texture
---local weapon_suit_hash = rom.data.get_hash_guid_from_string("WeaponSuit")
---custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-WeaponSuit")
+local weapon_suit_hash = rom.data.get_hash_guid_from_string("WeaponSuit")
+custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-WeaponSuit")
 
---current_overrides = rom.data.load_package_overrides_get(weapon_suit_hash)
---table.insert(current_overrides, 1, custom_pkg_hash)
---table.insert(current_overrides, weapon_suit_hash)
---rom.data.load_package_overrides_set(weapon_suit_hash, current_overrides)
+current_overrides = rom.data.load_package_overrides_get(weapon_suit_hash)
+table.insert(current_overrides, 1, custom_pkg_hash)
+table.insert(current_overrides, weapon_suit_hash)
+rom.data.load_package_overrides_set(weapon_suit_hash, current_overrides)
+
+gpk_path = rom.path.combine(
+    _PLUGIN.plugins_data_mod_folder_path, 'WeaponSuit.gpk')
+rom.data.add_granny_file('WeaponSuit.gpk', gpk_path)
 
 ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
     baseFunc(hero, args)
@@ -422,10 +402,22 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
 	elseif HeroHasTrait("AxeAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+		
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
 	--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
     elseif HeroHasTrait("AxeRecoveryAspect") then
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
         rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
 	--elseif (HeroHasTrait("SkullAspectofYoungMelinoe") or HeroHasTrait("SkullAspectofYoungMelinoe_Secondary")) then
 	elseif HeroHasTrait("SkullAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
@@ -434,12 +426,42 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
     elseif HeroHasTrait("LobAmmoBoostAspect") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
-	--elseif HeroHasTrait("SuitAspectofYoungMelinoe") then
-    --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", true)
-    --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", false)
-    --elseif HeroHasTrait("BaseSuitAspect") then
-    --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
-    --    rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", true)
+	elseif HeroHasTrait("SuitAspectofYoungMelinoe") then
+        rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBmultYM_MeshShape", true)
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBmultOutlineYM_MeshShape", true)
+		
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", false)
+        
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitMultiple_Rig:WeaponSuitB_MeshShape", false)
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitMultiple_Rig:WeaponSuitBOutline_MeshShape", false)
+
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBmultYM_MeshShape", false)
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBmultOutlineYM_MeshShape", false)
+		
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", true)
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", true)
+        
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", false)
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitBOutline_MeshShape", false)
+    elseif HeroHasTrait("BaseSuitAspect") then
+        rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", false)
+		
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBmultYM_MeshShape", false)
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBmultOutlineYM_MeshShape", false)
+        
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitMultiple_Rig:WeaponSuitB_MeshShape", true)
+		rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitMultiple_Rig:WeaponSuitBOutline_MeshShape", true)
+
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", false)
+		
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", false)
+        
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", true)
+		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitBOutline_MeshShape", true)
     end
 	
 end)
@@ -455,9 +477,13 @@ ModUtil.Path.Wrap("MouseOverBounty", function(baseFunc, button )
 		elseif button.Data.WeaponUpgradeName == "AxeAspectofYoungMelinoe" then
        		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
         	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+
+			--rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
 		elseif button.Data.WeaponUpgradeName == "AxeRecoveryAspect" then	
 			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
         	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+
+			--rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
 		elseif button.Data.WeaponUpgradeName == "SkullAspectofYoungMelinoe" then	
 			rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
         	rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", false)
@@ -571,6 +597,13 @@ modutil.once_loaded.game(function()
 	rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
 	rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
 	rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+
+	--Removing Axe Shadow bug
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
 
 	-- Changing Aspect text
 	import "Aspects_text.lua"
