@@ -368,7 +368,7 @@ table.insert(data.Texts, sjson.to_object(
     )
 
 return data
-	end)
+end)
 
 ---- Inserting the new events into the NarrativeData in the correct place for the priority
 table.insert(NarrativeData.Hecate.BossIntroTextLinePriorities, 35, "HecateAboutStaffYM01")
