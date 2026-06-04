@@ -16,7 +16,7 @@ OverwriteTableKeys( EnemyData.Hecate.BossIntroTextLineSets, {
 
         { 
             Cue = "/VO/Hecate_YM0001",
-            PreContentSound = "/VO/Hecate_0382", "{#Emph}Hrm..."
+            PreContentSound = "/VO/Hecate_0382", --"{#Emph}Hrm..."
             Text = "That form, It's been some time since I last saw you with sweet Descura sticking out of your mouth.",
         },
         { 
@@ -283,7 +283,7 @@ table.insert(data.Texts, sjson.to_object(
         {
          Id = "Melinoe_YM0002",
         InheritFrom = "BaseNarrative",
-        DisplayName = "Training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.",
+        DisplayName = "Truly, training with these blades were part of the rare times I could run around like a care-free child, wacking at trees.",
         Speaker = "Melinoe",
         Event = "HecateAboutDaggerYM01",
         },
@@ -316,7 +316,7 @@ table.insert(data.Texts, sjson.to_object(
         {
          Id = "Hecate_YM0005",
         InheritFrom = "BaseNarrative",
-        DisplayName = "This aspect of Ygnium? Back to your old mischief I see. At least I hope you no longer fill those balloons with nectar.",
+        DisplayName = "These markings on Zorephet. Do tell me you no longer fear the scary man in charge of time.",
         Speaker = "Hecate",
         Event = "HecateAboutAxeYM01",
         },
@@ -327,7 +327,7 @@ table.insert(data.Texts, sjson.to_object(
         {
          Id = "Melinoe_YM0004",
         InheritFrom = "BaseNarrative",
-        DisplayName = "Only water Headmistress. Per the family customs, Nectar is reserved for friends and gifts.",
+        DisplayName = "I have grown since then as has my resolve. Death to Chronos. I'll see to that. No one is more prepared.",
         Speaker = "Melinoe",
         Event = "HecateAboutAxeYM01",
         },

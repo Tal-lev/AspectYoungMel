@@ -256,18 +256,34 @@ end)
 import "Aspect_cast_functions.lua"
 
 ---- Adding Custom Textures ------
---New Axe Texture
-local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
-local custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Axe")
 
-local current_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
-table.insert(current_overrides, 1, custom_pkg_hash)
-table.insert(current_overrides, weapon_axe_hash)
-rom.data.load_package_overrides_set(weapon_axe_hash, current_overrides)
+--Whether to change new aspect textures
+import "config.lua"
+if config.Alter_Textures == true then
+	--Importing Axe Textures
+	local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
+	local custom_axe_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponAxe")
 
-local gpk_path = rom.path.combine(
-    _PLUGIN.plugins_data_mod_folder_path, 'Axe.gpk')
-rom.data.add_granny_file('Axe.gpk', gpk_path)
+	local current_axe_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
+
+	table.insert(current_axe_overrides, 1, custom_axe_hash)
+	table.insert(current_axe_overrides, weapon_axe_hash)
+
+	rom.data.load_package_overrides_set(weapon_axe_hash, current_axe_overrides)
+else
+	--New Axe Texture
+	local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
+	local custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Axe")
+
+	local current_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
+	table.insert(current_overrides, 1, custom_pkg_hash)
+	table.insert(current_overrides, weapon_axe_hash)
+	rom.data.load_package_overrides_set(weapon_axe_hash, current_overrides)
+
+	local gpk_path = rom.path.combine(
+		_PLUGIN.plugins_data_mod_folder_path, 'Axe.gpk')
+	rom.data.add_granny_file('Axe.gpk', gpk_path)
+end
 
 --New Staff Texture
 local weapon_staff_hash = rom.data.get_hash_guid_from_string("WeaponStaffSwing")
@@ -398,26 +414,7 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
 	--	rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponTorchYM_MeshShape", false)
 	--	rom.data.draw_set_mesh_visible("WeaponTorchR_Mesh", "WeaponHecateR_Rig:WeaponTorch_MeshShape", true)
 	--	rom.data.draw_set_mesh_visible("WeaponTorchL_Mesh", "WeaponHecateL_Rig:WeaponTorch_MeshShape", true)
-	--elseif (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
-	elseif HeroHasTrait("AxeAspectofYoungMelinoe") then
-        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
-        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-		
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
-	--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
-    elseif HeroHasTrait("AxeRecoveryAspect") then
-        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
-        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
 
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
-		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
 	--elseif (HeroHasTrait("SkullAspectofYoungMelinoe") or HeroHasTrait("SkullAspectofYoungMelinoe_Secondary")) then
 	elseif HeroHasTrait("SkullAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
@@ -463,6 +460,23 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
 		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", true)
 		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitBOutline_MeshShape", true)
     end
+		--elseif (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
+	if config.Alter_Textures == false then
+		if HeroHasTrait("AxeAspectofYoungMelinoe") then
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+		--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+		elseif HeroHasTrait("AxeRecoveryAspect") then
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
+		end
+	end
 	
 end)
 
@@ -474,15 +488,6 @@ ModUtil.Path.Wrap("MouseOverBounty", function(baseFunc, button )
 		elseif button.Data.WeaponUpgradeName == "BaseStaffAspect" then
 			rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", false)
         	rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", true)
-		elseif button.Data.WeaponUpgradeName == "AxeAspectofYoungMelinoe" then
-       		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
-        	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-
-			--rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
-		elseif button.Data.WeaponUpgradeName == "AxeRecoveryAspect" then	
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
-        	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
-
 			--rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
 		elseif button.Data.WeaponUpgradeName == "SkullAspectofYoungMelinoe" then	
 			rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
@@ -490,6 +495,52 @@ ModUtil.Path.Wrap("MouseOverBounty", function(baseFunc, button )
 		elseif button.Data.WeaponUpgradeName == "LobAmmoBoostAspect" then	
 			rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
         	rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
+		elseif button.Data.WeaponUpgradeName == "SuitAspectofYoungMelinoe" then
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBmultYM_MeshShape", true)
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBmultOutlineYM_MeshShape", true)
+			
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", false)
+			
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitMultiple_Rig:WeaponSuitB_MeshShape", false)
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitMultiple_Rig:WeaponSuitBOutline_MeshShape", false)
+
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBmultYM_MeshShape", false)
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBmultOutlineYM_MeshShape", false)
+			
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", true)
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", true)
+			
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", false)
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitBOutline_MeshShape", false)
+    	elseif button.Data.WeaponUpgradeName == "BaseSuitAspect" then
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", false)
+			
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBmultYM_MeshShape", false)
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitBmultOutlineYM_MeshShape", false)
+			
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitMultiple_Rig:WeaponSuitB_MeshShape", true)
+			rom.data.draw_set_mesh_visible("WeaponSuitMultiple_Base_Mesh", "WeaponSuitMultiple_Rig:WeaponSuitBOutline_MeshShape", true)
+
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", false)
+			
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBYM_MeshShape", false)
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitBOutlineYM_MeshShape", false)
+			
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", true)
+			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitBOutline_MeshShape", true)
+		end
+		if config.Alter_Textures == false then
+			if button.Data.WeaponUpgradeName == "AxeAspectofYoungMelinoe" then
+				rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+				rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+			--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+			elseif button.Data.WeaponUpgradeName == "AxeRecoveryAspect" then
+				rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+				rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+			end
 		end
 	end
 	baseFunc(button)
@@ -505,14 +556,6 @@ ModUtil.Path.Wrap("CloseBountyBoardScreen",  function(baseFunc, screen, button )
 	elseif HeroHasTrait("BaseStaffAspect") then
 		rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaffYM_MeshShapeDeformed", false)
         rom.data.draw_set_mesh_visible("WeaponStaff_Mesh", "WeaponStaff_Rig:WeaponStaff_MeshShapeDeformed", true)
-	--elseif (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
-	elseif HeroHasTrait("AxeAspectofYoungMelinoe") then
-        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
-        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-    --elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
-	elseif HeroHasTrait("AxeRecoveryAspect") then
-        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
-        rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
 	--elseif (HeroHasTrait("SkullAspectofYoungMelinoe") or HeroHasTrait("SkullAspectofYoungMelinoe_Secondary")) then
 	elseif HeroHasTrait("SkullAspectofYoungMelinoe") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", true)
@@ -521,6 +564,17 @@ ModUtil.Path.Wrap("CloseBountyBoardScreen",  function(baseFunc, screen, button )
 	elseif HeroHasTrait("LobAmmoBoostAspect") then
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
+	end
+	if config.Alter_Textures == false then
+		--if (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
+		if HeroHasTrait("AxeAspectofYoungMelinoe") then
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+		--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+		elseif HeroHasTrait("AxeRecoveryAspect") then
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+		end
 	end
 end)
 
@@ -597,13 +651,66 @@ modutil.once_loaded.game(function()
 	rom.data.draw_set_mesh_visible("WeaponDaggerA_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
 	rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
 	rom.data.draw_set_mesh_visible("WeaponDagger_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Pan_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Pan_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Pan_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Pan_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Pan_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Pan_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Pan_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Pan_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Pan_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Pan_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Pan_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Pan_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Artemis_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Artemis_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Artemis_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Artemis_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Artemis_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Artemis_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Artemis_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Artemis_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Artemis_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Artemis_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Artemis_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Artemis_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+	
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Morrigan_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Morrigan_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Morrigan_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Morrigan_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Morrigan_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Morrigan_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerB_Morrigan_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerA_Morrigan_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Morrigan_Mesh", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Morrigan_Mesh", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Morrigan_Mesh", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("WeaponDaggerMultiple_Morrigan_Mesh", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
+	
 
 	--Removing Axe Shadow bug
-	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
-	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
-	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxeCharon_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxeCharonOutline_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxeNergal_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxeNergalOutline_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxeThanatos_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxeThanatosOutline_MeshShape", false)
+
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponSuitBmultYM_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponSuitBmultOutlineYM_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponSuitBYM_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponSuitBOutlineYM_MeshShape", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponStaffYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponLobYM_MeshShape", false)
 	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponDaggerBYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponDaggerA_WeaponDaggerAYM_MeshShapeDeformed", false)
+	rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponDaggerB_WeaponDaggerBYM_MeshShapeDeformed", false)
 
 	-- Changing Aspect text
 	import "Aspects_text.lua"
