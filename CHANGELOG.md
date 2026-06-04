@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-06-04
+
 - Fixed missing suit mesh on initialization.
 - Fixed Posideon suit attack only activating once.
 
@@ -107,7 +109,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.0...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.3...1.0.0
 [0.5.3]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.2...0.5.3
 [0.5.2]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.1...0.5.2
