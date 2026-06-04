@@ -340,6 +340,10 @@ rom.data.add_granny_file('Lob.gpk', gpk_path)
 local weapon_suit_hash = rom.data.get_hash_guid_from_string("WeaponSuit")
 custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-WeaponSuit")
 
+gpk_path = rom.path.combine(
+    _PLUGIN.plugins_data_mod_folder_path, 'WeaponSuit.gpk')
+rom.data.add_granny_file('WeaponSuit.gpk', gpk_path)
+
 current_overrides = rom.data.load_package_overrides_get(weapon_suit_hash)
 table.insert(current_overrides, 1, custom_pkg_hash)
 table.insert(current_overrides, weapon_suit_hash)
@@ -1470,12 +1474,12 @@ modutil.once_loaded.game(function()
 		Icon = "JarlUlsfark-AspectYoungMel\\SuitAspectYoungMelIcon",
 		RequiredWeapon = "WeaponSuit",
 		PreEquipWeapons = { "WeaponSuit3" },
-		WeaponKitGrannyModel = Suit_comp_mesh,
+		WeaponKitGrannyModel = "WeaponSuitMultiple_Base_Mesh",
 		ReplacementGrannyModels = 
 		{
 			WeaponSuitR_Base_Mesh = "WeaponSuitR_Base_Mesh",
 			WeaponSuitL_Base_Mesh = "WeaponSuitL_Base_Mesh",
-			WeaponSuitB_Base_Mesh = Suit_back_mesh,
+			WeaponSuitB_Base_Mesh = "WeaponSuitB_Base_Mesh",
 		},
 		RarityLevels =
 		{

@@ -1845,3 +1845,18 @@ table.insert(TraitData.AresSpecialBoon.GameStateRequirements, {
 -- Dionaysus
 -- Hades
 
+---Aspect of Icarus Suit Fixing Poseidon Weapon Boon
+table.insert( TraitData.PoseidonWeaponBoon.OnEnemyDamagedAction.Args.MultihitProjectileWhitelist, "HarpyFlapFast_YM" )
+table.insert( TraitData.PoseidonWeaponBoon.OnEnemyDamagedAction.Args.MultihitProjectileWhitelist, "HarpyFlapFast2_YM" )
+table.insert( TraitData.PoseidonWeaponBoon.OnEnemyDamagedAction.Args.MultihitProjectileWhitelist, "HarpyFlapFast3_YM" )
+table.insert( TraitData.PoseidonWeaponBoon.OnEnemyDamagedAction.Args.MultihitProjectileWhitelist, "HarpyFlapFastDash_YM" )
+table.insert( TraitData.PoseidonWeaponBoon.OnEnemyDamagedAction.Args.MultihitProjectileWhitelist, "HarpyFlapFastCharge_YM" )
+
+
+OverwriteTableKeys(TraitData.PoseidonWeaponBoon.OnEnemyDamagedAction.Args.MultihitProjectileConditions, {
+	HarpyFlapFast_YM = { Count = 5, Window = 0.3 }, 
+	HarpyFlapFast2_YM = { Count = 5, Window = 0.3 }, 
+	HarpyFlapFast3_YM = { Count = 5, Window = 0.3 }, 
+	HarpyFlapFastDash_YM = { Count = 5, Window = 0.3 }, 
+	HarpyFlapFastCharge_YM = { Count = 5, Window = 0.3 },
+})
