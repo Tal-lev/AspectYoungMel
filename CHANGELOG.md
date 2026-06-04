@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added 6 Chaos trials
 - Added 6 conversations
 - Added a set of Arcana backs
-- Compat with Weapon-Fusion (By @Zerp on discord)
+- Steps towards compat with Weapon-Fusion (By @Zerp on discord)
 
 ## [0.5.3] - 2026-05-20
 
