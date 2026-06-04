@@ -81,7 +81,6 @@ Adds six Chaos trials
 
 - Dynamic texture for Axe causes a shadow bug (temp fix with config Alter_texture, removes dynamic swap)
 - Dynamic texture for Torch not yet implemented
-- Icarus aspect model fails to appear in chaos trial screen.
 - Torches Special-Cast god boons replaces the Special-Cast graphic only after room-transition.
 - Omega Special-Cast is not implemented.
 - Hestia Cast effect leaks between Special-Cast and regular Cast
