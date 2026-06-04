@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fixed missing suit mesh on initialization.
+- Fixed Posideon suit attack only activating once.
+
 ## [1.0.0] - 2026-06-04
 - Added Suit Aspect of Young Melinoë
     - Replaces the attack and omega attack with tornados.
