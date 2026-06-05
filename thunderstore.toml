@@ -5,7 +5,7 @@ schemaVersion = "0.1.0"
 [package]
 namespace = "JarlUlsfark"
 name = "AspectYoungMel"
-versionNumber = "1.0.1"
+versionNumber = "1.0.2"
 description = "Adds new Weapon Aspects for each of the six base weapons themed around Melinoë's youth."
 websiteUrl = "https://github.com/Tal-lev/AspectYoungMel"
 containsNsfwContent = false
