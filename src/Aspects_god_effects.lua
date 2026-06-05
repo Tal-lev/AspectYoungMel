@@ -68,24 +68,13 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 				ExcludeLinked = true,
 			},
 
-			-- Axe Nergal special
-			{
-				TraitName =  "AxeRallyAspect",
-				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeAspectofYoungMelinoe" },
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "FireFx",
-				ValuePrefix = "AxeSwipeUpper_",
-				ChangeType = "Absolute",
-				ExcludeLinked = true,
-			},
-
 			-- Axe farther special hammer (no FX)
 			{
 				TraitName = "AxeBlockEmpowerTrait",
 				FalseTraitNames = { "AxeAspectofYoungMelinoe", "AxeRallyAspect" },
 				WeaponName = "WeaponAxeSpecial",
 				WeaponProperty = "FireFx",
-				ValuePrefix = "null",
+				Value = "null",
 				ChangeType = "Absolute",
 				ExcludeLinked = true,
 			},
@@ -93,10 +82,10 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 			-- Axe YoungMel special (no FX)
 			{
 				TraitName = "AxeAspectofYoungMelinoe" ,
-				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect" },
+				FalseTraitNames = { "AxeBlockEmpowerTrait" },
 				WeaponName = "WeaponAxeSpecial",
 				WeaponProperty = "FireFx",
-				ValuePrefix = "null",
+				Value = "null",
 				ChangeType = "Absolute",
 				ExcludeLinked = true,
 			},
