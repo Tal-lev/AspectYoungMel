@@ -241,6 +241,34 @@ modutil.mod.Path.Wrap("SetupMap", function(base, source, args)
 	return base(source, args)
 end)
 
+function mod.CostumeArmorYM( hero, args, roomArgs )
+	roomArgs = roomArgs or {}
+	local sourceTrait = nil
+	for i, traitData in ipairs( CurrentRun.Hero.Traits ) do
+		if traitData.SetupFunction and traitData.SetupFunction.Args and traitData.SetupFunction.Args.Source == args.Source then
+			sourceTrait = traitData
+			break
+		end
+		if traitData.SetupFunctions then
+			for i, setupFunctionData in pairs( traitData.SetupFunctions ) do
+				if setupFunctionData.Name == "CostumeArmor" and setupFunctionData.Args and setupFunctionData.Args.Source == args.Source then
+					sourceTrait = traitData
+					break
+				end
+			end
+		end
+		
+	end
+	if not sourceTrait then
+		return
+	end
+	if not sourceTrait.CurrentArmor then
+		sourceTrait.CurrentArmor = args.BaseAmount
+	end
+	AddHealthBuffer( sourceTrait.CurrentArmor, sourceTrait.Name, { Silent = roomArgs.Grouped or args.Silent, Delay = args.Delay  })
+	FrameState.RequestUpdateHealthUI = true
+end
+
 ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
         -- Fallback to the original logic first so we don't break actual gameplay healing
         baseFunc(victim, triggerArgs)
@@ -1470,7 +1498,7 @@ modutil.once_loaded.game(function()
 	}
 
 	SuitAspectofYoungMelinoe = {
-		InheritFrom = { "WeaponEnchantmentTrait", "CostumeTrait" },
+		InheritFrom = { "WeaponEnchantmentTrait" },
 		Icon = "JarlUlsfark-AspectYoungMel\\SuitAspectYoungMelIcon",
 		RequiredWeapon = "WeaponSuit",
 		PreEquipWeapons = { "WeaponSuit3" },
@@ -1510,7 +1538,7 @@ modutil.once_loaded.game(function()
 		},
 		SetupFunction =
 		{
-			Name = "CostumeArmor",
+			Name = _PLUGIN.guid .. "." .. "CostumeArmorYM",
 			Args =
 			{
 				Source = "Aspect",
@@ -1630,7 +1658,7 @@ modutil.once_loaded.game(function()
 		FlavorText = "SuitAspectofYoungMelinoe_FlavorText",
 	}
 
-	--OverwriteTableKeys( TraitSetData.Aspects.BaseSuitAspect, SuitAspectofYoungMelinoe)
+	--OverwriteTableKeys( TraitSetData.Aspects.AxeRecoveryAspect, ShovelRaiseDeadNecroMel)
 	
 	TraitData.StaffAspectofYoungMelinoe = StaffAspectofYoungMelinoe
 	TraitData.DaggerAspectofYoungMelinoe = DaggerAspectofYoungMelinoe

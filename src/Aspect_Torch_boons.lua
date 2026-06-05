@@ -1860,3 +1860,11 @@ OverwriteTableKeys(TraitData.PoseidonWeaponBoon.OnEnemyDamagedAction.Args.Multih
 	HarpyFlapFastDash_YM = { Count = 5, Window = 0.3 }, 
 	HarpyFlapFastCharge_YM = { Count = 5, Window = 0.3 },
 })
+---Axe aspect of youngmel Fixing Poseidon special Boon
+table.insert( TraitData.PoseidonSpecialBoon.OnEnemyDamagedAction.Args.MultihitProjectileWhitelist, "ProjectileAxeBlockSpin" )
+table.insert( TraitData.PoseidonSpecialBoon.OnEnemyDamagedAction.Args.MultihitProjectileWhitelist, "ProjectileAxeBlockSpinDeflect" )
+
+OverwriteTableKeys(TraitData.PoseidonSpecialBoon.OnEnemyDamagedAction.Args.MultihitProjectileConditions, {
+	ProjectileAxeBlockSpin = { Count = 2, Window = 0.2 }, 
+	ProjectileAxeBlockSpinDeflect = { Count = 2, Window = 0.2 }, 
+})
