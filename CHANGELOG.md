@@ -8,7 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Fixed Posideon Axe special only activating once.
+- Fixed bug where Aspect of Icarus disappears when the armor is gone
 - Compat with WeaponFusion (by @Zerp on discord)
+  
 
 ## [1.0.1] - 2026-06-04
 
