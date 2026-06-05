@@ -47,6 +47,110 @@ local function RemoveWeaponPropertyFromGodTraits(weaponName, weaponProperty)
     end
 end
 
+local function PropertiesMatch(propertyChange, property)
+	local ignoredFields = {"Replacements", "Deletions", "Additions"}
+	local ignoredFields2 = {}
+	for _, field in ipairs(ignoredFields) do
+		for _, field2 in ipairs(propertyChange[field] or {}) do
+			table.insert(ignoredFields2, field2)
+		end
+	end
+	local merge = true
+	for field, value in pairs(propertyChange) do
+		if not game.Contains(ignoredFields, field) and not game.Contains(ignoredFields2, field) then
+			if type(value) ~= type(property[field]) then
+				merge = false
+			end
+			if type(value) ~= table and property[field] ~= value then
+				merge = false
+			end
+			if type(value) == table and table.concat(property[field] or {}) ~= table.concat(value) then
+				merge = false
+			end
+		end
+	end
+	if merge then
+		for index, value in ipairs(propertyChange.Replacements or {}) do
+			property[value] = propertyChange[value]
+		end
+		for index, value in ipairs(propertyChange.Deletions or {}) do
+			property[value] = nil
+		end
+		for index, value in ipairs(propertyChange.Additions or {}) do
+			property[value] = propertyChange[value]
+		end
+	end
+end
+
+local function ModifyGodTraitWeaponProperty(args)
+	if args.PropertyChanges == nil then
+		return
+	end
+	local prefix = args.TraitPrefix or ""
+	local suffix = args.TraitSuffix or ""
+	for _, god in pairs(CoreGods) do
+		local traitName = (prefix) .. god .. (suffix)
+		local properties = args.PropertyChanges
+		local traitData = game.TraitData[traitName]
+		if traitData then
+			for _, propertyChange in ipairs(properties) do
+				for _, traitProperty in ipairs(traitData.PropertyChanges or {}) do
+					local processedPropertyChange = game.DeepCopyTable(propertyChange)
+					if processedPropertyChange.ValuePrefix ~= nil or processedPropertyChange.ValueSuffix ~= nil then
+						processedPropertyChange.ChangeValue = (processedPropertyChange.ValuePrefix or "") .. god .. (processedPropertyChange.ValueSuffix or "")
+						processedPropertyChange.ValuePrefix = nil
+						processedPropertyChange.ValueSuffix = nil
+					end
+					PropertiesMatch(processedPropertyChange, traitProperty)
+				end
+			end
+		end
+	end
+end
+
+ModifyGodTraitWeaponProperty({
+	TraitSuffix = "SpecialBoon",
+	PropertyChanges = {
+		{
+			FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect", "AxeAspectofYoungMelinoe"},
+			WeaponName = "WeaponAxeSpecial",
+			WeaponProperty = "FireFx",
+			ValuePrefix = "AxeSpinDouble_",
+			ChangeType = "Absolute",
+			ExcludeLinked = true,
+
+			Replacements = {
+				"FalseTraitNames"
+			},
+			Deletions = {
+
+			},
+			Additions = {
+
+			}
+		},
+		{
+			TraitName = "AxeBlockEmpowerTrait",
+			FalseTraitNames = { "AxeRallyAspect", "AxeAspectofYoungMelinoe"},
+			WeaponName = "WeaponAxeSpecial",
+			WeaponProperty = "FireFx",
+			ChangeValue = "null",
+			ChangeType = "Absolute",
+			ExcludeLinked = true,
+
+			Replacements = {
+
+			},
+			Deletions = {
+				"FalseTraitName"
+			},
+			Additions = {
+				"FalseTraitNames"
+			}
+		},
+	}
+})
+
 --Starting to add god_effects
 
 --RemoveWeaponPropertyFromTraits("WeaponAxeSpecial", "FireFx")
@@ -57,28 +161,6 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 	AddGodTraitProperty({
 		TraitSuffix = "SpecialBoon",
 		PropertyChanges = {
-
-			-- Axe Default special (no aspect overrides)
-			{
-				FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect", "AxeAspectofYoungMelinoe" },
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "FireFx",
-				ValuePrefix = "AxeSpinDouble_",
-				ChangeType = "Absolute",
-				ExcludeLinked = true,
-			},
-
-			-- Axe farther special hammer (no FX)
-			{
-				TraitName = "AxeBlockEmpowerTrait",
-				FalseTraitNames = { "AxeAspectofYoungMelinoe", "AxeRallyAspect" },
-				WeaponName = "WeaponAxeSpecial",
-				WeaponProperty = "FireFx",
-				Value = "null",
-				ChangeType = "Absolute",
-				ExcludeLinked = true,
-			},
-
 			-- Axe YoungMel special (no FX)
 			{
 				TraitName = "AxeAspectofYoungMelinoe" ,
@@ -219,3 +301,6 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 			--},
 		}
 	})
+
+-- modifying existing properties for WeaponAxeSpecial
+
