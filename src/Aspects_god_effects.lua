@@ -301,6 +301,3 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 			--},
 		}
 	})
-
--- modifying existing properties for WeaponAxeSpecial
-
