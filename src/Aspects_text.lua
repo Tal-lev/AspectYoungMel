@@ -23,7 +23,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		Id = "HealthThresholdStatDisplay",
 		InheritFrom = "BaseStatLine",
 		DisplayName = "{!Icons.Bullet}{#PropertyFormat}Health Threshold:",
-		Description = "{#UpgradeFormat}{$TooltipData.ExtractData.HealthThreshold}%{!Icons.Health}"
+		Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.HealthThreshold}{!Icons.Health}"
 
 	},
 	TextOrder)
@@ -34,7 +34,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 		Id = "SkullAspectYoungMelStat",
 		InheritFrom = "BaseStatLine",
 		DisplayName = "{!Icons.Bullet}{#PropertyFormat}Combo Stack Damage:",
-		Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.ComboMultiplier}%"
+		Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
 
 	},
 	TextOrder)
@@ -265,7 +265,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 			Id = "TorchAspectYoungMelStat",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Olympian Bonus Damage:",
-			Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.OlympicBoonsYM}%"
+			Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
 		},
 		TextOrder)
 	)
@@ -285,7 +285,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 			Id = "AxeAspectYoungMelStat",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Retaliate Damage:",
-			Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.RetaliateDamage}%"
+			Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
 		},
 		TextOrder)
 	)
@@ -433,7 +433,7 @@ game.ConcatTableValuesIPairs(game.KeywordList, newKeywords)
 			Id = "SuitAspectYoungMelStat",
 			InheritFrom = "BaseBoonMultiline",
 			DisplayName = "{!Icons.Bullet}{#PropertyFormat}Starting Armor:",
-			Description = "{#UpgradeFormat}+{$TooltipData.ExtractData.TooltipAmount}"
+			Description = "{#UpgradeFormat}{$TooltipData.StatDisplay1}"
 		},
 		TextOrder)
 	)
