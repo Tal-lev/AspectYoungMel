@@ -274,7 +274,7 @@ ModUtil.Path.Wrap("Heal", function(baseFunc, victim, triggerArgs)
         baseFunc(victim, triggerArgs)
 		if victim == CurrentRun.Hero and (HeroHasTrait("StaffAspectofYoungMelinoe") or HeroHasTrait("StaffAspectofYoungMelinoe_Secondary")) then
 			CurrentRun.HealingTracker = CurrentRun.HealingTracker or 0
-			CurrentRun.HealingTracker = CurrentRun.HealingTracker + triggerArgs.ActualHealAmount
+			CurrentRun.HealingTracker = CurrentRun.HealingTracker + ( triggerArgs.ActualHealAmount or 0 )
 			if CurrentRun.HealingTracker >= 500 and not GameState.Flags.LargeHealRun then
 				GameState.Flags.LargeHealRun = true
 			end
