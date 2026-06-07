@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 - Fix weapon shop text not showing the upgrade statistics of the next rarity
+- Fix rare crash caused when healing with staff aspect.
 
 ## [1.0.2] - 2026-06-05
 
