@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-06-07
+
 - Fix weapon shop text not showing the upgrade statistics of the next rarity
 - Fix rare crash caused when healing with staff aspect.
 
@@ -119,7 +121,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.2...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.3...HEAD
+[1.0.3]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/Tal-lev/AspectYoungMel/compare/0.5.3...1.0.0
