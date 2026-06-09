@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fix crash when other mods are not loaded afterwards
+
 ## [1.0.3] - 2026-06-07
 
 - Fix weapon shop text not showing the upgrade statistics of the next rarity
