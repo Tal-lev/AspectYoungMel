@@ -1693,5 +1693,8 @@ modutil.once_loaded.game(function()
 	import "Aspects_Conversations.lua"
 
 
-
+	-- Crucial, leads to crashes if this doesn't run in the end by another mod
+	if (not rom.mods['NikkelM-Zagreus_Journey']) and (not rom.mods['JarlUlsfark-Tools_of_the_Trade']) then
+		SetupRunData()
+	end
 end)
