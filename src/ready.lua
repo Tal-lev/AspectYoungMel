@@ -152,13 +152,14 @@ function mod.EscalateMagnetismYM( consumable )
 	end
 	CreateAnimation({ Name = "AmmoReturnTimer", DestinationId = consumable.ObjectId })
 	local trait = GetHeroTrait( "SkullAspectofYoungMelinoe") or GetHeroTrait( "SkullAspectofYoungMelinoe_Secondary")
-	if trait.Combo ~= 0 and not HeroHasTrait("LobExtendComboTraitYM") then
+	if trait and trait.Combo and trait.Combo ~= 0 and not HeroHasTrait("LobExtendComboTraitYM") then
 		trait.Combo = 0
 		mod.ComboPresentationCancel(CurrentRun.Hero.ObjectId)
 	end
 	wait( consumable.MagnetismHintRemainingTime, RoomThreadName )
+	trait = GetHeroTrait( "SkullAspectofYoungMelinoe") or GetHeroTrait( "SkullAspectofYoungMelinoe_Secondary")
 	SetObstacleProperty({ Property = "Magnetism", Value = consumable.MagnetismEscalateAmount, DestinationId = consumable.ObjectId })
-	if trait.Combo ~= 0 and HeroHasTrait("LobExtendComboTraitYM") then
+	if trait and trait.Combo and trait.Combo ~= 0 and HeroHasTrait("LobExtendComboTraitYM") then
 		trait.Combo = 0
 		mod.ComboPresentationCancel(CurrentRun.Hero.ObjectId)
 	end
