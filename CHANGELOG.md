@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fix trials not ending properly when finishing the biome
+
 ## [1.0.5] - 2026-06-22
 
 - Fix crash when unequipping Skull aspect before picking all skulls
