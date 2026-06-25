@@ -320,7 +320,7 @@ bountyAPI.RegisterBounty({
     end,
 
     BaseData = {
-		InheritFrom = { "DefaultPackagedBounty", "BasePackageBountyBiomeP", },
+		InheritFrom = { "DefaultPackagedBounty", "BasePackageBountyBiomeG", },
         WeaponKitName = "WeaponTorch",
 		WeaponUpgradeName = "TorchAspectofYoungMelinoe",
 		KeepsakeName = "FountainRarityKeepsake",
@@ -670,7 +670,7 @@ bountyAPI.RegisterBounty({
     end,
 
     BaseData = {
-		InheritFrom = { "DefaultPackagedBounty", "BasePackageBountyBiomeI", },
+		InheritFrom = { "DefaultPackagedBounty", "BasePackageBountyBiomeH", },
         WeaponKitName = "WeaponLob",
 		WeaponUpgradeName = "SkullAspectofYoungMelinoe",
 		KeepsakeName = "DecayingBoostKeepsake",
@@ -850,7 +850,7 @@ bountyAPI.RegisterBounty({
     end,
 
     BaseData = {
-		InheritFrom = { "DefaultPackagedBounty", "BasePackageBountyBiomeF", },
+		InheritFrom = { "DefaultPackagedBounty", "BasePackageBountyBiomeO", },
         WeaponKitName = "WeaponSuit",
 		WeaponUpgradeName = "SuitAspectofYoungMelinoe",
 		KeepsakeName = "TempHammerKeepsake",
