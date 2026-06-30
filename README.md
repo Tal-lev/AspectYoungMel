@@ -79,7 +79,6 @@ Adds six Chaos trials
 
 ## Known Issues / To do list
 
-- Dynamic texture for Axe causes a shadow bug (temp fix with config Alter_texture, removes dynamic swap)
 - Dynamic texture for Torch not yet implemented
 - Torches Special-Cast god boons replaces the Special-Cast graphic only after room-transition.
 - Omega Special-Cast is not implemented.
