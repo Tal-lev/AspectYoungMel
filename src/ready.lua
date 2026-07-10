@@ -306,13 +306,9 @@ end
 
 --Whether to change new aspect textures
 import "config.lua"
-if config.Alter_Textures == true then
-	--Importing Axe Textures
-	AddPackageOverride("WeaponAxe", "AxeTest-WeaponAxe")
-else
-	--New Axe Texture
-	AddPackageOverride("WeaponAxe", "Enderclem-CG3HBuilder-Enderclem-Axe")
-end
+
+--New Axe Texture
+AddPackageOverride("WeaponAxe", "Enderclem-CG3HBuilder-Enderclem-Axe")
 
 --New Staff Texture
 AddPackageOverride("WeaponStaffSwing", "Enderclem-CG3HBuilder-Enderclem-Staff")
