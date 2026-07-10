@@ -286,97 +286,68 @@ import "Aspect_cast_functions.lua"
 
 ---- Adding Custom Textures ------
 
+local function AddPackageOverride(original_package_name, new_pacakge_name)
+	local original_hash = rom.data.get_hash_guid_from_string(original_package_name)
+	local new_hash = rom.data.get_hash_guid_from_string(new_pacakge_name)
+	if original_hash ~= 0 and new_hash ~= 0 then
+		local current_pkg_overrides = rom.data.load_package_overrides_get(original_hash)
+		if not game.Contains(current_pkg_overrides, new_hash) then
+			local new_pkg_overrides = {}
+			table.insert(new_pkg_overrides, new_hash)
+            rom.data.load_package_overrides_set(original_hash, new_pkg_overrides)
+		end
+		if not game.Contains(current_pkg_overrides, original_hash) then
+			local new_pkg_overrides = {}
+			table.insert(new_pkg_overrides, original_hash)
+            rom.data.load_package_overrides_set(original_hash, new_pkg_overrides)
+		end
+	end
+end
+
 --Whether to change new aspect textures
 import "config.lua"
 if config.Alter_Textures == true then
 	--Importing Axe Textures
-	local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
-	local custom_axe_hash = rom.data.get_hash_guid_from_string("AxeTest-WeaponAxe")
-
-	local current_axe_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
-
-	table.insert(current_axe_overrides, 1, custom_axe_hash)
-	table.insert(current_axe_overrides, weapon_axe_hash)
-
-	rom.data.load_package_overrides_set(weapon_axe_hash, current_axe_overrides)
+	AddPackageOverride("WeaponAxe", "AxeTest-WeaponAxe")
 else
 	--New Axe Texture
-	local weapon_axe_hash = rom.data.get_hash_guid_from_string("WeaponAxe")
-	local custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Axe")
-
-	local current_overrides = rom.data.load_package_overrides_get(weapon_axe_hash)
-	table.insert(current_overrides, 1, custom_pkg_hash)
-	table.insert(current_overrides, weapon_axe_hash)
-	rom.data.load_package_overrides_set(weapon_axe_hash, current_overrides)
-
-	local gpk_path = rom.path.combine(
-		_PLUGIN.plugins_data_mod_folder_path, 'Axe.gpk')
-	rom.data.add_granny_file('Axe.gpk', gpk_path)
+	AddPackageOverride("WeaponAxe", "Enderclem-CG3HBuilder-Enderclem-Axe")
 end
 
 --New Staff Texture
-local weapon_staff_hash = rom.data.get_hash_guid_from_string("WeaponStaffSwing")
-custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Staff")
-
-current_overrides = rom.data.load_package_overrides_get(weapon_staff_hash)
-table.insert(current_overrides, 1, custom_pkg_hash)
-table.insert(current_overrides, weapon_staff_hash)
-rom.data.load_package_overrides_set(weapon_staff_hash, current_overrides)
+AddPackageOverride("WeaponStaffSwing", "Enderclem-CG3HBuilder-Enderclem-Staff")
 
 gpk_path = rom.path.combine(
     _PLUGIN.plugins_data_mod_folder_path, 'Staff.gpk')
 rom.data.add_granny_file('Staff.gpk', gpk_path)
 
 --New Dagger Texture
-local weapon_dagger_hash = rom.data.get_hash_guid_from_string("WeaponDagger")
-custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Dagger")
-current_overrides = rom.data.load_package_overrides_get(weapon_dagger_hash)
-table.insert(current_overrides, 1, custom_pkg_hash)
-table.insert(current_overrides, weapon_dagger_hash)
-rom.data.load_package_overrides_set(weapon_dagger_hash, current_overrides)
+AddPackageOverride("WeaponDagger", "Enderclem-CG3HBuilder-Enderclem-Dagger")
 
 gpk_path = rom.path.combine(
     _PLUGIN.plugins_data_mod_folder_path, 'Dagger.gpk')
 rom.data.add_granny_file('Dagger.gpk', gpk_path)
 
 --new Torch texture
---local weapon_torch_hash = rom.data.get_hash_guid_from_string("WeaponTorch")
---custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-WeaponTorch")
-
---current_overrides = rom.data.load_package_overrides_get(weapon_torch_hash)
---table.insert(current_overrides, 1, custom_pkg_hash)
---table.insert(current_overrides, weapon_torch_hash)
---rom.data.load_package_overrides_set(weapon_torch_hash, current_overrides)
+--AddPackageOverride("WeaponTorch", "Enderclem-CG3HBuilder-Enderclem-WeaponTorch")
 
 --gpk_path = rom.path.combine(
 --    _PLUGIN.plugins_data_mod_folder_path, 'WeaponTorch.gpk')
 --rom.data.add_granny_file('WeaponTorch.gpk', gpk_path)
 
 --new Skull texture
-local weapon_lob_hash = rom.data.get_hash_guid_from_string("WeaponLob")
-custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-Lob")
-
-current_overrides = rom.data.load_package_overrides_get(weapon_lob_hash)
-table.insert(current_overrides, 1, custom_pkg_hash)
-table.insert(current_overrides, weapon_lob_hash)
-rom.data.load_package_overrides_set(weapon_lob_hash, current_overrides)
+AddPackageOverride("WeaponLob", "Enderclem-CG3HBuilder-Enderclem-Lob")
 
 gpk_path = rom.path.combine(
     _PLUGIN.plugins_data_mod_folder_path, 'Lob.gpk')
 rom.data.add_granny_file('Lob.gpk', gpk_path)
 
 --New suit texture
-local weapon_suit_hash = rom.data.get_hash_guid_from_string("WeaponSuit")
-custom_pkg_hash = rom.data.get_hash_guid_from_string("Enderclem-CG3HBuilder-Enderclem-WeaponSuit")
+AddPackageOverride("WeaponSuit", "Enderclem-CG3HBuilder-Enderclem-WeaponSuit")
 
 gpk_path = rom.path.combine(
     _PLUGIN.plugins_data_mod_folder_path, 'WeaponSuit.gpk')
 rom.data.add_granny_file('WeaponSuit.gpk', gpk_path)
-
-current_overrides = rom.data.load_package_overrides_get(weapon_suit_hash)
-table.insert(current_overrides, 1, custom_pkg_hash)
-table.insert(current_overrides, weapon_suit_hash)
-rom.data.load_package_overrides_set(weapon_suit_hash, current_overrides)
 
 gpk_path = rom.path.combine(
     _PLUGIN.plugins_data_mod_folder_path, 'WeaponSuit.gpk')
