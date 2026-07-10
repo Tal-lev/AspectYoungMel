@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.7] - 2026-07-10
+
 - DEV: overriding textures using a function to reduce repeated loading (by @zerp)
 - Fix Axe shadow bug (by @Enderclem)
 - DEV : Removing config of alter textures as its no longer needed
@@ -137,7 +139,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.6...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.7...HEAD
+[1.0.7]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.5...1.0.6
 [1.0.5]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.4...1.0.5
 [1.0.4]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.3...1.0.4
