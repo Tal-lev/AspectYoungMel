@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- DEV: overriding textures using a function to reduce repeated loading (by @zerp)
+- Fix Axe shadow bug (by @Enderclem)
+- DEV : Removing config of alter textures as its no longer needed
+
 ## [1.0.6] - 2026-06-25
 
 - Fix trials not ending properly when finishing the biome
