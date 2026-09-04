@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.8] - 2026-09-04
+
 - Fix rare crash related to mod load order
 
 ## [1.0.7] - 2026-07-10
@@ -141,7 +143,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.7...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.8...HEAD
+[1.0.8]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.5...1.0.6
 [1.0.5]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.4...1.0.5
