@@ -461,21 +461,19 @@ ModUtil.Path.Wrap("EquipWeaponUpgrade", function(baseFunc, hero, args)
 		rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitBOutline_MeshShape", true)
     end
 		--elseif (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
-	if config.Alter_Textures == false then
-		if HeroHasTrait("AxeAspectofYoungMelinoe") then
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-		--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
-		elseif HeroHasTrait("AxeRecoveryAspect") then
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
+	if HeroHasTrait("AxeAspectofYoungMelinoe") then
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+	--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+	elseif HeroHasTrait("AxeRecoveryAspect") then
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
 
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
-		end
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYM_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxeYMOutline_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh", "WeaponAxe_Rig_01:WeaponAxeOutline_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYMOutline_MeshShapeDeformed", false)
 	end
 	
 end)
@@ -532,16 +530,16 @@ ModUtil.Path.Wrap("MouseOverBounty", function(baseFunc, button )
 			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitB_MeshShape", true)
 			rom.data.draw_set_mesh_visible("WeaponSuitB_Base_Mesh", "WeaponSuitB_Rig:WeaponSuitBOutline_MeshShape", true)
 		end
-		if config.Alter_Textures == false then
-			if button.Data.WeaponUpgradeName == "AxeAspectofYoungMelinoe" then
-				rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
-				rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-			--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
-			elseif button.Data.WeaponUpgradeName == "AxeRecoveryAspect" then
-				rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
-				rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
-			end
+
+		if button.Data.WeaponUpgradeName == "AxeAspectofYoungMelinoe" then
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+		--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+		elseif button.Data.WeaponUpgradeName == "AxeRecoveryAspect" then
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
 		end
+
 	end
 	baseFunc(button)
 end)
@@ -565,17 +563,17 @@ ModUtil.Path.Wrap("CloseBountyBoardScreen",  function(baseFunc, screen, button )
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLobYM_MeshShape", false)
         rom.data.draw_set_mesh_visible("WeaponLob_Mesh", "WeaponLob_Rig:WeaponLob_MeshShape", true)
 	end
-	if config.Alter_Textures == false then
-		--if (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
-		if HeroHasTrait("AxeAspectofYoungMelinoe") then
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
-		--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
-		elseif HeroHasTrait("AxeRecoveryAspect") then
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
-			rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
-		end
+
+	--if (HeroHasTrait("AxeAspectofYoungMelinoe") or HeroHasTrait("AxeAspectofYoungMelinoe_Secondary")) then
+	if HeroHasTrait("AxeAspectofYoungMelinoe") then
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", true)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", false)
+	--elseif (HeroHasTrait("AxeRecoveryAspect") or HeroHasTrait("AxeRecoveryAspect_Secondary")) then
+	elseif HeroHasTrait("AxeRecoveryAspect") then
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxeYM_MeshShapeDeformed", false)
+		rom.data.draw_set_mesh_visible("Melinoe_Axe_Mesh1", "WeaponAxe_Rig_01:WeaponAxe_MeshShapeDeformed", true)
 	end
+
 end)
 
 -- Steps to create new Aspects
@@ -1663,6 +1661,6 @@ modutil.once_loaded.game(function()
 
 	-- Crucial, leads to crashes if this doesn't run in the end by another mod
 	--if (not rom.mods['NikkelM-Zagreus_Journey']) and (not rom.mods['JarlUlsfark-Tools_of_the_Trade']) then
-	SetupRunData()
+		SetupRunData()
 	--end
 end)
