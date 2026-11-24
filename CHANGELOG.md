@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.9] - 2026-11-24
+
 - Fix rare bug where Aspect of Icarus Attack becoming disabled until next location 
 
 ## [1.0.8] - 2026-09-04
@@ -145,7 +147,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.8...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.9...HEAD
+[1.0.9]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.8...1.0.9
 [1.0.8]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.6...1.0.7
 [1.0.6]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.5...1.0.6
