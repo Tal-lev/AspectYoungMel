@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Fix rare bug where Aspect of Icarus Attack becoming disabled until next location 
+
 ## [1.0.8] - 2026-09-04
 
 - Fix rare crash related to mod load order
