@@ -269,7 +269,7 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 				ExcludeLinked = true,
 			},
 			{
-				WeaponName = "WeaponSuit3",
+				WeaponName = "IcarusAspectWeaponSuit3",
 				ProjectileName = "HarpyFlapFast_YM",
 				ProjectileProperty = "Graphic",
 				ValuePrefix = "HarpyTornadoYM_",
