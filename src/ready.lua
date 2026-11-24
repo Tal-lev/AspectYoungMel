@@ -307,6 +307,33 @@ end
 --Whether to change new aspect textures
 import "config.lua"
 
+local packageNames = {
+    "Enderclem-CG3HBuilder-Enderclem-Axe",
+    "Enderclem-CG3HBuilder-Enderclem-Staff",
+    "Enderclem-CG3HBuilder-Enderclem-Dagger",
+    "Enderclem-CG3HBuilder-Enderclem-Lob",
+    "Enderclem-CG3HBuilder-Enderclem-WeaponSuit",
+}
+
+local seenHashes = {}
+
+local function CheckPackageHashes(location)
+    for _, packageName in ipairs(packageNames) do
+        local hash = rom.data.get_hash_guid_from_string(packageName)
+
+        if hash ~= 0 and not seenHashes[packageName] then
+            seenHashes[packageName] = true
+            rom.log.warning(packageName .. " interned " .. location .. ": " .. hash)
+        end
+    end
+end
+
+CheckPackageHashes("when ready.lua loaded")
+
+rom.on_import.post(function(scriptName)
+    CheckPackageHashes("after " .. scriptName)
+end)
+
 --New Axe Texture
 AddPackageOverride("WeaponAxe", "Enderclem-CG3HBuilder-Enderclem-Axe")
 
@@ -714,6 +741,7 @@ modutil.once_loaded.game(function()
 	import "Aspects_text.lua"
 	-- Changing the weapon effects, adding all possible aspects and switching new effects to inactive
 	import "Aspects_weapon_effects.lua"
+	import "Aspects_WeaponObject.lua"
 
 	-- import "Aspect_VFX.lua"	-- Adds new VFX for attacks, Inside Aspects_projectiles.lua
 	-- Adds new projectiles
@@ -1467,7 +1495,7 @@ modutil.once_loaded.game(function()
 		InheritFrom = { "WeaponEnchantmentTrait" },
 		Icon = "JarlUlsfark-AspectYoungMel\\SuitAspectYoungMelIcon",
 		RequiredWeapon = "WeaponSuit",
-		PreEquipWeapons = { "WeaponSuit3" },
+		PreEquipWeapons = { "IcarusAspectWeaponSuit3" },
 		WeaponKitGrannyModel = "WeaponSuitMultiple_Base_Mesh",
 		ReplacementGrannyModels = 
 		{
@@ -1574,7 +1602,7 @@ modutil.once_loaded.game(function()
 			WeaponSuit2 = {
 				InheritFrom = { "WeaponSuit", },
 			},
-			WeaponSuit3 = {
+			IcarusAspectWeaponSuit3 = {
 				InheritFrom = { "WeaponSuit", },
 			},
 		},
@@ -1591,21 +1619,25 @@ modutil.once_loaded.game(function()
 					RootOwnerWhileFiring = true,
 					SelfVelocity = -500,
 				},
+				ExcludeLinked = true,
 			},
 			{
 				WeaponName = "WeaponSuit",
 				WeaponProperty = "Projectile",
 				ChangeValue = "HarpyFlapFast_YM",
+				ExcludeLinked = true,
 			},
 			{
 				WeaponName = "WeaponSuit2",
 				WeaponProperty = "Projectile",
 				ChangeValue = "HarpyFlapFast2_YM",
+				ExcludeLinked = true,
 			},
 			{
-				WeaponName = "WeaponSuit3",
+				WeaponName = "IcarusAspectWeaponSuit3",
 				WeaponProperty = "Projectile",
 				ChangeValue = "HarpyFlapFast3_YM",
+				ExcludeLinked = true,
 			},
 			{
 				WeaponName = "WeaponSuit",
@@ -1616,6 +1648,7 @@ modutil.once_loaded.game(function()
 				WeaponName = "WeaponSuitCharged",
 				WeaponProperty = "Projectile",
 				ChangeValue = "HarpyFlapFastCharge_YM",
+				ExcludeLinked = true,
 			},
 		},
 		StatLines = {

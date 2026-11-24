@@ -112,7 +112,7 @@ ModifyGodTraitWeaponProperty({
 	TraitSuffix = "SpecialBoon",
 	PropertyChanges = {
 		{
-			FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect", "AxeAspectofYoungMelinoe"},
+			FalseTraitNames = { "AxeBlockEmpowerTrait", "AxeRallyAspect", "AxeAspectofYoungMelinoe", "ChronosAspect"},
 			WeaponName = "WeaponAxeSpecial",
 			WeaponProperty = "FireFx",
 			ValuePrefix = "AxeSpinDouble_",
@@ -131,7 +131,7 @@ ModifyGodTraitWeaponProperty({
 		},
 		{
 			TraitName = "AxeBlockEmpowerTrait",
-			FalseTraitNames = { "AxeRallyAspect", "AxeAspectofYoungMelinoe"},
+			FalseTraitNames = { "AxeRallyAspect", "AxeAspectofYoungMelinoe",},
 			WeaponName = "WeaponAxeSpecial",
 			WeaponProperty = "FireFx",
 			ChangeValue = "null",
@@ -164,6 +164,15 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 			-- Axe YoungMel special (no FX)
 			{
 				TraitName = "AxeAspectofYoungMelinoe" ,
+				FalseTraitNames = { "AxeBlockEmpowerTrait" },
+				WeaponName = "WeaponAxeSpecial",
+				WeaponProperty = "FireFx",
+				Value = "null",
+				ChangeType = "Absolute",
+				ExcludeLinked = true,
+			},
+			{
+				TraitName = "ChronosAspect" ,
 				FalseTraitNames = { "AxeBlockEmpowerTrait" },
 				WeaponName = "WeaponAxeSpecial",
 				WeaponProperty = "FireFx",
