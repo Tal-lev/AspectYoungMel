@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.10] - 2026-11-25
+
 - Fix Aspect of Icarus Attack behavior with Thousand Cuts Hammer.
 
 ## [1.0.9] - 2026-11-24
@@ -149,7 +151,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - First version of the mod!
 
-[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.9...HEAD
+[unreleased]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.10...HEAD
+[1.0.10]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.9...1.0.10
 [1.0.9]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.8...1.0.9
 [1.0.8]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.7...1.0.8
 [1.0.7]: https://github.com/Tal-lev/AspectYoungMel/compare/1.0.6...1.0.7
