@@ -1612,14 +1612,19 @@ modutil.once_loaded.game(function()
 				WeaponName = "WeaponSuit",
 				WeaponProperties = {
 					SwapOnFire = "WeaponSuit",
+					Cooldown = 0.6,
+				},
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "WeaponSuit",
+				WeaponProperties = {
 					BlockMoveInput = true,
 					CancelMovement = true,
-					Cooldown = 0.6,
 					FireGraphic = "Melinoe_Suit_SpecialMissile_FireQuick",
 					RootOwnerWhileFiring = true,
 					SelfVelocity = -500,
 				},
-				ExcludeLinked = true,
 			},
 			{
 				WeaponName = "WeaponSuit",
@@ -1634,15 +1639,24 @@ modutil.once_loaded.game(function()
 				ExcludeLinked = true,
 			},
 			{
+				WeaponName = "WeaponSuit2",
+				WeaponProperties = {
+					Cooldown = 0.6,
+				},
+				ExcludeLinked = true,
+			},
+			{
+				WeaponName = "IcarusAspectWeaponSuit3",
+				WeaponProperties = {
+					Cooldown = 0.6,
+				},
+				ExcludeLinked = true,
+			},
+			{
 				WeaponName = "IcarusAspectWeaponSuit3",
 				WeaponProperty = "Projectile",
 				ChangeValue = "HarpyFlapFast3_YM",
 				ExcludeLinked = true,
-			},
-			{
-				WeaponName = "WeaponSuit",
-				WeaponProperty = "FireGraphic",
-				ChangeValue = "Melinoe_Suit_SpecialMissile_FireQuick",
 			},
 			{
 				WeaponName = "WeaponSuitCharged",

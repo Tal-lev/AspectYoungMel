@@ -251,7 +251,7 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 		AddGodTraitProperty({
 		TraitSuffix = "WeaponBoon",
 		PropertyChanges = {
-			-- Torches Aspect of young Mel special 
+			-- Suit Aspect of young Mel Attack 
 			{
 				WeaponName = "WeaponSuit",
 				ProjectileName = "HarpyFlapFast_YM",
@@ -262,7 +262,7 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 			},
 			{
 				WeaponName = "WeaponSuit2",
-				ProjectileName = "HarpyFlapFast_YM",
+				ProjectileName = "HarpyFlapFast2_YM",
 				ProjectileProperty = "Graphic",
 				ValuePrefix = "HarpyTornadoYM_",
 				ChangeType = "Absolute",
@@ -270,7 +270,7 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 			},
 			{
 				WeaponName = "IcarusAspectWeaponSuit3",
-				ProjectileName = "HarpyFlapFast_YM",
+				ProjectileName = "HarpyFlapFast3_YM",
 				ProjectileProperty = "Graphic",
 				ValuePrefix = "HarpyTornadoYM_",
 				ChangeType = "Absolute",
@@ -310,3 +310,5 @@ RemoveWeaponPropertyFromGodTraits("WeaponCastYM", "ImpactFx")
 			--},
 		}
 	})
+
+
