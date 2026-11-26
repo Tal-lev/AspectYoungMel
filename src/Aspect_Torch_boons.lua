@@ -1792,6 +1792,22 @@ table.insert( LootData.AresUpgrade.PriorityUpgrades, 2, "AresCastBoonYM" )
 -- Dionaysus
 -- Hades
 
+--Adding Aspect Codex Requierments
+OverwriteTableKeys(TraitRequirements, {
+	ZeusCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	HeraCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	SpawnCastDamageBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	PoseidonCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	DemeterCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	CastNovaBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	ApolloCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	ApolloManaBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	AphroditeCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	HephaestusCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	HestiaCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	BurnSprintBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+	AresCastBoonYM = { OneOf = { "TorchAspectofYoungMelinoe" }, },
+})
 
 
 ------ Removing old special from pool
